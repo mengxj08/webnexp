@@ -61,9 +61,9 @@
         </div>
       </div>
       <div class="jumbotron">
-          <p>3. Acoording to your general question, define your hypothesis as the below form:</p>
+          <p>3. Acoording to your general question, define your hypothesis as the below form: ___(Your solution/product/service)__ is better than___(other solutions/products/services)__ in___(certain tasks)___ under___(certain context)___ based on___(certain terms)___.</p>
       </div>
-
+<!-- Select options -->
       <div class="row">
         <div class="col-md-6">
           <select multiple class="form-control" id="selectOne" size="4">
@@ -76,9 +76,9 @@
         </div>
         <div class="col-md-1">
           <div class="btn-group-vertical" role="group" aria-label="...">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#firstModal">
               <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" onclick="clickMinusFunction(selectOne)">
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
@@ -87,7 +87,7 @@
 
       <div class="row">
         <div class="col-md-6">
-          <select multiple class="form-control" id="selectOne" size="4">
+          <select multiple class="form-control" id="selectTwo" size="4">
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -97,9 +97,9 @@
         </div>
         <div class="col-md-1">
           <div class="btn-group-vertical" role="group" aria-label="...">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#secondModal">
               <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" onclick="clickMinusFunction(selectTwo)">
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
@@ -108,7 +108,7 @@
 
       <div class="row">
         <div class="col-md-6">
-          <select multiple class="form-control" id="selectOne" size="4">
+          <select multiple class="form-control" id="selectThree" size="4">
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -118,9 +118,9 @@
         </div>
         <div class="col-md-1">
           <div class="btn-group-vertical" role="group" aria-label="...">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#thirdModal">
               <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" onclick="clickMinusFunction(selectThree)">
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
@@ -129,7 +129,7 @@
 
       <div class="row">
         <div class="col-md-6">
-          <select multiple class="form-control" id="selectOne" size="4">
+          <select multiple class="form-control" id="selectFour" size="4">
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -139,9 +139,9 @@
         </div>
         <div class="col-md-1">
           <div class="btn-group-vertical" role="group" aria-label="...">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#forthModal">
               <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" onclick="clickMinusFunction(selectFour)">
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
@@ -150,7 +150,7 @@
 
       <div class="row">
         <div class="col-md-6">
-          <select multiple class="form-control" id="selectOne" size="4">
+          <select multiple class="form-control" id="selectFive" size="4">
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -160,16 +160,15 @@
         </div>
         <div class="col-md-1">
           <div class="btn-group-vertical" role="group" aria-label="...">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#fifthModal">
               <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" onclick="clickMinusFunction(selectFive)">
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
         <div class="col-md-4"><h1>.</h1></div>
       </div>
-
-
+<!-- ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
     <nav>
       <ul class="pager">
         <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
@@ -179,10 +178,105 @@
     <footer class="footer">
       <p>&copy; NUS-HCI Lab</p>
     </footer>
-    </div> <!-- /container -->  
+    </div> 
+    <!-- /container --> 
 
+<!-- Model template for add into the select options -->
+    <div class="modal fade bs-example-modal-sm" id="firstModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-body">
+              <div class="input-group input-group-lg">
+                <input id="inputOne" type="text" class="form-control" placeholder="Your solution">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectOne,inputOne)">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="modal fade bs-example-modal-sm" id="secondModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-body">
+              <div class="input-group input-group-lg">
+                <input id="inputTwo" type="text" class="form-control" placeholder="Other solution">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectTwo,inputTwo)">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-sm" id="thirdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-body">
+              <div class="input-group input-group-lg">
+                <input id="inputThree" type="text" class="form-control" placeholder="certain tasks">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectThree,inputThree)">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-sm" id="forthModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-body">
+              <div class="input-group input-group-lg">
+                <input id="inputFour" type="text" class="form-control" placeholder="certain context">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectFour,inputFour)">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-sm" id="fifthModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-body">
+              <div class="input-group input-group-lg">
+                <input id="inputFive" type="text" class="form-control" placeholder="centain terms">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectFive,inputFive)">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script>
+      function clickMinusFunction(selectID) {
+        selectID.remove(selectID.selectedIndex);
+        }
+      function saveChanges(selectID, inputID){
+        if(inputID.value == "") return;
+        var tmp = inputID.value;
+        var option = document.createElement("option");
+        option.text = tmp;
+        selectID.add(option);
+        inputID.value = "";
+      }
+
+    </script>
   </body>
 </html>
