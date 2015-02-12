@@ -53,6 +53,11 @@ select[multiple]{
   height: 78px;
 }
 
+hr{
+  margin-bottom: 20px;
+/*  border: 0;
+  border-top: 1px solid #696969;*/
+}
 span.glyphicon {
   font-size:27px;
 }
