@@ -16,7 +16,7 @@
     <script src="js/bootstrap.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="css/guidedesignTwo.css" rel="stylesheet">
+    <link href="css/guidedesignThree.css" rel="stylesheet">
 
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
@@ -46,32 +46,57 @@
         <table class="table">
           <thead>
           <tr>
-              <th data-field="state" data-checkbox="true"></th>
-              <th data-field="FactorName">FactorName</th>
-              <th data-field="Type">Type</th>
-              <th data-field="designType">Between- or Within-</th>
-              <th data-field="level">Level</th>
+              <th id="state"></th>
+              <th id="FactorName">FactorName</th>
+              <th id="designType">Between- or Within-</th>
+              <th id="Type">Type</th>
+              <th id="level">Level</th>
           </tr>
           </thead>
           <tr>
-            <td>Jill</td>
-            <td>Smith</td> 
-            <td>50</td>
-            <td>50</td>
+            <td><input type="checkbox"></td>
+            <td><input type="text" class="form-control" placeholder="Name"></td>
+            <td>
+                <select class="form-control" size="1">
+                    <option value="in">Between</option>
+                    <option value="de">Within</option>
+                </select>
+            </td>
+            <td>
+                <select class="form-control" size="1">
+                    <option value="in">No CounterBalancing</option>
+                    <option value="de">Latin Square</option>
+                    <option value="de">Fully CounterBalancing</option>
+                </select>
+            </td> 
+            <td>
+<!--                 <select multiple class="form-control" size="1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select> -->
+                <div class="row">
+                  <div class="col-md-6">
+                    <select multiple class="form-control" id="selectOne">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    </select>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="btn-group-vertical btn-group-xs" role="group" aria-label="...">
+                      <button type="button" class="btn btn-default btn-table" data-toggle="modal" data-target="#firstModal">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
+                      <button type="button" class="btn btn-default btn-table" onclick="clickMinusFunction(selectOne)">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
+                    </div>
+                  </div>
+                </div>                
+            </td>
           </tr>
         </table>
       </div>
 
-      <table id="table-methods-table" data-height="299">
-          <thead>
-          <tr>
-              <th data-field="state" data-checkbox="true"></th>
-              <th data-field="id">Item ID</th>
-              <th data-field="name">Item Name</th>
-              <th data-field="price">Item Price</th>
-          </tr>
-          </thead>
-      </table>      
       <nav>
         <ul class="pager">
           <li class="previous"><a href="guidedesignTwo.html"><span aria-hidden="true">&larr;</span> Previous</a></li>
