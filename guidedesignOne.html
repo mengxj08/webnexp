@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="nexp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +14,8 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="js/angular-local-storage.min.js"></script>
 
     <!-- Custom styles for this template -->
     <link href="css/guidedesignOne.css" rel="stylesheet">
@@ -26,7 +27,7 @@
 
   <body>
 
-    <div class="container">
+    <div class="container" ng-controller="pageOneControl">
       <div class="header">
         <nav>
           <ul class="nav nav-pills pull-right">
@@ -264,6 +265,7 @@
     </div>
 <!-- ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/pageOneControl.js"></script>
     <script src="js/ie10-viewport-bug-workaround.js"></script>
     <script>
       function clickMinusFunction(selectID) {
