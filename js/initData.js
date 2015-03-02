@@ -12,7 +12,7 @@ app.config(function(localStorageServiceProvider){
 app.controller('initData', function($scope, $http, localStorageService){
 	localStorageService.clearAll();
 
-	localStorageService.set('localStorageDemo', 'oldValue');
+	//localStorageService.set('localStorageDemo', 'oldValue');
 
 	if (localStorageService.getStorageType().indexOf('session') >= 0) {
       console.log('StorageType: Session storage');
@@ -24,6 +24,7 @@ app.controller('initData', function($scope, $http, localStorageService){
 
    	$http.get('data/data.json').success(function (data){
 		$scope.jsonData = data;
+		localStorageService.set('jsonData', data);
 		console.log($scope.jsonData.design_guide.variables.dependent_variable.length);
 	});
 

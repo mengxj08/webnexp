@@ -43,7 +43,7 @@
       <div class="jumbotron">
           <p>1. Before designing the experiment, you should be clear that what question you are going to focus on. Start with a general Question:</p>
       </div>
-      <textarea class="form-control" rows="3" placeholder="Research Question"></textarea>
+      <textarea class="form-control" rows="3" placeholder="Research Question" ng-model="jsonData.design_guide.research_question.general_question"></textarea>
 
       <div class="jumbotron">
           <p>2. After figuring out the general question, please type the necessary information below:</p>
@@ -51,15 +51,15 @@
       <div class="InputGroup">
         <div class="input-group input-group-lg">
           <span class="input-group-addon" id="sizing-addon1">Experiment Name:</span>
-          <input type="text" class="form-control" placeholder="name" aria-describedby="sizing-addon1">
+          <input type="text" class="form-control" placeholder="name" aria-describedby="sizing-addon1" ng-model="jsonData.design_guide.research_question.experiment_title">
         </div>
         <div class="input-group input-group-lg">
           <span class="input-group-addon" id="sizing-addon2">Author:</span>
-          <input type="text" class="form-control" placeholder="author" aria-describedby="sizing-addon2">
+          <input type="text" class="form-control" placeholder="author" aria-describedby="sizing-addon2" ng-model="jsonData.design_guide.research_question.experiment_description">
         </div>
         <div class="input-group input-group-lg">
           <span class="input-group-addon" id="sizing-addon3">Description:</span>
-          <input type="text" class="form-control" placeholder="description" aria-describedby="sizing-addon3">
+          <input type="text" class="form-control" placeholder="description" aria-describedby="sizing-addon3" ng-model="jsonData.design_guide.research_question.experiment_conductor">
         </div>
       </div>
       <div class="jumbotron">
@@ -80,7 +80,7 @@
           <div class="btn-group-vertical" role="group" aria-label="...">
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#firstModal">
               <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
-            <button type="button" class="btn btn-default" onclick="clickMinusFunction(selectOne)">
+            <button type="button" class="btn btn-default" ng-click="clickMinusFunction('selectOne')">
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
@@ -89,19 +89,15 @@
 
       <div class="row">
         <div class="col-md-6">
-          <select multiple class="form-control" id="selectTwo" size="4">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+          <select multiple class="form-control" id="selectTwo" size="4" ng-model="selectedItemTwo">
+          <option ng-repeat="comSolution in jsonData.design_guide.research_question.hypothesis.compare_solutions">{{comSolution}}</option>
           </select>
         </div>
         <div class="col-md-1">
           <div class="btn-group-vertical" role="group" aria-label="...">
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#secondModal">
               <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
-            <button type="button" class="btn btn-default" onclick="clickMinusFunction(selectTwo)">
+            <button type="button" class="btn btn-default" ng-click="clickMinusFunction('selectTwo')">
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
@@ -122,7 +118,7 @@
           <div class="btn-group-vertical" role="group" aria-label="...">
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#thirdModal">
               <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
-            <button type="button" class="btn btn-default" onclick="clickMinusFunction(selectThree)">
+            <button type="button" class="btn btn-default" ng-click="clickMinusFunction(selectThree)">
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
@@ -143,7 +139,7 @@
           <div class="btn-group-vertical" role="group" aria-label="...">
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#forthModal">
               <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
-            <button type="button" class="btn btn-default" onclick="clickMinusFunction(selectFour)">
+            <button type="button" class="btn btn-default" ng-click="clickMinusFunction(selectFour)">
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
@@ -164,7 +160,7 @@
           <div class="btn-group-vertical" role="group" aria-label="...">
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#fifthModal">
               <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
-            <button type="button" class="btn btn-default" onclick="clickMinusFunction(selectFive)">
+            <button type="button" class="btn btn-default" ng-click="clickMinusFunction(selectFive)">
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
@@ -194,7 +190,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectOne,inputOne)">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveChanges(selectOne,inputOne)">Save changes</button>
           </div>
         </div>
       </div>
@@ -210,7 +206,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectTwo,inputTwo)">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveChanges(selectTwo,inputTwo)">Save changes</button>
           </div>
         </div>
       </div>
@@ -226,7 +222,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectThree,inputThree)">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveChanges(selectThree,inputThree)">Save changes</button>
           </div>
         </div>
       </div>
@@ -242,7 +238,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectFour,inputFour)">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveChanges(selectFour,inputFour)">Save changes</button>
           </div>
         </div>
       </div>
@@ -258,7 +254,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectFive,inputFive)">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveChanges(selectFive,inputFive)">Save changes</button>
           </div>
         </div>
       </div>
@@ -268,17 +264,7 @@
     <script src="js/pageOneControl.js"></script>
     <script src="js/ie10-viewport-bug-workaround.js"></script>
     <script>
-      function clickMinusFunction(selectID) {
-        selectID.remove(selectID.selectedIndex);
-        }
-      function saveChanges(selectID, inputID){
-        if(inputID.value == "") return;
-        var tmp = inputID.value;
-        var option = document.createElement("option");
-        option.text = tmp;
-        selectID.add(option);
-        inputID.value = "";
-      }
+
 
     </script>
   </body>

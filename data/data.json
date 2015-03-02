@@ -7,21 +7,19 @@
             "experiment_conductor": "There seems to be a Density & Number of Dimension Trade-off between PCP & SCP-common. I try to figure out the specific interactive effect here.",
             "hypothesis": {
                 "main_solution": "SCP",
-                "compare_solutions": {
-                    "compare_solution": "PCP"
-                },
-                "tasks": {
-                    "task": "Density"
-                },
-                "contexts": {
-                    "context": "Number of dimension"
-                },
-                "measures": {
-                    "measure": [
+                "compare_solutions": [
+                    "PCP"
+                ],
+                "tasks": [
+                    "Density"
+                ],
+                "contexts": [
+                    "Number of dimension"
+                ],
+                "measures": [
                         "Time cost",
                         "Accuracy"
-                    ]
-                },
+                ],
                 "target_population": ""
             }
         },
