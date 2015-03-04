@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="nexp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,22 +8,25 @@
     <title>Next Experiment design toolkit for controlled experiment in HCI</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="css/angular-ui-tree.min.css">
+    <link rel="stylesheet" href="css/guidedesignTwo.css">
 
     <!-- Bootstrap core Javascript-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
-
-    <!-- Custom styles for this template -->
-    <link href="css/guidedesignTwo.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="js/angular-local-storage.min.js"></script>
+    <script type="text/javascript" src="js/angular-ui-tree.min.js"></script>
 
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
 
   </head>
 
-  <body>
+  <body ng-controller="pageTwoControl">
 
     <div class="container">
       <div class="header">
@@ -42,35 +45,97 @@
           <p>1. Define your independent variables:</p>
       </div>
 
-<!-- Select options -->
-      <div class="row">
-        <div class="col-md-5"><h2>Independent Variables</h2></div>
-        <div class="col-md-6">
-          <select multiple class="form-control" id="selectOne">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          </select>
-        </div>
-        <div class="col-md-1">
-          <div class="btn-group-vertical" role="group" aria-label="...">
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#firstModal">
-              <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
-            <button type="button" class="btn btn-default" onclick="clickMinusFunction(selectOne)">
-              <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
+<!-- AnjularJS Tree -->  
+<!--
+        <script type="text/ng-template" id="nodes_renderer.html">
+          <div class="tree-node tree-node-content">
+            <a class="btn btn-success btn-xs" ng-if="node.levels && node.levels.length > 0" data-nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a>
+            {{node.name}}
+            <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+            <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
           </div>
+          <ol ui-tree-nodes="" ng-model="node.levels" ng-class="{hidden: collapsed}">
+            <li ng-repeat="node in node.levels" ui-tree-node>
+              <div ui-tree-handle class="tree-node tree-node-content">
+                {{node.name}}
+                <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-pencil"></span></a>
+              </div>
+            </li>
+          </ol>
+        </script>
+        <div ui-tree id="tree-root">
+          <ol ui-tree-nodes="" ng-model="jsonData.design_guide.variables.independent_variable">
+            <li ng-repeat="node in jsonData.design_guide.variables.independent_variable" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+          </ol>
         </div>
-      </div>
+-->
 
+      <div ui-tree="options">
+        <h3>Groups &amp; Categories</h3>
+        <ol ui-tree-nodes ng-model="groups" data-type="group">
+          <li ng-repeat="group in jsonData.design_guide.variables.independent_variable" ui-tree-node>
+            <div class="group-title angular-ui-tree-handle" ng-show="!group.editing">
+              <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeGroup(group)"><i class="glyphicon glyphicon-remove"></i></a>
+              <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editGroup(group)"><i class="glyphicon glyphicon-pencil"></i></a>
+              <div>&nbsp;{{group.name}}</div>
+            </div>
+            <div class="group-title angular-ui-tree-handle" data-nodrag ng-show="group.editing">
+              <form class="form-inline" role="form">
+                <div class="form-group">
+                  <label class="sr-only" for="groupName">Group name</label>
+                  <input type="text" class="form-control" placeholder="Group name" ng-model="group.name">
+                </div>
+                <button type="submit" class="btn btn-default" ng-click="saveGroup(group)">Save</button>
+                <button type="submit" class="btn btn-default" ng-click="cancelEditingGroup(group)">Cancel</button>
+              </form>
+            </div>
+            <ol ui-tree-nodes ng-model="group.levels" data-type="category">
+              <li ng-repeat="category in group.levels" ui-tree-node>
+                <div class="category-title angular-ui-tree-handle">
+                  <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeCategory(group, category)"><i class="glyphicon glyphicon-remove"></i></a>
+                  <div>
+                    &nbsp;{{category.name}}
+                  </div>
+                </div>
+              </li>
+            </ol>
+            <ol class="angular-ui-tree-nodes" data-nodrag>
+              <li class="angular-ui-tree-node">
+                <div class="category-title angular-ui-tree-handle">
+                  <form class="form-inline" role="form">
+                    <div class="form-group">
+                      <label class="sr-only" for="categoryName">Category name</label>
+                      <input type="text" class="form-control" ng-model="group.newCategoryName" placeholder="Category name">
+                    </div>
+                    <button type="submit" class="btn btn-default" ng-click="addCategory(group)">Add Category</button>
+                  </form>
+                </div>
+              </li>
+            </ol>
+          </li>
+        </ol>
+        <ol class="angular-ui-tree-nodes">
+          <li class="angular-ui-tree-node">
+            <div class="group-title angular-ui-tree-handle">
+              <form class="form-inline" role="form">
+                <div class="form-group">
+                  <label class="sr-only" for="groupName">Group name</label>
+                  <input type="text" class="form-control" id="groupName" placeholder="Group name">
+                </div>
+                <button type="submit" class="btn btn-default" ng-click="addGroup()">Add Group</button>
+              </form>
+            </div>
+          </li>
+        </ol>
+      </div>
       <hr />
 
       <div class="jumbotron">
           <p>2. Define your dependent variables:</p>
       </div>
 
-      <div class="row">
+<!--       <div class="row">
       <div class="col-md-5"><h2>Dependent variables</h2></div>
         <div class="col-md-6">
           <select multiple class="form-control" id="selectTwo" size="4">
@@ -90,7 +155,7 @@
           </div>
         </div>
         
-      </div>
+      </div> -->
 <!-- ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
     <nav>
       <ul class="pager">
@@ -138,21 +203,9 @@
     </div>
 
 <!-- ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
-    <script>
-      function clickMinusFunction(selectID) {
-        selectID.remove(selectID.selectedIndex);
-        }
-      function saveChanges(selectID, inputID){
-        if(inputID.value == "") return;
-        var tmp = inputID.value;
-        var option = document.createElement("option");
-        option.text = tmp;
-        selectID.add(option);
-        inputID.value = "";
-      }
-
-    </script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="js/pageTwoControl.js"></script>
+  <script src="js/ie10-viewport-bug-workaround.js"></script>
+  <script type="text/javascript" src="js/pageTwoControl.js"></script>
   </body>
 </html>

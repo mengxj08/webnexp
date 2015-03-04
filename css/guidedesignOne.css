@@ -54,7 +54,11 @@ select[multiple]{
 }
 
 span.glyphicon {
-  font-size:27px;
+  font-size:12px;
+}
+
+.btn{
+  height: 38px;
 }
 /* Customize container */
 @media (min-width: 888px) {

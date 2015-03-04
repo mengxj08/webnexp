@@ -1,93 +1,89 @@
 {
-    "design_guide": {
-        "research_question": {
-            "general_question": "What is the interactive effect of density & the number of dimension for PCP & SCP-standard?",
-            "experiment_title": "PCP vs. SCP",
-            "experiment_description": "Xiaojun",
-            "experiment_conductor": "There seems to be a Density & Number of Dimension Trade-off between PCP & SCP-common. I try to figure out the specific interactive effect here.",
-            "hypothesis": {
-                "main_solution": "SCP",
-                "compare_solutions": [
-                    "PCP"
-                ],
-                "tasks": [
-                    "Density"
-                ],
-                "contexts": [
-                    "Number of dimension"
-                ],
-                "measures": [
-                        "Time cost",
-                        "Accuracy"
-                ],
-                "target_population": ""
-            }
-        },
-        "variables": {
-            "independent_variable": [
-                {
-                    "name": "Technique",
-                    "subject_design": "Within",
-                    "levels": {
-                        "level": [
-                            {
-                                "name": "SCP"
-                            },
-                            {
-                                "name": "PCP"
-                            }
-                        ]
-                    },
-                    "counter_balance": "FullyCounterBalancing"
-                },
-                {
-                    "name": "Density",
-                    "subject_design": "Within",
-                    "levels": {
-                        "level": [
-                            {
-                                "name": "4D"
-                            },
-                            {
-                                "name": "6D"
-                            }
-                        ]
-                    },
-                    "counter_balance": "FullyCounterBalancing"
-                },
-                {
-                    "name": "Number of dimension",
-                    "subject_design": "Within",
-                    "levels": {
-                        "level": [
-                            {
-                                "name": "20"
-                            },
-                            {
-                                "name": "40"
-                            }
-                        ]
-                    },
-                    "counter_balance": "FullyCounterBalancing"
-                }
+  "design_guide": {
+    "research_question": {
+      "general_question": "",
+      "experiment_title": "",
+      "experiment_description": "",
+      "experiment_conductor": "",
+      "hypothesis": {
+        "main_solutions": [
+          "SCP"
+        ],
+        "compare_solutions": [
+          "PCP"
+        ],
+        "tasks": [
+          "Density"
+        ],
+        "contexts": [
+          "Number of dimension"
+        ],
+        "measures": [
+          "Time cost",
+          "Accuracy"
+        ],
+        "target_population": ""
+      }
+    },
+    "variables": {
+      "independent_variable": [
+        {
+          "name": "Technique",
+          "subject_design": "Within",
+          "levels": [
+              {
+                "name": "SCP"
+              },
+              {
+                "name": "PCP"
+              }
             ],
-            "dependent_variable": [
-                {
-                    "name": "Time cost"
-                },
-                {
-                    "name": "Accuracy"
-                }
-            ]
+          "counter_balance": "FullyCounterBalancing"
         },
-        "arrangement": {
-            "min_number": "8",
-            "actual_number": "16",
-            "fee_per_participant": "10",
-            "trial": "3",
-            "time_per_trial": "200",
-            "block": "2",
-            "participants": ""
+        {
+          "name": "Density",
+          "subject_design": "Within",
+          "levels": [
+              {
+                "name": "4D"
+              },
+              {
+                "name": "6D"
+              }
+            ],
+          "counter_balance": "FullyCounterBalancing"
+        },
+        {
+          "name": "Number of dimension",
+          "subject_design": "Within",
+          "levels": [
+              {
+                "name": "20"
+              },
+              {
+                "name": "40"
+              }
+            ],
+          "counter_balance": "FullyCounterBalancing"
         }
+      ],
+      "dependent_variable": [
+        {
+          "name": "Time cost"
+        },
+        {
+          "name": "Accuracy"
+        }
+      ]
+    },
+    "arrangement": {
+      "min_number": "8",
+      "actual_number": "16",
+      "fee_per_participant": "10",
+      "trial": "3",
+      "time_per_trial": "200",
+      "block": "2",
+      "participants": ""
     }
+  }
 }
