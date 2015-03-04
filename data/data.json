@@ -32,47 +32,58 @@
           "subject_design": "Within",
           "levels": [
               {
-                "name": "SCP"
+                "name": "SCP",
+                "type": "category"
               },
               {
-                "name": "PCP"
+                "name": "PCP",
+                "type": "category"
               }
             ],
-          "counter_balance": "FullyCounterBalancing"
+          "counter_balance": "FullyCounterBalancing",
+          "type": "group"
         },
         {
           "name": "Density",
           "subject_design": "Within",
           "levels": [
               {
-                "name": "4D"
+                "name": "4D",
+                "type": "category"
               },
               {
-                "name": "6D"
+                "name": "6D",
+                "type": "category"
               }
             ],
-          "counter_balance": "FullyCounterBalancing"
+          "counter_balance": "FullyCounterBalancing",
+          "type": "group"
         },
         {
           "name": "Number of dimension",
           "subject_design": "Within",
           "levels": [
               {
-                "name": "20"
+                "name": "20",
+                "type": "category"
               },
               {
-                "name": "40"
+                "name": "40",
+                "type": "category"
               }
             ],
-          "counter_balance": "FullyCounterBalancing"
+          "counter_balance": "FullyCounterBalancing",
+          "type": "group"
         }
       ],
       "dependent_variable": [
         {
-          "name": "Time cost"
+          "name": "Time cost",
+          "type": "DVgroup"
         },
         {
-          "name": "Accuracy"
+          "name": "Accuracy",
+          "type": "DVgroup"
         }
       ]
     },

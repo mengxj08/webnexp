@@ -19,7 +19,6 @@
     <script src="js/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="js/angular-local-storage.min.js"></script>
-    <script type="text/javascript" src="js/angular-ui-tree.min.js"></script>
 
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
@@ -42,7 +41,7 @@
           <h1>#2 Determine variables</h1>
       </div>
       <div class="jumbotron">
-          <p>1. Define your independent variables:</p>
+          <h3>1. Define your independent variables:</h3>
       </div>
 
 <!-- AnjularJS Tree -->  
@@ -72,8 +71,8 @@
 -->
 
       <div ui-tree="options">
-        <h3>Groups &amp; Categories</h3>
-        <ol ui-tree-nodes ng-model="groups" data-type="group">
+<!--         <h3>Independent Variables:</h3> -->
+        <ol ui-tree-nodes ng-model="jsonData.design_guide.variables.independent_variable" data-type="group">
           <li ng-repeat="group in jsonData.design_guide.variables.independent_variable" ui-tree-node>
             <div class="group-title angular-ui-tree-handle" ng-show="!group.editing">
               <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeGroup(group)"><i class="glyphicon glyphicon-remove"></i></a>
@@ -134,7 +133,40 @@
       <div class="jumbotron">
           <p>2. Define your dependent variables:</p>
       </div>
-
+      <div ui-tree="options">
+      <ol ui-tree-nodes ng-model="jsonData.design_guide.variables.dependent_variable" data-type="DVgroup">
+          <li ng-repeat="group in jsonData.design_guide.variables.dependent_variable" ui-tree-node>
+            <div class="category-title angular-ui-tree-handle" ng-show="!group.editing">
+              <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeDVGroup(group)"><i class="glyphicon glyphicon-remove"></i></a>
+              <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editGroup(group)"><i class="glyphicon glyphicon-pencil"></i></a>
+              <div>&nbsp;{{group.name}}</div>
+            </div>
+            <div class="category-title angular-ui-tree-handle" data-nodrag ng-show="group.editing">
+              <form class="form-inline" role="form">
+                <div class="form-group">
+                  <label class="sr-only" for="DVgroupName">Group name</label>
+                  <input type="text" class="form-control" placeholder="Group name" ng-model="group.name">
+                </div>
+                <button type="submit" class="btn btn-default" ng-click="saveGroup(group)">Save</button>
+                <button type="submit" class="btn btn-default" ng-click="cancelEditingGroup(group)">Cancel</button>
+              </form>
+            </div>
+          </li>
+        </ol>
+        <ol class="angular-ui-tree-nodes">
+          <li class="angular-ui-tree-node">
+            <div class="group-title angular-ui-tree-handle">
+              <form class="form-inline" role="form">
+                <div class="form-group">
+                  <label class="sr-only" for="DVgroupName">Group name</label>
+                  <input type="text" class="form-control" id="DVgroupName" placeholder="Group name">
+                </div>
+                <button type="submit" class="btn btn-default" ng-click="addGrouptoDV()">Add Dependent Variables</button>
+              </form>
+            </div>
+          </li>
+        </ol>
+        </div>
 <!--       <div class="row">
       <div class="col-md-5"><h2>Dependent variables</h2></div>
         <div class="col-md-6">
@@ -169,43 +201,11 @@
     </div> 
     <!-- /container --> 
 
-<!-- Model template for add into the select options -->
-    <div class="modal fade bs-example-modal-sm" id="firstModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-body">
-              <div class="input-group input-group-lg">
-                <input id="inputOne" type="text" class="form-control" placeholder="Independent variables">
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectOne,inputOne)">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade bs-example-modal-sm" id="secondModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-body">
-              <div class="input-group input-group-lg">
-                <input id="inputTwo" type="text" class="form-control" placeholder="Dependent variables">
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectTwo,inputTwo)">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
 <!-- ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="js/pageTwoControl.js"></script>
   <script src="js/ie10-viewport-bug-workaround.js"></script>
-  <script type="text/javascript" src="js/pageTwoControl.js"></script>
+  <script type="text/javascript" src="js/angular-ui-tree.js"></script>
+  <script type="text/javascript" src="js/pageTwoControl.js"></script> 
   </body>
 </html>

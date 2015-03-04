@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="nexp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +14,8 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="js/angular-local-storage.min.js"></script>
 
     <!-- Custom styles for this template -->
     <link href="css/guidedesignThree.css" rel="stylesheet">
@@ -24,7 +25,7 @@
 
   </head>
 
-  <body>
+  <body ng-controller="pageThreeControl">
 
     <div class="container">
       <div class="header">
@@ -44,51 +45,47 @@
         <!-- Default panel contents -->
         <div class="panel-heading"><h4>Set the arrangement of your independent variables and dependent variables in the below table.</h4></div>
         <!-- Table -->
-        <table class="table">
+        <table class="table" ng-model="jsonData.design_guide.variables.independent_variable">
           <thead>
           <tr>
-              <th id="state"></th>
               <th id="FactorName">FactorName</th>
               <th id="designType">Between- or Within-</th>
               <th id="Type">Type</th>
               <th id="level">Level</th>
           </tr>
           </thead>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td><input type="text" class="form-control" placeholder="Name"></td>
+          <tr ng-repeat="item in jsonData.design_guide.variables.independent_variable">
+            <td><input type="text" class="form-control" placeholder="Name" ng-model="item.name"></td>
             <td>
-                <select class="form-control" size="1">
-                    <option value="in">Between</option>
-                    <option value="de">Within</option>
+                <select class="form-control" size="1" ng-model="item.subject_design">
+                    <option value="Between">Between</option>
+                    <option value="Within">Within</option>
                 </select>
             </td>
             <td>
-                <select class="form-control" size="1">
-                    <option value="in">No CounterBalancing</option>
-                    <option value="de">Latin Square</option>
-                    <option value="de">Fully CounterBalancing</option>
+                <select class="form-control" size="1" ng-model="item.counter_balance">
+                    <option value="NoCounterBalancing">No CounterBalancing</option>
+                    <option value="LatinSquare">Latin Square</option>
+                    <option value="FullyCounterBalancing">Fully CounterBalancing</option>
                 </select>
             </td> 
             <td>
-<!--                 <select multiple class="form-control" size="1">
+ <!--                <select multiple class="form-control" size="1">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
                 </select> -->
                 <div class="row">
                   <div class="col-md-6">
-                    <select multiple class="form-control" id="selectOne">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
+                    <select multiple class="form-control" ng-model="item.selectedlevel">
+                    <option ng-repeat="subitem in item.levels">{{subitem.name}}</option>
                     </select>
                   </div>
                   <div class="col-md-1">
                     <div class="btn-group-vertical btn-group-xs" role="group" aria-label="...">
-                      <button type="button" class="btn btn-default btn-table" data-toggle="modal" data-target="#firstModal">
+                      <button type="button" class="btn btn-default btn-table" data-toggle="modal" data-target="#myModal" ng-click="passValuetoModel(item)">
                         <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
-                      <button type="button" class="btn btn-default btn-table" onclick="clickMinusFunction(selectOne)">
+                      <button type="button" class="btn btn-default btn-table" ng-click="clickMinusFunction(item, item.selectedlevel)">
                         <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
                     </div>
                   </div>
@@ -111,7 +108,7 @@
     <!-- /container --> 
 
 <!-- Model template for add into the select options -->
-    <div class="modal fade bs-example-modal-sm" id="firstModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-body">
@@ -121,23 +118,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectOne,inputOne)">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade bs-example-modal-sm" id="secondModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-body">
-              <div class="input-group input-group-lg">
-                <input id="inputTwo" type="text" class="form-control" placeholder="Dependent variables">
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveChanges(selectTwo,inputTwo)">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveChanges()">Save changes</button>
           </div>
         </div>
       </div>
@@ -146,19 +127,6 @@
 <!-- ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
-    <script>
-      function clickMinusFunction(selectID) {
-        selectID.remove(selectID.selectedIndex);
-        }
-      function saveChanges(selectID, inputID){
-        if(inputID.value == "") return;
-        var tmp = inputID.value;
-        var option = document.createElement("option");
-        option.text = tmp;
-        selectID.add(option);
-        inputID.value = "";
-      }
-
-    </script>
+    <script type="text/javascript" src="js/pageThreeControl.js"></script> 
   </body>
 </html>

@@ -20,6 +20,7 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
 
     localStorageService.bind($scope, 'jsonData');
     var IVgroups = $scope.jsonData.design_guide.variables.independent_variable;
+    var DVgroups = $scope.jsonData.design_guide.variables.dependent_variable;
 
     $scope.addGroup = function() {
       // if ($scope.groups.length > 10) {
@@ -31,7 +32,9 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
         IVgroups.push({
           name: groupName,
           subject_design: "Within",
+          counter_balance: "FullyCounterBalancing",
           levels: [],
+          type: "group"
         });
         document.getElementById("groupName").value = '';
       }
@@ -53,65 +56,72 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
       // if (window.confirm('Are you sure to remove this group?')) {
       //   group.destroy();
       // }
-      // var removedIndex = IVgroups.indexOf(group);
-      // console.log(removedIndex);
-      // IVgroups.splice(removedIndex,1);
+      var removedIndex = IVgroups.indexOf(group);
+      console.log(removedIndex);
+      IVgroups.splice(removedIndex,1);
     };
 
-    $scope.saveGroups = function() {
-      for (var i = $scope.groups.length - 1; i >= 0; i--) {
-        var group = $scope.groups[i];
-        group.sortOrder = i + 1;
-        group.save();
-      }
+    $scope.removeDVGroup = function(group){
+      var removedIndex = DVgroups.indexOf(group);
+      console.log(removedIndex);
+      DVgroups.splice(removedIndex,1);
     };
 
     $scope.addCategory = function(group) {
       if (!group.newCategoryName || group.newCategoryName.length === 0) {
         return;
       }
-      group.categories.push({
+      group.levels.push({
         name: group.newCategoryName,
-        sortOrder: group.categories.length,
         type: "category"
       });
       group.newCategoryName = '';
-      group.save();
     };
 
     $scope.removeCategory = function(group, category) {
-      if (window.confirm('Are you sure to remove this category?')) {
-        var index = group.categories.indexOf(category);
-        if (index > -1) {
-          group.categories.splice(index, 1)[0];
-        }
-        group.save();
+      var removedIndex = group.levels.indexOf(category);
+      if (removedIndex > -1) {
+        group.levels.splice(removedIndex, 1);
       }
+    };
+
+    $scope.addGrouptoDV = function(){
+      var groupName = document.getElementById("DVgroupName").value;
+      if (groupName.length > 0) {
+        DVgroups.push({
+          name: groupName,
+          type: "DVgroup"
+        });
+        document.getElementById("DVgroupName").value = '';
+      }      
     };
 
     $scope.options = {
       accept: function(sourceNode, destNodes, destIndex) {
-        var data = sourceNode.$modelValue;
+        // console.log("accept");
+        var data = sourceNode.$modelValue.type;
         var destType = destNodes.$element.attr('data-type');
-        return (data.type == destType); // only accept the same type
+        //console.log(sourceNode.$modelValue.type == destType);
+        return (data == destType); // only accept the same type
+        //return true;
       },
-      dropped: function(event) {
-        console.log(event);
-        var sourceNode = event.source.nodeScope;
-        var destNodes = event.dest.nodesScope;
-        // update changes to server
-        if (destNodes.isParent(sourceNode)
-          && destNodes.$element.attr('data-type') == 'category') { // If it moves in the same group, then only update group
-          var group = destNodes.$nodeScope.$modelValue;
-          group.save();
-        } else { // save all
-          $scope.saveGroups();
-        }
-      },
+      // dropped: function(event) {
+      //   console.log(event);
+      //   // var sourceNode = event.source.nodeScope;
+      //   // var destNodes = event.dest.nodesScope;
+      //   // // update changes to server
+      //   // if (destNodes.isParent(sourceNode)
+      //   //   && destNodes.$element.attr('data-type') == 'category') { // If it moves in the same group, then only update group
+      //   //   var group = destNodes.$nodeScope.$modelValue;
+      //   //   //group.save();
+      //   // } else { // save all
+      //   //   //$scope.saveGroups();
+      //   // }
+      // },
       beforeDrop: function(event) {
-        if (!window.confirm('Are you sure you want to drop it here?')) {
-          event.source.nodeScope.$$apply = false;
-        }
+        //if (!window.confirm('Are you sure you want to drop it here?')) {
+        //event.source.nodeScope.$$apply = true;
+        //}
       }
     };
 });

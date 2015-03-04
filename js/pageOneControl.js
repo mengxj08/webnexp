@@ -98,6 +98,6 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
 		// option.text = tmp;
 		// selectID.add(option);
 		// inputID.value = "";
-	}
+	};
 });
 
