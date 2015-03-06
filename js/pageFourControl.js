@@ -31,16 +31,16 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
     $scope.showDraw = function(){
       $scope.generate = true;
       $scope.GenerateSimulation();
-      draw();
+      //draw();
     };
 
     $scope.GenerateSimulation = function(){
       $scope.idvBetween = new Array();
       $scope.idvWithin = new Array();
-      %scope.arrangement = new Array();
+      $scope.arrangement = new Array();
       $scope.individual = new Array();
       $scope.betweenArrangement = new Array();
-      %scope.numberOfParticipants = 1;
+      $scope.numberOfParticipants = 1;
       $scope.numberOfConditions = 1;
       $scope.numberOfBetweenArrangement = 1;
       $scope.jsonData.design_guide.variables.independent_variable.forEach(function(idv){
@@ -56,8 +56,12 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
       });
 
       $scope.GenerateOverallArrangment();
+      //console.log($scope.arrangement);
       $scope.GenerateIndividualArrangment();
+      //console.log($scope.individual);
       $scope.GenerateBetweenArrangment();
+      $scope.WriteToJson();
+      console.log($scope.writeToJson);
     };
 
     $scope.GenerateOverallArrangment = function(){
@@ -71,25 +75,25 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
           case $scope.fullyCounterBalancing:
             var result = levelsName.reduce(function permute(res, item, key, arr) {
                          return res.concat(arr.length > 1 && arr.slice(0, key).concat(arr.slice(key + 1)).reduce(permute, []).map(function(perm) { return [item].concat(perm); }) || item);}, []);
-            %scope.arrangement.push(result);
+            $scope.arrangement.push(result);
             break;
           case $scope.latinSquare:
             var result = new Array();
-            for(int i = 0; i < levelsName.length; i++){
+            for(var i = 0; i < levelsName.length; i++){
               var tmp = new Array();
-              int j = i;
-              for(int count = 0; count < levelsName.length; count++){
+              var j = i;
+              for(var count = 0; count < levelsName.length; count++){
                 tmp.push(levelsName[(j+levelsName.length)%levelsName.length]);
                 j++;
               }
               result.push(tmp);
             }
-            %scope.arrangement.push(result);
+            $scope.arrangement.push(result);
             break;
           case $scope.noCounterBalancing:
             var result = new Array();
             result.push(levelsName);
-            %scope.arrangement.push(result);
+            $scope.arrangement.push(result);
             break;
         }
       });
@@ -97,32 +101,33 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
 
     $scope.GenerateIndividualArrangment = function(){
       $scope.arrangement.forEach(function(idv){
-        numberOfParticipants *= idv.length;
+        $scope.numberOfParticipants *= idv.length;
       });
 
-      $scope.arrangement.forEach(function(idv){
-        numberOfConditions *= idv.levels.length;
+      $scope.idvWithin.forEach(function(idv){
+        $scope.numberOfConditions *= idv.levels.length;
       });
 
-      for(int i=0; i < numberOfParticipants; i++){
+      for(var i=0; i < $scope.numberOfParticipants; i++){
         var participants = new Array();
-        int total = numberOfParticipants;
-        int tmp = i;
+        var total = $scope.numberOfParticipants;
+        var tmp = i;
 
         var index = new Array($scope.arrangement.length);
-        for(int j=0; i<$scoep.arrangement.length){
+
+        for(var j=0; j<$scope.arrangement.length; j++){
           total /= $scope.arrangement[j].length;
-          index[j] = tmp/total;
+          index[j] = parseInt(tmp/total);
           tmp -= index[j]*total;
         }
-
-        for(int k=0; k < numberOfConditions; k++){
+        console.log("index:"+index);
+        for(var k=0; k < $scope.numberOfConditions; k++){
           var condition = new Array();
-          int tmpK = k;
-          int totalConditions = numberOfConditions;
-          for(int m=0; m<$scope.arrangement.length; m++){
-            totalConditions /= $scope.idvWithin[m].levels.length;
-            int n = tmpK / totalConditions;
+          var tmpK = k;
+          var totalConditions = $scope.numberOfConditions;
+          for(var m=0; m<$scope.arrangement.length; m++){
+            totalConditions /= parseInt($scope.idvWithin[m].levels.length);
+            var n = parseInt(tmpK / totalConditions);
             condition.push($scope.arrangement[m][index[m]][n]);
             tmpK -= n*totalConditions;
           }
@@ -134,17 +139,17 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
     };
 
     $scope.GenerateBetweenArrangment = function(){
-      if(idvBetween.length == 0) return;
+      if($scope.idvBetween.length == 0) return;
 
-      for(int i=0; i<$scope.numberOfBetweenArrangement; i++){
+      for(var i=0; i<$scope.numberOfBetweenArrangement; i++){
         var tmpArrangement = new Array();
 
-        int tmpI = i;
-        int totalArrangement = numberOfBetweenArrangement;
+        var tmpI = i;
+        var totalArrangement = numberOfBetweenArrangement;
 
-        for(int m=0; m < $scope.idvBetween.length; m++){
+        for(var m=0; m < $scope.idvBetween.length; m++){
           totalArrangement /= idvBetween[m].levels.length;
-          int n = tmpI / totalArrangement;
+          var n = tmpI / totalArrangement;
           tmpArrangement.push(idvBetween[m].levels[n].name);
           tmpI -= n*totalArrangement;
         }
@@ -163,12 +168,12 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
       }
     };
     $scope.WriteToJson = function(){
-      $scope.writeToJson = "{Experiment";
+      $scope.writeToJson = "{";
       $scope.writeToJson += $scope.WrapperNameLine("Experiment",0);
       $scope.writeToJson += "\"children\": [";
 
       if($scope.numberOfBetweenArrangement == 1){
-        int i;
+        var i;
         for(i=0; i < $scope.individual.length-1; i++){
           $scope.WriteParticipant(i,-1,"");
           $scope.writeToJson += ",";
@@ -181,6 +186,8 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
         //----------------------------------------------to be continued
 
       }
+
+      $scope.writeToJson += "]}";
     };
 
     $scope.WriteParticipant = function(idInside, idParticipant, betweenString){
@@ -197,7 +204,7 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
 
       $scope.writeToJson += "\"children\": [";
 
-      int i;
+      var i;
       for(i = 0; i < $scope.jsonData.design_guide.arrangement.block - 1; i++){
         $scope.WriteBlock(idInside,i);
         $scope.writeToJson += ",";
@@ -212,8 +219,8 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
       $scope.writeToJson += $scope.WrapperNameLine("Block" + idBlock.toString(), 0);
       $scope.writeToJson += "\"children\": [";
 
-      int i;
-      for(i = 0; i < individual[idParticipant].length - 1; i++){
+      var i;
+      for(i = 0; i < $scope.individual[idParticipant].length - 1; i++){
         $scope.WriteCondition(idParticipant, i);
         $scope.writeToJson += ",";
       }
@@ -224,8 +231,9 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
     };
 
     $scope.WriteCondition = function(idParticipant, idCondition){
-      String tmp = "(";
-      int i;
+      $scope.writeToJson += "{";
+      var tmp = "(";
+      var i;
       if($scope.individual[idParticipant][idCondition].length > 0){
         for(i=0; i < $scope.individual[idParticipant][idCondition].length - 1; i++){
           tmp += $scope.individual[idParticipant][idCondition][i].toString() + ",";
@@ -239,7 +247,7 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
       $scope.writeToJson += $scope.WrapperNameLine("condition " + idCondition.toString() + ": " + tmp, 0);
       $scope.writeToJson += "\"children\": [";
 
-      int n;
+      var n;
       for (n = 0; n < $scope.jsonData.design_guide.arrangement.trial - 1; n++){
         $scope.writeToJson += $scope.WrapperNameLine("Trial " + n.toString(), 1);
         $scope.writeToJson += ","
