@@ -1,4 +1,4 @@
-function draw(){
+function draw(jsonString){
 	var margin = {top: 20, right: 120, bottom: 20, left: 120},
 	    width = 960 - margin.right - margin.left,
 	    height = 800 - margin.top - margin.bottom;
@@ -13,14 +13,16 @@ function draw(){
 	var diagonal = d3.svg.diagonal()
 	    .projection(function(d) { return [d.y, d.x]; });
 
+	d3.selectAll("#draw > *").remove();
+
 	var svg = d3.select("#draw").append("svg")
 	    .attr("width", width + margin.right + margin.left)
 	    .attr("height", height + margin.top + margin.bottom)
 	  .append("g")
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	d3.json("test.json", function(error, test) {
-	  root = test;
+	// d3.json(jsonString, function(error, test) {
+	  root = JSON.parse(jsonString);
 	  root.x0 = height / 2;
 	  root.y0 = 0;
 
@@ -34,7 +36,7 @@ function draw(){
 
 	  root.children.forEach(collapse);
 	  update(root);
-	});
+	// });
 
 	d3.select(self.frameElement).style("height", "800px");
 

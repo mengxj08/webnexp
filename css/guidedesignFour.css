@@ -116,3 +116,7 @@ span.glyphicon {
   stroke: #ccc;
   stroke-width: 1.5px;
 }
+
+#draw{
+  border:2px solid grey;
+}
