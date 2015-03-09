@@ -1,0 +1,38 @@
+{
+  "design_guide": {
+    "research_question": {
+      "general_question": "",
+      "experiment_title": "",
+      "experiment_description": "",
+      "experiment_conductor": "",
+      "hypothesis": {
+        "main_solutions": [
+        ],
+        "compare_solutions": [
+        ],
+        "tasks": [
+        ],
+        "contexts": [
+        ],
+        "measures": [
+        ],
+        "target_population": ""
+      }
+    },
+    "variables": {
+      "independent_variable": [
+      ],
+      "dependent_variable": [
+      ]
+    },
+    "arrangement": {
+      "min_number": "",
+      "actual_number": "",
+      "fee_per_participant": "",
+      "trial": "",
+      "time_per_trial": "",
+      "block": "",
+      "participants": ""
+    }
+  }
+}

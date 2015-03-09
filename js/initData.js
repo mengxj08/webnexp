@@ -22,10 +22,14 @@ app.controller('initData', function($scope, $http, localStorageService){
       console.log('StorageType: Cookie');
     }
 
-   	$http.get('data/data.json').success(function (data){
-		$scope.jsonData = data;
+    $scope.data = "data/data.json";
+    $scope.data = "data/rawData.json";
+   	$http.get($scope.data.toString()).success(function (data){
 		localStorageService.set('jsonData', data);
+    localStorageService.bind($scope, 'jsonData');
 		console.log($scope.jsonData.design_guide.variables.dependent_variable.length);
 	});
 
+    localStorageService.set('flagOne', true);
+    //localStorageService.bind($scope, 'flagOne');
 });

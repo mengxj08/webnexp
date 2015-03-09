@@ -31,7 +31,7 @@
       <div class="header">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation"><a href="#">Home</a></li>
+            <li role="presentation"><a href="guidedesign.html">Home</a></li>
             <li role="presentation"><a href="#">Help</a></li>
           </ul>
         </nav>
@@ -134,25 +134,6 @@
           <p>2. Define your dependent variables:</p>
       </div>
       <div ui-tree="options">
-      <ol ui-tree-nodes ng-model="jsonData.design_guide.variables.dependent_variable" data-type="DVgroup">
-          <li ng-repeat="group in jsonData.design_guide.variables.dependent_variable" ui-tree-node>
-            <div class="category-title angular-ui-tree-handle" ng-show="!group.editing">
-              <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeDVGroup(group)"><i class="glyphicon glyphicon-remove"></i></a>
-              <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editGroup(group)"><i class="glyphicon glyphicon-pencil"></i></a>
-              <div>&nbsp;{{group.name}}</div>
-            </div>
-            <div class="category-title angular-ui-tree-handle" data-nodrag ng-show="group.editing">
-              <form class="form-inline" role="form">
-                <div class="form-group">
-                  <label class="sr-only" for="DVgroupName">Group name</label>
-                  <input type="text" class="form-control" placeholder="Group name" ng-model="group.name">
-                </div>
-                <button type="submit" class="btn btn-default" ng-click="saveGroup(group)">Save</button>
-                <button type="submit" class="btn btn-default" ng-click="cancelEditingGroup(group)">Cancel</button>
-              </form>
-            </div>
-          </li>
-        </ol>
         <ol class="angular-ui-tree-nodes">
           <li class="angular-ui-tree-node">
             <div class="group-title angular-ui-tree-handle">
@@ -166,6 +147,25 @@
             </div>
           </li>
         </ol>
+        <ol ui-tree-nodes ng-model="jsonData.design_guide.variables.dependent_variable" data-type="DVgroup">
+            <li ng-repeat="group in jsonData.design_guide.variables.dependent_variable" ui-tree-node>
+              <div class="category-title angular-ui-tree-handle" ng-show="!group.editing">
+                <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeDVGroup(group)"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editGroup(group)"><i class="glyphicon glyphicon-pencil"></i></a>
+                <div>&nbsp;{{group.name}}</div>
+              </div>
+              <div class="category-title angular-ui-tree-handle" data-nodrag ng-show="group.editing">
+                <form class="form-inline" role="form">
+                  <div class="form-group">
+                    <label class="sr-only" for="DVgroupName">Group name</label>
+                    <input type="text" class="form-control" placeholder="Group name" ng-model="group.name">
+                  </div>
+                  <button type="submit" class="btn btn-default" ng-click="saveGroup(group)">Save</button>
+                  <button type="submit" class="btn btn-default" ng-click="cancelEditingGroup(group)">Cancel</button>
+                </form>
+              </div>
+            </li>
+          </ol>
         </div>
 <!--       <div class="row">
       <div class="col-md-5"><h2>Dependent variables</h2></div>

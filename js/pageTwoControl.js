@@ -19,8 +19,94 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
     }
 
     localStorageService.bind($scope, 'jsonData');
+    localStorageService.bind($scope, 'flagOne');
+
     var IVgroups = $scope.jsonData.design_guide.variables.independent_variable;
     var DVgroups = $scope.jsonData.design_guide.variables.dependent_variable;
+
+    $scope.Automation = function(){
+      $scope.flagOne = false;
+
+      var HYgroups = $scope.jsonData.design_guide.research_question.hypothesis;
+      if(HYgroups.main_solutions.length != 0 || HYgroups.compare_solutions.length != 0){
+        var tmp = {
+          name: "Techniques",
+          subject_design: "Within",
+          levels: [
+            ],
+          counter_balance: "FullyCounterBalancing",
+          type: "group"
+        };
+
+        HYgroups.main_solutions.forEach(function(item){
+          tmp.levels.push({
+              name: item.toString(),
+              type: "category"
+          });
+        });
+
+        HYgroups.compare_solutions.forEach(function(item){
+          tmp.levels.push({
+              name: item.toString(),
+              type: "category"
+          });
+        });
+
+        IVgroups.push(tmp);
+      }
+
+      if(HYgroups.tasks.length != 0){
+        var tmp = {
+          name: "Certain Tasks",
+          subject_design: "Within",
+          levels: [
+            ],
+          counter_balance: "FullyCounterBalancing",
+          type: "group"
+        };
+
+        HYgroups.tasks.forEach(function(item){
+          tmp.levels.push({
+              name: item.toString(),
+              type: "category"
+          });
+        });
+
+        IVgroups.push(tmp);
+      }
+      if(HYgroups.contexts.length != 0){
+        var tmp = {
+          name: "Certain Contexts",
+          subject_design: "Within",
+          levels: [
+            ],
+          counter_balance: "FullyCounterBalancing",
+          type: "group"
+        };
+
+        HYgroups.contexts.forEach(function(item){
+          tmp.levels.push({
+              name: item.toString(),
+              type: "category"
+          });
+        });
+
+        IVgroups.push(tmp);
+      }
+      if(HYgroups.measures.length != 0){
+        HYgroups.measures.forEach(function(item){
+          DVgroups.push({
+            name: item.toString(),
+            type: "DVgroup"
+          });
+        });
+      }
+    };
+
+    if($scope.flagOne === 'true'){
+      $scope.Automation();
+      console.log("First enter the Automation");
+    }
 
     $scope.addGroup = function() {
       // if ($scope.groups.length > 10) {
