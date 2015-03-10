@@ -27,7 +27,7 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
     $scope.fullyCounterBalancing = "FullyCounterBalancing";
     $scope.latinSquare = "LatinSquare";
     $scope.noCounterBalancing = "NoCounterBalancing";
-    
+
     $scope.showDraw = function(){
       $scope.generate = true;
       $scope.GenerateSimulation();
@@ -65,6 +65,63 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
       console.log($scope.writeToJson);
 
     };
+
+    $scope.CalculateMinNumberOfParticipants = function(){
+      var tmp = 1;
+      $scope.jsonData.design_guide.variables.independent_variable.forEach(function(idv){
+        var length = idv.levels.length;
+        if(idv.subject_design == $scope.within){
+          switch(idv.counter_balance){
+            case $scope.fullyCounterBalancing:
+              for(var i = 0; i < length; i++) tmp *= (length - i);
+              break;
+            case $scope.latinSquare:
+              tmp *= length;
+              break;
+            case $scope.noCounterBalancing:
+              break;
+          }
+        }
+        else{
+          tmp *= length;
+        }
+      });
+
+      $scope.jsonData.design_guide.arrangement.min_number = tmp;
+    };
+
+    $scope.CalculateMinNumberOfParticipants();
+
+    $scope.getConditionsNum = function(){
+      var tmp = 1;
+      $scope.jsonData.design_guide.variables.independent_variable.forEach(function(idv){
+        if(idv.subject_design == $scope.within){
+          tmp *= idv.levels.length;
+        }
+      });
+
+      return tmp.toString();
+    };
+
+    $scope.$watch('jsonData.design_guide.arrangement.actual_number', function(){
+      $scope.jsonData.design_guide.arrangement.totalPayment = $scope.jsonData.design_guide.arrangement.actual_number * $scope.jsonData.design_guide.arrangement.fee_per_participant;
+    });
+
+    $scope.$watch('jsonData.design_guide.arrangement.fee_per_participant', function(){
+      $scope.jsonData.design_guide.arrangement.totalPayment = $scope.jsonData.design_guide.arrangement.actual_number * $scope.jsonData.design_guide.arrangement.fee_per_participant;
+    });
+
+    $scope.$watch('jsonData.design_guide.arrangement.trial', function(){
+      $scope.jsonData.design_guide.arrangement.totalTimeCost = parseInt($scope.getConditionsNum()*$scope.jsonData.design_guide.arrangement.trial * $scope.jsonData.design_guide.arrangement.block * $scope.jsonData.design_guide.arrangement.time_per_trial / 60);
+    });
+
+    $scope.$watch('jsonData.design_guide.arrangement.block', function(){
+      $scope.jsonData.design_guide.arrangement.totalTimeCost = parseInt($scope.getConditionsNum()*$scope.jsonData.design_guide.arrangement.trial * $scope.jsonData.design_guide.arrangement.block * $scope.jsonData.design_guide.arrangement.time_per_trial / 60);
+    });
+
+    $scope.$watch('jsonData.design_guide.arrangement.time_per_trial', function(){
+      $scope.jsonData.design_guide.arrangement.totalTimeCost = parseInt($scope.getConditionsNum()*$scope.jsonData.design_guide.arrangement.trial * $scope.jsonData.design_guide.arrangement.block * $scope.jsonData.design_guide.arrangement.time_per_trial / 60);
+    });
 
     $scope.GenerateOverallArrangment = function(){
       $scope.idvWithin.forEach(function(idv){
@@ -184,7 +241,7 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
         $scope.WriteParticipant(i,-1,"");
       }
       else{
-        var totalNumberofParticipants = $scope.numberOfParticipants * $scope.numberOfBetweenArrangement; // total participants
+        //var totalNumberofParticipants = $scope.numberOfParticipants * $scope.numberOfBetweenArrangement; // total participants
         //----------------------------------------------to be continued
         $scope.FormatBwtweenString();
 

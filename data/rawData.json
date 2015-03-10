@@ -27,11 +27,13 @@
     },
     "arrangement": {
       "min_number": "",
-      "actual_number": "",
-      "fee_per_participant": "",
-      "trial": "",
-      "time_per_trial": "",
-      "block": "",
+      "actual_number": 0,
+      "fee_per_participant": 0,
+      "trial": 1,
+      "time_per_trial": 0,
+      "block": 1,
+      "totalPayment":0,
+      "totalTimeCost":0,
       "participants": ""
     }
   }

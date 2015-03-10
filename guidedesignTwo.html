@@ -82,8 +82,8 @@
             <div class="group-title angular-ui-tree-handle" data-nodrag ng-show="group.editing">
               <form class="form-inline" role="form">
                 <div class="form-group">
-                  <label class="sr-only" for="groupName">Group name</label>
-                  <input type="text" class="form-control" placeholder="Group name" ng-model="group.name">
+                  <label class="sr-only" for="groupName">Variable name</label>
+                  <input type="text" class="form-control" placeholder="Variable name" ng-model="group.name">
                 </div>
                 <button type="submit" class="btn btn-default" ng-click="saveGroup(group)">Save</button>
                 <button type="submit" class="btn btn-default" ng-click="cancelEditingGroup(group)">Cancel</button>
@@ -104,10 +104,10 @@
                 <div class="category-title angular-ui-tree-handle">
                   <form class="form-inline" role="form">
                     <div class="form-group">
-                      <label class="sr-only" for="categoryName">Category name</label>
-                      <input type="text" class="form-control" ng-model="group.newCategoryName" placeholder="Category name">
+                      <label class="sr-only" for="categoryName">Level name</label>
+                      <input type="text" class="form-control" ng-model="group.newCategoryName" placeholder="Level name">
                     </div>
-                    <button type="submit" class="btn btn-default" ng-click="addCategory(group)">Add Category</button>
+                    <button type="submit" class="btn btn-default" ng-click="addCategory(group)">Add Levels</button>
                   </form>
                 </div>
               </li>
@@ -119,10 +119,10 @@
             <div class="group-title angular-ui-tree-handle">
               <form class="form-inline" role="form">
                 <div class="form-group">
-                  <label class="sr-only" for="groupName">Group name</label>
-                  <input type="text" class="form-control" id="groupName" placeholder="Group name">
+                  <label class="sr-only" for="groupName">Variable name</label>
+                  <input type="text" class="form-control" id="groupName" placeholder="Variable name">
                 </div>
-                <button type="submit" class="btn btn-default" ng-click="addGroup()">Add Group</button>
+                <button type="submit" class="btn btn-default" ng-click="addGroup()">Add Independent Variables</button>
               </form>
             </div>
           </li>
@@ -139,8 +139,8 @@
             <div class="group-title angular-ui-tree-handle">
               <form class="form-inline" role="form">
                 <div class="form-group">
-                  <label class="sr-only" for="DVgroupName">Group name</label>
-                  <input type="text" class="form-control" id="DVgroupName" placeholder="Group name">
+                  <label class="sr-only" for="DVgroupName">Variable name</label>
+                  <input type="text" class="form-control" id="DVgroupName" placeholder="Variable name">
                 </div>
                 <button type="submit" class="btn btn-default" ng-click="addGrouptoDV()">Add Dependent Variables</button>
               </form>
