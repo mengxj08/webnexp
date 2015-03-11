@@ -9,7 +9,7 @@ app.config(function(localStorageServiceProvider){
     .setNotify(true, true);
 });
 
-app.controller('pageFourControl',function($scope, $http, localStorageService){
+app.controller('pageFourControl',function($scope, $http, $window,localStorageService){
 	if (localStorageService.getStorageType().indexOf('session') >= 0) {
       console.log('StorageType: Session storage');
     }
@@ -345,5 +345,21 @@ app.controller('pageFourControl',function($scope, $http, localStorageService){
       }
       $scope.writeToJson += $scope.WrapperNameLine("Trial" + n.toString(), 1);
       $scope.writeToJson += "]}";
+    };
+
+    $scope.DownloadFile = function(){
+      $http({
+          method: 'post',
+          url: 'SaveDataToCookies.php',
+          data: $scope.writeToJson,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8;'},
+        }).
+        success(function(response) {
+            $scope.codeStatus = response.data;
+            $window.location.href = 'download.php';
+        }).
+        error(function(response) {
+            $scope.codeStatus = response || "Request failed";
+        });
     };
 });

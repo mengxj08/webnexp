@@ -59,31 +59,36 @@
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon5" ng-model="jsonData.design_guide.arrangement.actual_number" min="0" max="99" required>
           <span class="input-group-addon small" ng-show="groupOne.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupOne.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
+          <span class="input-group-addon small" ng-show="groupOne.input.$error.min || groupOne.input.$error.max">The value must be in range 0 to 99!</span>
         </Form>
         <Form class="input-group input-group-lg" name="groupTwo">
           <span class="input-group-addon" id="sizing-addon1">Number of trials per condition:</span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon1" ng-model="jsonData.design_guide.arrangement.trial" min="0" max="99" required>
           <span class="input-group-addon small" ng-show="groupTwo.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupTwo.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
+          <span class="input-group-addon small" ng-show="groupTwo.input.$error.min || groupTwo.input.$error.max">The value must be in range 0 to 99!</span>
         </Form>
         <Form class="input-group input-group-lg" name="groupThree">
           <span class="input-group-addon" id="sizing-addon2">Number of blocks per participant:</span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon2" ng-model="jsonData.design_guide.arrangement.block" min="0" max="99" required>
           <span class="input-group-addon small" ng-show="groupThree.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupThree.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
+          <span class="input-group-addon small" ng-show="groupThree.input.$error.min || groupThree.input.$error.max">The value must be in range 0 to 99!</span>
         </Form>
         <Form class="input-group input-group-lg" name="groupFour">
           <span class="input-group-addon" id="sizing-addon3">Time cost per trial:</span>
-          <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon3" ng-model="jsonData.design_guide.arrangement.time_per_trial" min="0" max="99" required> 
+          <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon3" ng-model="jsonData.design_guide.arrangement.time_per_trial" min="0" max="3600" required> 
           <span class="input-group-addon small">Seconds</span> 
           <span class="input-group-addon small" ng-show="groupFour.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupFour.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
+          <span class="input-group-addon small" ng-show="groupFour.input.$error.min || groupFour.input.$error.max">The value must be in range 0 to 3600!</span>
         </Form>
         <Form class="input-group input-group-lg" name="groupFive">
           <span class="input-group-addon" id="sizing-addon6">Fee per participant:</span>
-          <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon6" ng-model="jsonData.design_guide.arrangement.fee_per_participant" min="0" max="99" required>
+          <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon6" ng-model="jsonData.design_guide.arrangement.fee_per_participant" min="0" max="999" required>
           <span class="input-group-addon small" ng-show="groupFive.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupFive.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
+          <span class="input-group-addon small" ng-show="groupFive.input.$error.min || groupFive.input.$error.max">The value must be in range 0 to 999!</span>
         </Form>
         <div class="input-group input-group-lg">
           <span class="input-group-addon" id="sizing-addon7">Total time cost per participant:</span>
@@ -98,6 +103,8 @@
       </div>
       <div class="jumbotron">
           <p><a role="button" class="btn btn-success btn-lg" ng-click="showDraw()">Generate</a> the simulation of the whole arrangement of the experiment:</p>
+          <p>Only after generating the simulation, you are able to download the arrangement file,<a ng-show="generate" ng-click="DownloadFile()">(Click here to download)</a> which is used as input for running platform.</p>
+
       </div>
       <div id="draw" ng-show="generate"></div>
 

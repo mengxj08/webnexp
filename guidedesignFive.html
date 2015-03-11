@@ -62,19 +62,5 @@
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
-    <script>
-      function clickMinusFunction(selectID) {
-        selectID.remove(selectID.selectedIndex);
-        }
-      function saveChanges(selectID, inputID){
-        if(inputID.value == "") return;
-        var tmp = inputID.value;
-        var option = document.createElement("option");
-        option.text = tmp;
-        selectID.add(option);
-        inputID.value = "";
-      }
-
-    </script>
   </body>
 </html>
