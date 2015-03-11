@@ -351,7 +351,7 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
       $http({
           method: 'post',
           url: 'SaveDataToCookies.php',
-          data: $scope.writeToJson,
+          data: $.param({'name':'ResultOfArrangement','data':$scope.writeToJson}),
           headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8;'},
         }).
         success(function(response) {
