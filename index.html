@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="nexp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,13 +9,13 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Bootstrap core Javascript-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="js/angular-local-storage.min.js"></script>
+    <script src="js/angular-file-upload.js"></script>
 
     <!-- Custom styles for this template -->
     <link href="css/nexp.css" rel="stylesheet">
@@ -24,10 +24,10 @@
     <script src="js/ie-emulation-modes-warning.js"></script>
   </head>
 
-  <body>
+  <body ng-controller="initData" uploader="uploader" filters="queueLimit, customFilter">
 
     <div class="container">
-      <div class="header" ng-app="nexp" ng-controller="initData">
+      <div class="header" ng-app="nexp">
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="#">Home</a></li>
@@ -46,6 +46,7 @@
 
       <div class="row marketing">
         <div class="col-lg-6">
+
           <h4>Design</h4>
           <p>Design platform guides users to design an effective controlled experiment. The resulting design file is readable by running platform.</p>
 
@@ -88,6 +89,16 @@
         <p><a type="button" class="btn btn-primary" href="guidedesign.html">Fast design process</a> No tutorials provided and suits experienced HCI researchers.</p>
         <br />
         <p><a type="button" class="btn btn-primary" href="guidedesign.html">Guided design process</a> Providing plenty guidelines and tutorials for HCI beginners.</p>
+
+        <hr class="soften"/>
+        
+        <div class="well my-drop-zone" nv-file-over="" uploader="uploader" nv-file-drop="">
+        <h3>Load an existing design project:</h3>
+        <input type="file" nv-file-select="" uploader="uploader" class="btn btn-default btn-file"/>
+<!--         <span class="btn btn-default" flow-btn><span class="glyphicon glyphicon-file" aria-hidden="false"></span>Upload File</span> -->
+          Or drag-and-drop your file here.
+        </div>
+
       </div>
       <div class="modal-footer">
         <p><a type="button" class="btn btn-default" data-dismiss="modal">Close</a></p>
