@@ -62,7 +62,7 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
       //console.log($scope.individual);
       $scope.GenerateBetweenArrangment();
       $scope.WriteToJson();
-      console.log($scope.writeToJson);
+      //console.log($scope.writeToJson);
 
     };
 
@@ -179,7 +179,6 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
           index[j] = parseInt(tmp/total);
           tmp -= index[j]*total;
         }
-        console.log("index:"+index);
         for(var k=0; k < $scope.numberOfConditions; k++){
           var condition = new Array();
           var tmpK = k;

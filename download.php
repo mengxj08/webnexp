@@ -1,14 +1,16 @@
 <?php
+session_start();
+
 $File = "Arrangement.json";
-$cookie_name = "ResultOfArrangement";
+$session_name = "ResultOfArrangement";
 
 header("Content-Disposition: attachment; filename=\"" . basename($File) . "\"");
 header("Content-Type: application/force-download");
 header("Connection: close");
 
-if(!isset($_COOKIE[$cookie_name])) {
+if(!isset($_SESSION[$session_name])) {
     echo "The arrangement is not set successfully!";
 } else {
-    echo $_COOKIE[$cookie_name];
+    echo $_SESSION[$session_name];
 }
 ?>

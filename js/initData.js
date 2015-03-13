@@ -31,6 +31,8 @@ app.controller('initData', function($scope, $http, $window, localStorageService,
       });     
     }
 
+    $scope.ReadLocalJsonFile();
+
     var uploader = $scope.uploader = new FileUploader({
         url: 'upload.php',
         autoUpload: true
