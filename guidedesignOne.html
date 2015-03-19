@@ -62,7 +62,7 @@
           <input type="text" class="form-control" placeholder="description" aria-describedby="sizing-addon3" ng-model="jsonData.design_guide.research_question.experiment_conductor">
         </div>
       </div>
-      <div class="jumbotron">
+      <div class="jumbotron" data-toggle="tooltip" data-placement="right" title="One of the challenges in experiment design is to decide what to test (independent variables) and what to measure (dependent variables). With the 5-Step approach, things become much easier, but you still have to make those tough decisions. When you face difficulties, it's always important to go back to your research question and ask what exactly you want to test in the experiment. This will help you to prioritize your choices.">
           <p>3. Acoording to your general question, define your hypothesis as the below form: ___(Your solution/product/service)__ is better than___(other solutions/products/services)__ in___(certain tasks)___ under___(certain context)___ based on___(certain terms)___.</p>
       </div>
 <!-- Select options -->
@@ -247,5 +247,10 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/pageOneControl.js"></script>
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript">
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+    </script>
   </body>
 </html>
