@@ -17,7 +17,7 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
     if (!localStorageService.isSupported) {
       console.log('StorageType: Cookie');
     }
-
+    
     localStorageService.bind($scope, 'jsonData');	
     console.log($scope.jsonData.design_guide.variables.independent_variable.length);
     var arrangement = $scope.jsonData.design_guide.arrangement;

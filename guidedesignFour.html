@@ -50,53 +50,61 @@
           <p>Step 4: Combine with the condition arrangement and check the simulation of the whole experiment.</p>
       </div>
       <div class="InputGroup">
+        <h4 class="smallLabels">Minimum number of participants:</h4>
         <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="sizing-addon4">Minimum number of participants:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon4">Minimum number of participants:</span>
           <input type="number" class="form-control" placeholder="0" aria-describedby="sizing-addon4" ng-model="jsonData.design_guide.arrangement.min_number" disabled>
         </div>
+        <h4 class="smallLabels">Actual number of participants:</h4>
         <Form class="input-group input-group-lg" name="groupOne">
-          <span class="input-group-addon" id="sizing-addon5">Actual number of participants:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon5">Actual number of participants:</span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon5" ng-model="jsonData.design_guide.arrangement.actual_number" min="0" max="99" required>
           <span class="input-group-addon small" ng-show="groupOne.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupOne.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
           <span class="input-group-addon small" ng-show="groupOne.input.$error.min || groupOne.input.$error.max">The value must be in range 0 to 99!</span>
         </Form>
+        <h4 class="smallLabels">Number of trials per condition:</h4>
         <Form class="input-group input-group-lg" name="groupTwo">
-          <span class="input-group-addon" id="sizing-addon1">Number of trials per condition:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon1">Number of trials per condition:</span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon1" ng-model="jsonData.design_guide.arrangement.trial" min="0" max="99" required>
           <span class="input-group-addon small" ng-show="groupTwo.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupTwo.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
           <span class="input-group-addon small" ng-show="groupTwo.input.$error.min || groupTwo.input.$error.max">The value must be in range 0 to 99!</span>
         </Form>
+        <h4 class="smallLabels">Number of blocks per participant:</h4>
         <Form class="input-group input-group-lg" name="groupThree">
-          <span class="input-group-addon" id="sizing-addon2">Number of blocks per participant:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon2">Number of blocks per participant:</span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon2" ng-model="jsonData.design_guide.arrangement.block" min="0" max="99" required>
           <span class="input-group-addon small" ng-show="groupThree.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupThree.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
           <span class="input-group-addon small" ng-show="groupThree.input.$error.min || groupThree.input.$error.max">The value must be in range 0 to 99!</span>
         </Form>
+        <h4 class="smallLabels">Time cost per trial:</h4>
         <Form class="input-group input-group-lg" name="groupFour">
-          <span class="input-group-addon" id="sizing-addon3">Time cost per trial:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon3">Time cost per trial:</span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon3" ng-model="jsonData.design_guide.arrangement.time_per_trial" min="0" max="3600" required> 
           <span class="input-group-addon small">Seconds</span> 
           <span class="input-group-addon small" ng-show="groupFour.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupFour.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
           <span class="input-group-addon small" ng-show="groupFour.input.$error.min || groupFour.input.$error.max">The value must be in range 0 to 3600!</span>
         </Form>
+        <h4 class="smallLabels">Fee per participant:</h4>
         <Form class="input-group input-group-lg" name="groupFive">
-          <span class="input-group-addon" id="sizing-addon6">Fee per participant:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon6">Fee per participant:</span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon6" ng-model="jsonData.design_guide.arrangement.fee_per_participant" min="0" max="999" required>
           <span class="input-group-addon small" ng-show="groupFive.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupFive.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
           <span class="input-group-addon small" ng-show="groupFive.input.$error.min || groupFive.input.$error.max">The value must be in range 0 to 999!</span>
         </Form>
+        <h4 class="smallLabels">Total time cost per participant:</h4>
         <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="sizing-addon7">Total time cost per participant:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon7">Total time cost per participant:</span>
           <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon7" ng-model="jsonData.design_guide.arrangement.totalTimeCost" disabled>
           <span class="input-group-addon small">Minutes</span> 
         </div>
+        <h4 class="smallLabels">Total payment:</h4>
         <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="sizing-addon8">Total payment:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon8">Total payment:</span>
           <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon8" ng-model="jsonData.design_guide.arrangement.totalPayment" disabled>
           <span class="input-group-addon small">Bucks</span>
         </div>        

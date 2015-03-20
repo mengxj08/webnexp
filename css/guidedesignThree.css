@@ -42,15 +42,6 @@ textarea {
   margin-bottom: 30px;
 }
 
-.col-md-6 {
-  padding-right: 0px;
-  width: 220px;
-}
-.col-md-1 {
-  padding-right: 0px;
-  padding-left: 10px;
-}
-
 #FactorName{
   width: 210px;
 }
@@ -60,6 +51,10 @@ textarea {
 }
 
 #Type{
+  width: 220px;
+}
+
+#level{
   width: 220px;
 }
 
@@ -83,6 +78,17 @@ span.glyphicon {
 @media (min-width: 888px) {
   .container {
     max-width: 850px;
+  }
+
+  .col-md-9 {
+    padding-right: 0px;
+  /*  width: 220px;*/
+  /*  width: 70%;*/
+  }
+  .col-md-1 {
+    padding-right: 0px;
+    padding-left: 10px;
+  /*  width: 20%;*/
   }
 }
 .container-narrow > hr {
@@ -112,4 +118,8 @@ span.glyphicon {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
 }

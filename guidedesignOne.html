@@ -62,11 +62,14 @@
           <input type="text" class="form-control" placeholder="description" aria-describedby="sizing-addon3" ng-model="jsonData.design_guide.research_question.experiment_conductor">
         </div>
       </div>
-      <div class="jumbotron" data-toggle="tooltip" data-placement="right" title="One of the challenges in experiment design is to decide what to test (independent variables) and what to measure (dependent variables). With the 5-Step approach, things become much easier, but you still have to make those tough decisions. When you face difficulties, it's always important to go back to your research question and ask what exactly you want to test in the experiment. This will help you to prioritize your choices.">
+      <div class="jumbotron">
           <p>3. Acoording to your general question, define your hypothesis as the below form: ___(Your solution/product/service)__ is better than___(other solutions/products/services)__ in___(certain tasks)___ under___(certain context)___ based on___(certain terms)___.</p>
       </div>
+<!--       "One of the challenges in experiment design is to decide what to test (independent variables) and what to measure (dependent variables). With the 5-Step approach, things become much easier, but you still have to make those tough decisions. When you face difficulties, it's always important to go back to your research question and ask what exactly you want to test in the experiment. This will help you to prioritize your choices." -->
+
 <!-- Select options -->
       <div class="row">
+        <div class="col-md-5"> <h1><mark>Hypothesis:</mark></h1> </div>
         <div class="col-md-6">
           <select multiple class="form-control" id="selectOne" size="4" ng-model="selectedItemOne">
           <option ng-repeat="mainSolution in jsonData.design_guide.research_question.hypothesis.main_solutions track by $index">{{mainSolution}}</option>
@@ -80,10 +83,10 @@
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
-        <div class="col-md-4"><h1>is better than</h1></div>
       </div>
 
       <div class="row">
+        <div class="col-md-5"><h1>is better than</h1></div>
         <div class="col-md-6">
           <select multiple class="form-control" id="selectTwo" size="4" ng-model="selectedItemTwo">
           <option ng-repeat="comSolution in jsonData.design_guide.research_question.hypothesis.compare_solutions track by $index">{{comSolution}}</option>
@@ -97,10 +100,10 @@
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
-        <div class="col-md-4"><h1>in</h1></div>
       </div>
 
       <div class="row">
+        <div class="col-md-5"><h1>in</h1></div>
         <div class="col-md-6">
           <select multiple class="form-control" id="selectThree" size="4" ng-model="selectedItemThree">
           <option ng-repeat="task in jsonData.design_guide.research_question.hypothesis.tasks track by $index">{{task}}</option>
@@ -114,10 +117,10 @@
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
-        <div class="col-md-4"><h1>under</h1></div>
       </div>
 
       <div class="row">
+        <div class="col-md-5"><h1>under</h1></div>
         <div class="col-md-6">
           <select multiple class="form-control" id="selectFour" size="4" ng-model="selectedItemFour">
             <option ng-repeat="context in jsonData.design_guide.research_question.hypothesis.contexts track by $index">{{context}}</option>
@@ -131,10 +134,10 @@
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
-        <div class="col-md-4"><h1>based on</h1></div>
       </div>
 
       <div class="row">
+        <div class="col-md-5"><h1>based on</h1></div>
         <div class="col-md-6">
           <select multiple class="form-control" id="selectFive" size="4" ng-model="selectedItemFive"> 
             <option ng-repeat="measure in jsonData.design_guide.research_question.hypothesis.measures track by $index">{{measure}}</option>
@@ -148,7 +151,6 @@
               <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
           </div>
         </div>
-        <div class="col-md-4"><h1>.</h1></div>
       </div>
 <!-- ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
     <nav>

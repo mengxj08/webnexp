@@ -43,13 +43,7 @@ textarea {
   margin-bottom: 30px;
 }
 
-.input-group-addon{
-  width: 300px;
-}
 
-.small{
-  width: 100px;
-}
 select[multiple]{
   height: 45px;
 }
@@ -78,6 +72,20 @@ span.glyphicon {
   border-bottom: 1px solid #e5e5e5;
 }
 
+.input-group-addon{
+  font-size: 18px;
+  white-space: normal;
+}
+
+.largeLabels{
+  display: none;
+/*  visibility: hidden;*/
+}
+/*@media (max-width: 888px) {
+  .largeLabels{
+  visibility: hidden;
+  }
+}*/
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 888px) {
   /* Remove the padding we set earlier */
@@ -94,6 +102,18 @@ span.glyphicon {
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
+  }
+  .smallLabels{
+  /*visibility: hidden;*/
+  display: none;
+  }
+  .largeLabels{
+  width: 300px;
+  display: inline;
+  }
+
+  .small{
+  width: 100px;
   }
 }
 /* D3 */
