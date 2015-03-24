@@ -31,37 +31,6 @@ body {
   border-top: 1px solid #e5e5e5;
 }
 
-textarea {
-  margin-bottom: 30px;
-}
-
-.input-group {
-  margin-bottom: 15px;
-  width: 100%;
-}
-.InputGroup {
-  margin-bottom: 30px;
-}
-
-.input-group-addon{
-  width: 300px;
-}
-
-.small{
-  width: 100px;
-}
-select[multiple]{
-  height: 45px;
-}
-
-hr{
-  margin-bottom: 20px;
-/*  border: 0;
-  border-top: 1px solid #696969;*/
-}
-span.glyphicon {
-  font-size:15px;
-}
 /* Customize container */
 @media (min-width: 888px) {
   .container {
