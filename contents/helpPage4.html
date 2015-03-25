@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="nexp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Next Experiment design toolkit for controlled experiment in HCI</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/guidedesignFive.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="../guidedesignThree.html">Back</a></li>
+            <li role="presentation" class="active"><a href="">Help</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">NEXP</h3>
+      </div>
+      <div class="page-header">
+          <h1>Tutorial: #3 Arrange Conditions:</h1>
+      </div>
+      <div class="jumbotron">
+        <p>#3.1: List all Independent Variables and their levels</p>
+        <p>#3.2: Decide counter-balancing strategy for each variable</p>
+        <p>#3.3: Determine the minimum No. of participants </p>
+        <p>#3.4: Arrange the overall design</p>
+        <p>#3.5: Determine detailed arrangement for each participant</p>
+        <p>After finishing step 3.1 & 3.2, NEXP will automatically arrange all the remaining for you.</p>
+      </div>
+      <div class="jumbotron">
+      <p><strong>What is a condition?</strong></p> 
+      <p>A particular independent variable “Technique” has two levels: XXX-Pod and iPod. </p>
+      <ul>
+        <li>If it is the only independent variable considered, this experiment has two conditions</li>
+      </ul>
+      <p>However, an experiment rarely only has 1 independent variable, suppose there is another independent variable “Menu Breadth” with 3 levels (4, 8, 12). </p>
+      <ul>
+        <li>There are 2 (Techniques) x 3 (Menu Breadth) = 6 experimental conditions</li>
+        <li>The each unique combination of the different levels of the various independent variables (such as XXX-Pod, 4) is an experimental condition </li>
+      </ul>
+      </div>
+
+      <div class="jumbotron">
+        <p><strong>How can We Test These Conditions?</strong></p>
+        <p>Method I:</p>
+        <ul>
+          <li>Recruit 6 participants, one for each condition (this is also called between-subject design, which means the conditions are tested between different subjects):</li>
+          <li>P1: earPod, 4</li>
+          <li>P2: earPod, 8</li>
+          <li>P3: earPod, 12</li>
+          <li>P4: iPod, 4</li>
+          <li>P5: iPod, 8</li>
+          <li>P6: iPod 12 </li>
+        </ul>
+        <p>What’s the problem of this Method I? </p>
+        <ul>
+          <li>What about individual differences? </li>
+          <li>To balance individual differences, we need lots of participants</li>
+          <li><strong>Key insight: </strong>this method is expensive.</li>
+        </ul>
+        <p>Method II:</p>
+        <ul>
+          <li>Recruit the same participants to test all 6 conditions (this is also called within-subject design since all conditions are tested within the same subject):</li>
+          <li>P1: earPod, 4</li>
+          <li>P1: earPod, 8</li>
+          <li>P1: earPod, 12</li>
+          <li>P1: iPod, 4</li>
+          <li>P1: iPod, 8</li>
+          <li>P1: iPod 12 </li>
+        </ul>
+        <p>What’s the problem of this Method II? </p>
+        <ul>
+          <li>Practice (or order effect) as a confounding variable </li>
+          <li>However, in many cases, this effect can be controlled </li>
+          <li><strong>Key insight: </strong>this method is much more economica.</li>
+        </ul>
+      </div>
+      <div class="jumbotron">
+      <p>Control Order Effect using Counter-balancing strategies:</p>
+        <ul>
+          <li>Fully CounterBalancing </li>
+          <li>Latin Square</li>
+          <li>No CounterBalancing</li>
+        </ul>
+      </div>
+    <footer class="footer">
+      <p>&copy; NUS-HCI Lab</p>
+    </footer>
+    </div> 
+    <!-- /container --> 
+  </body>
+</html>
