@@ -56,42 +56,42 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
       }
 
       if(HYgroups.tasks.length != 0){
-        var tmp = {
-          name: "Certain Tasks",
-          subject_design: "Within",
-          levels: [
-            ],
-          counter_balance: "FullyCounterBalancing",
-          type: "group"
-        };
 
         HYgroups.tasks.forEach(function(item){
-          tmp.levels.push({
-              name: item.toString(),
-              type: "category"
-          });
-        });
+          // tmp.levels.push({
+          //     name: item.toString(),
+          //     type: "category"
+          // });
+          var tmp = {
+            name: item.toString(),
+            subject_design: "Within",
+            levels: [
+              ],
+            counter_balance: "FullyCounterBalancing",
+            type: "group"
+          };
 
-        IVgroups.push(tmp);
+          IVgroups.push(tmp);
+        });
       }
       if(HYgroups.contexts.length != 0){
-        var tmp = {
-          name: "Certain Contexts",
-          subject_design: "Within",
-          levels: [
-            ],
-          counter_balance: "FullyCounterBalancing",
-          type: "group"
-        };
 
         HYgroups.contexts.forEach(function(item){
-          tmp.levels.push({
-              name: item.toString(),
-              type: "category"
-          });
-        });
+          var tmp = {
+            name: item.toString(),
+            subject_design: "Within",
+            levels: [
+              ],
+            counter_balance: "FullyCounterBalancing",
+            type: "group"
+          };
 
-        IVgroups.push(tmp);
+          IVgroups.push(tmp);
+          // tmp.levels.push({
+          //     name: item.toString(),
+          //     type: "category"
+          // });
+        });
       }
       if(HYgroups.measures.length != 0){
         HYgroups.measures.forEach(function(item){

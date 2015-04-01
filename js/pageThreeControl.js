@@ -22,6 +22,16 @@ app.controller('pageThreeControl',function($scope, $http, localStorageService){
     console.log($scope.jsonData.design_guide.variables.independent_variable.length);
     var IVgroups = $scope.jsonData.design_guide.variables.independent_variable;
 
+    $scope.removeNoLevels = function(){
+        for(var i = 0; i < IVgroups.length; i++){
+            if(IVgroups[i].levels.length == 0){
+                IVgroups.splice(i,1);
+                i--;
+            }
+        }
+    };
+    $scope.removeNoLevels();
+
     $scope.clickMinusFunction = function(IDV, selectedlevel){
     	if(IDV && selectedlevel){
     		var index = IVgroups.indexOf(IDV);
