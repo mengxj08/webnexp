@@ -19,7 +19,7 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
     }
     
     localStorageService.bind($scope, 'jsonData');	
-    console.log($scope.jsonData.design_guide.variables.independent_variable.length);
+    //console.log($scope.jsonData.design_guide.variables.independent_variable.length);
     var arrangement = $scope.jsonData.design_guide.arrangement;
 
     $scope.between = "Between";
@@ -67,26 +67,46 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
     };
 
     $scope.CalculateMinNumberOfParticipants = function(){
+      var Betweentmp = 1;
+      var Withintmp = 1;
       var tmp = 1;
       $scope.jsonData.design_guide.variables.independent_variable.forEach(function(idv){
+        //console.log(idv);
         var length = idv.levels.length;
         if(idv.subject_design == $scope.within){
+          console.log(idv.name);
           switch(idv.counter_balance){
             case $scope.fullyCounterBalancing:
-              for(var i = 0; i < length; i++) tmp *= (length - i);
+              for(var i = 0; i < length; i++) Withintmp *= (length - i);
               break;
             case $scope.latinSquare:
-              tmp *= length;
+              Withintmp *= length;
               break;
             case $scope.noCounterBalancing:
               break;
           }
         }
         else{
-          tmp *= length;
+          Betweentmp *= length;
         }
       });
-
+      if(Betweentmp == 1){
+        tmp = Withintmp;
+      }
+      else{
+        Betweentmp = Betweentmp * 6;
+        if(Betweentmp <= Withintmp){
+          tmp = Withintmp;
+        }
+        else{
+          if(Betweentmp % Withintmp == 0){
+            tmp = Betweentmp;
+          }
+          else{
+            tmp = Withintmp*(parseInt(Betweentmp / Withintmp) + 1);
+          }
+        }
+      }
       $scope.jsonData.design_guide.arrangement.min_number = tmp;
     };
 
@@ -244,23 +264,67 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
         //----------------------------------------------to be continued
         $scope.FormatBwtweenString();
 
-        var j;
-        for(j = 0; j < $scope.numberOfBetweenArrangement - 1; j++){
-          for(var i = 0; i < $scope.individual.length; i++){
-            $scope.WriteParticipant(i, i + j * $scope.individual.length, $scope.betweenStringFormated[j]);
+        var min_number = $scope.jsonData.design_guide.arrangement.min_number;
+        var betweenSubjectNum = $scope.numberOfBetweenArrangement * 6;
+        var withinSubjectNum = $scope.individual.length;
+
+        if(betweenSubjectNum <= withinSubjectNum){
+          var i;
+          for(i = 0; i < $scope.individual.length - 1; i++){
+            $scope.WriteParticipant(i, i, $scope.betweenStringFormated[i % $scope.numberOfBetweenArrangement]);
             $scope.writeToJson += ",";
           }
+          $scope.WriteParticipant(i, i, $scope.betweenStringFormated[i % $scope.numberOfBetweenArrangement]);
         }
-
-        var m;
-        for(m = 0; m < $scope.individual.length - 1; m++){
-          $scope.WriteParticipant(m, m + j*$scope.individual.length, $scope.betweenStringFormated[j]);
-          $scope.writeToJson += ",";
+        else if (betweenSubjectNum % withinSubjectNum == 0){
+          var tmpValue = betweenSubjectNum / withinSubjectNum;
+          
+          var j;
+          for(j = 0; j < tmpValue - 1 ; j++){
+              for(var i = 0; i < $scope.individual.length; i++){
+                var Pid = i + j * $scope.individual.length;
+                $scope.WriteParticipant(i, Pid, $scope.betweenStringFormated[Pid % $scope.numberOfBetweenArrangement]);
+                $scope.writeToJson += ",";
+            }
+          }
+          var m;
+          for(m = 0; m < $scope.individual.length - 1; m++){
+            var Pid = m + j * $scope.individual.length;
+            $scope.WriteParticipant(m, Pid, $scope.betweenStringFormated[Pid % $scope.numberOfBetweenArrangement]);
+            $scope.writeToJson += ",";
+          }
+          var Pid = m + j * $scope.individual.length;
+          $scope.WriteParticipant(m, Pid, $scope.betweenStringFormated[Pid % $scope.numberOfBetweenArrangement]);
         }
+      else{
+          var tmpValue = min_number / withinSubjectNum;
 
-        $scope.WriteParticipant(m, m + j * $scope.individual.length, $scope.betweenStringFormated[j]);
+          var j;
+          for(j = 0; j < tmpValue - 1 ; j++){
+              for(var i = 0; i < $scope.individual.length; i++){
+                var Pid = i + j * $scope.individual.length;
+                $scope.WriteParticipant(i, Pid, $scope.betweenStringFormated[Pid % $scope.numberOfBetweenArrangement]);
+                $scope.writeToJson += ",";
+            }
+          }
+          var m;
+          for(m = 0; m < $scope.individual.length - 1; m++){
+            var Pid = m + j * $scope.individual.length;
+            $scope.WriteParticipant(m, Pid, $scope.betweenStringFormated[Pid % $scope.numberOfBetweenArrangement]);
+            $scope.writeToJson += ",";
+          }
+          var Pid = m + j * $scope.individual.length;
+          $scope.WriteParticipant(m, Pid, $scope.betweenStringFormated[Pid % $scope.numberOfBetweenArrangement]);
+
+        }
+        //var j;
+        // for(j = 0; j < $scope.numberOfBetweenArrangement - 1; j++){
+        //   for(var i = 0; i < $scope.individual.length; i++){
+        //     $scope.WriteParticipant(i, i + j * $scope.individual.length, $scope.betweenStringFormated[j]);
+        //     $scope.writeToJson += ",";
+        //   }
+        // }
       }
-
       $scope.writeToJson += "]}";
     };
 
