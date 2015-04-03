@@ -94,6 +94,7 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
         tmp = Withintmp;
       }
       else{
+        var OldBetweentmp = Betweentmp;
         Betweentmp = Betweentmp * 6;
         if(Betweentmp <= Withintmp){
           tmp = Withintmp;

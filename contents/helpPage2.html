@@ -12,24 +12,28 @@
 
     <!-- Custom styles for this template -->
     <link href="../css/guidedesignFive.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
   </head>
   <body>
     <div class="container">
       <div class="header">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation"><a href="../guidedesignOne.html">Back</a></li>
+            <li role="presentation" data-toggle="tooltip" data-placement="bottom" title="Click here to back"><a href="../guidedesignOne.html">Back</a></li>
             <li role="presentation" class="active"><a href="">Help</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">NEXP</h3>
       </div>
-      <div class="page-header">
+      <div id="1" class="page-header">
           <h1>Tutorial: #1 Define the research question:</h1>
       </div>
       <div class="jumbotron">
           <p>Step 1.1: Start with a General Question:</p>
           <p>How does XXX-Pod compare with iPod’s menu in terms of performance?</p>
+          <p>See more <a href="#2">examples</a></p>
       </div>
       <div class="jumbotron">
           <p>Step 1.2: Define Target Population:</p>
@@ -58,7 +62,7 @@
                 <li>Accuracy</li>
                 <li>Learnability</li>
               </ul>
-            <strong>Key insight:</strong> need to define “testable” measures.
+            <strong>Key insight:</strong> need to define "testable" measures.
           </p>
       </div>
       <div class="jumbotron">
@@ -79,26 +83,52 @@
           </p>
       </div>
 
-      <div class="jumbotron">
-      <p>Example 2: “Opti” vs. “Qwerty” Keyboard</p>
+    <div id="3" class="jumbotron">
+      <p>Hypothesis Example: "XXX-Pod" menu vs. "iPod" menu</p>
         <pre>
+    <b>Experiment Name:</b> "XXX-Pod" menu vs. "iPod" menu
+    <b>Author:</b> Tom
+    <b>Description:</b> We design a new type of iPod named "XXX-Pod". This controlled experiment aims to prove that selecting menus using the "XXX-Pod" is better than using "iPod".
+
+    <b>Hypothesis:</b> XXX-pod 
+    <b>is better than</b> iPod
+    <b>in</b> selecting menus
+    <b>under</b> different sizes of screen
+    <b>based on</b> speed and accuracy.
+        </pre>
+    </div>
+
+    <div id="2" class="jumbotron">
+    <p>Experiment 2: "Opti" vs. "Qwerty" Keyboard</p>
+      <pre>
+    <b>Experiment Name:</b> "Opti" vs. "Qwerty" Keyboard
+    <b>Author:</b> Sam
+    <b>Description:</b> We find a new layout of keyboard named "Opti". This controlled experiment aims to prove that typing using the "Opti" keyboard is faster than using the traditional "Qwerty"  Keyboard.
+
     1.1: General question
-    how does the “opti” keyboard layout compare with the “qwerty” keyboard in performance? 
+    how does the "opti" keyboard layout compare with the "qwerty" keyboard in performance? 
     1.2: Target Population?
     Computer users? 
     1.3: Task(s)?
-    Type “the quick brown fox jumps over the lazy dog”
+    Type "the quick brown fox jumps over the lazy dog"
     1.4: Measure(s)?
     Speed, accuracy, learning 
     1.5: (Other) Factors? 
     Device: Touch typing vs. stylus?
     Screen size: different screen size? 
-        </pre>
-      </div>
+      </pre>
+    </div>
     <footer class="footer">
       <p>&copy; NUS-HCI Lab</p>
     </footer>
     </div> 
     <!-- /container --> 
+    <script type="text/javascript">
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip('show');
+
+      setTimeout(function(){$('[data-toggle="tooltip"]').tooltip('hide');},3000);
+    })
+    </script>
   </body>
 </html>

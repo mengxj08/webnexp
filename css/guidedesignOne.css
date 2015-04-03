@@ -57,6 +57,10 @@ span.glyphicon {
   font-size:12px;
 }
 
+#helpIcon{
+  font-size:24px;
+}
+
 .btn{
   height: 38px;
 }

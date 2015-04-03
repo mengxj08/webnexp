@@ -24,6 +24,10 @@ body {
   line-height: 40px;
 }
 
+#helpIcon{
+  font-size:24px;
+}
+
 /* Custom page footer */
 .footer {
   padding-top: 19px;

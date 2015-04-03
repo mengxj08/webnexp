@@ -60,6 +60,10 @@ hr{
     margin-right: 8px;
 }
 
+#helpIcon{
+  font-size:24px;
+}
+
 .angular-ui-tree-handle {
     background: #f8faff;
     border: 1px solid #dae2ea;

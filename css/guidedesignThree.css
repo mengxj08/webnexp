@@ -31,6 +31,10 @@ body {
   border-top: 1px solid #e5e5e5;
 }
 
+#helpIcon{
+  font-size:24px;
+}
+
 textarea {
   margin-bottom: 30px;
 }

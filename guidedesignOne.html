@@ -32,7 +32,7 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation"><a href="guidedesign.html">Home</a></li>
-            <li role="presentation"><a href="contents/helpPage2.html">Help</a></li>
+            <li role="presentation" data-toggle="tooltip" data-placement="bottom" title="Click here to see tutorial & examples"><a href="contents/helpPage2.html">Help</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">NEXP</h3>
@@ -42,11 +42,13 @@
       </div>
       <div class="jumbotron">
           <p>1. Before designing the experiment, you should be clear that what question you are going to focus on. Start with a general Question:</p>
+          <a href="contents/helpPage2.html#1" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
       </div>
       <textarea class="form-control" rows="3" placeholder="Research Question" ng-model="jsonData.design_guide.research_question.general_question"></textarea>
 
       <div class="jumbotron">
           <p>2. After figuring out the general question, please type the necessary information below:</p>
+          <a href="contents/helpPage2.html#2" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
       </div>
       <div class="InputGroup">
         <div class="input-group input-group-lg">
@@ -64,6 +66,7 @@
       </div>
       <div class="jumbotron">
           <p>3. Acoording to your general question, define your hypothesis as the below form: ___(Your solution/product/service)__ is better than___(other solutions/products/services)__ in___(certain tasks)___ under___(certain context)___ based on___(certain terms)___.</p>
+          <a href="contents/helpPage2.html#3" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
       </div>
 <!--       "One of the challenges in experiment design is to decide what to test (independent variables) and what to measure (dependent variables). With the 5-Step approach, things become much easier, but you still have to make those tough decisions. When you face difficulties, it's always important to go back to your research question and ask what exactly you want to test in the experiment. This will help you to prioritize your choices." -->
 
@@ -251,7 +254,9 @@
     <script src="js/ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript">
     $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
+      $('[data-toggle="tooltip"]').tooltip('show');
+
+      setTimeout(function(){$('[data-toggle="tooltip"]').tooltip('hide');},3000);
     })
     </script>
   </body>
