@@ -171,6 +171,18 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
       }
     };
 
+    $scope.editCategory = function(category){
+      category.editing = true;
+    };
+
+    $scope.saveCategory = function(category){
+      category.editing = false;
+    };
+
+    $scope.cancelEditingCategory = function(category){
+      category.editing = false;
+    };
+
     $scope.addGrouptoDV = function(){
       var groupName = document.getElementById("DVgroupName").value;
       if (groupName.length > 0) {

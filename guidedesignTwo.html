@@ -37,8 +37,15 @@
         </nav>
         <h3 class="text-muted">NEXP</h3>
       </div>
+      <ul class="nav nav-tabs">
+        <li role="presentation"><a href="guidedesignOne.html">1-Research question & hypothesis</a></li>
+        <li role="presentation" class="active"><a href="">2-Variables</a></li>
+        <li role="presentation"><a href="guidedesignThree.html">3-Arrangement</a></li>
+        <li role="presentation"><a href="guidedesignFour.html">4-Block & Trial & Timing</a></li>
+        <li role="presentation"><a href="guidedesignFive.html">5-Procedures</a></li>
+      </ul>
       <div class="page-header">
-          <h1>#2 Determine variables</h1>
+          <h1>Step 2: Determine variables</h1>
       </div>
       <div class="jumbotron">
           <h3>1. Define your independent variables:</h3>
@@ -81,7 +88,7 @@
             <div class="group-title angular-ui-tree-handle" ng-show="!group.editing">
               <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeGroup(group)"><i class="glyphicon glyphicon-remove"></i></a>
               <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editGroup(group)"><i class="glyphicon glyphicon-pencil"></i></a>
-              <div>&nbsp;{{group.name}}</div>
+              <div>&nbsp;Independent variable:&nbsp;{{group.name}}</div>
             </div>
             <div class="group-title angular-ui-tree-handle" data-nodrag ng-show="group.editing">
               <form class="form-inline" role="form">
@@ -95,12 +102,23 @@
             </div>
             <ol ui-tree-nodes ng-model="group.levels" data-type="category">
               <li ng-repeat="category in group.levels" ui-tree-node>
-                <div class="category-title angular-ui-tree-handle">
+                <div class="category-title angular-ui-tree-handle" ng-show="!category.editing">
                   <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeCategory(group, category)"><i class="glyphicon glyphicon-remove"></i></a>
+                  <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editCategory(category)"><i class="glyphicon glyphicon-pencil"></i></a>
                   <div>
-                    &nbsp;{{category.name}}
+                    &nbsp;Test condition: &nbsp;{{category.name}}
                   </div>
                 </div>
+                <div class="category-title angular-ui-tree-handle" data-nodrag ng-show="category.editing">
+                  <form class="form-inline" role="form">
+                    <div class="form-group">
+                      <label class="sr-only" for="categoryName">Test condition name</label>
+                      <input type="text" class="form-control" placeholder="Test condition name" ng-model="category.name">
+                    </div>
+                    <button type="submit" class="btn btn-default" ng-click="saveCategory(category)">Save</button>
+                    <button type="submit" class="btn btn-default" ng-click="cancelEditingCategory(category)">Cancel</button>
+                  </form>
+               </div>
               </li>
             </ol>
             <ol class="angular-ui-tree-nodes" data-nodrag>
@@ -108,10 +126,10 @@
                 <div class="category-title angular-ui-tree-handle">
                   <form class="form-inline" role="form">
                     <div class="form-group">
-                      <label class="sr-only" for="categoryName">Level name</label>
-                      <input type="text" class="form-control" ng-model="group.newCategoryName" placeholder="Level name">
+                      <label class="sr-only" for="categoryName">Test condition</label>
+                      <input type="text" class="form-control" ng-model="group.newCategoryName" placeholder="Test condition name">
                     </div>
-                    <button type="submit" class="btn btn-default" ng-click="addCategory(group)">Add Levels</button>
+                    <button type="submit" class="btn btn-default" ng-click="addCategory(group)">Add Test condtions</button>
                   </form>
                 </div>
               </li>
@@ -159,7 +177,7 @@
               <div class="category-title angular-ui-tree-handle" ng-show="!group.editing">
                 <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeDVGroup(group)"><i class="glyphicon glyphicon-remove"></i></a>
                 <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editGroup(group)"><i class="glyphicon glyphicon-pencil"></i></a>
-                <div>&nbsp;{{group.name}}</div>
+                <div>&nbsp;Dependent variable:&nbsp;{{group.name}}</div>
               </div>
               <div class="category-title angular-ui-tree-handle" data-nodrag ng-show="group.editing">
                 <form class="form-inline" role="form">
