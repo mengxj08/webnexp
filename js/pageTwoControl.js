@@ -40,14 +40,14 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
 
         HYgroups.main_solutions.forEach(function(item){
           tmp.levels.push({
-              name: item.toString(),
+              name: item.name.toString(),
               type: "category"
           });
         });
 
         HYgroups.compare_solutions.forEach(function(item){
           tmp.levels.push({
-              name: item.toString(),
+              name: item.name.toString(),
               type: "category"
           });
         });
@@ -63,7 +63,7 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
           //     type: "category"
           // });
           var tmp = {
-            name: item.toString(),
+            name: item.name.toString(),
             subject_design: "Within",
             levels: [
               ],
@@ -78,7 +78,7 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
 
         HYgroups.contexts.forEach(function(item){
           var tmp = {
-            name: item.toString(),
+            name: item.name.toString(),
             subject_design: "Within",
             levels: [
               ],
@@ -96,7 +96,7 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
       if(HYgroups.measures.length != 0){
         HYgroups.measures.forEach(function(item){
           DVgroups.push({
-            name: item.toString(),
+            name: item.name.toString(),
             type: "DVgroup"
           });
         });

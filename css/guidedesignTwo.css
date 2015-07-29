@@ -90,7 +90,9 @@ hr{
     color: #FFF !important;
 }
 
-
+div{
+  word-wrap:break-word;
+}
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 888px) {

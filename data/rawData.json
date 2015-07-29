@@ -16,7 +16,8 @@
         ],
         "measures": [
         ],
-        "target_population": ""
+        "target_population": [
+        ]
       }
     },
     "variables": {
