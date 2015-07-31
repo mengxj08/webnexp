@@ -36,4 +36,24 @@ app.controller('pageFiveControl',function($scope,$http,$window,localStorageServi
             $scope.codeStatus = response || "Request failed";
         });
     };
+
+    $scope.saveToPDF = function(){
+      $http({
+          method: 'post',
+          url: 'SaveDataToCookies.php',
+          data: $.param({'name':'ResultOfDesign','data':JSON.stringify($scope.jsonData)}),
+          headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8;'},
+        }).
+        success(function(response) {
+            $scope.codeStatus = response.data;
+            window.open(
+            'saveToPDF.php',
+            '_blank' // <- This is what makes it open in a new window.
+            );
+            // $window.location.href = 'saveToPDF.php';
+        }).
+        error(function(response) {
+            $scope.codeStatus = response || "Request failed";
+        });
+    };
 });
