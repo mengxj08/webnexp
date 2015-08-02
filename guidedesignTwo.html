@@ -142,7 +142,6 @@
             <div class="group-title angular-ui-tree-handle">
               <form class="form-inline" role="form">
                 <div class="form-group">
-                  <label class="sr-only" for="groupName">Variable name</label>
                   <input type="text" class="form-control" id="groupName" placeholder="Variable name">
                 </div>
                 <button type="submit" class="btn btn-default" ng-click="addGroup()">Add Independent Variables</button>
@@ -178,13 +177,15 @@
               <div class="category-title angular-ui-tree-handle" ng-show="!group.editing">
                 <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeDVGroup(group)"><i class="glyphicon glyphicon-remove"></i></a>
                 <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editGroup(group)"><i class="glyphicon glyphicon-pencil"></i></a>
-                <div>&nbsp;Dependent variable:&nbsp;{{group.name}}</div>
+                <div>&nbsp;Dependent variable:&nbsp;{{group.name}}&nbsp;&nbsp;&nbsp;&nbsp;Description:{{group.description}}</div>
               </div>
               <div class="category-title angular-ui-tree-handle" data-nodrag ng-show="group.editing">
                 <form class="form-inline" role="form">
                   <div class="form-group">
-                    <label class="sr-only" for="DVgroupName">Group name</label>
-                    <input type="text" class="form-control" placeholder="Group name" ng-model="group.name">
+                    <label>Name</label>
+                    <input type="text" class="form-control" placeholder="Variable name" ng-model="group.name">
+                    <label>Description</label>
+                    <input type="text" class="form-control" placeholder="Description" ng-model="group.description">
                   </div>
                   <button type="submit" class="btn btn-default" ng-click="saveGroup(group)">Save</button>
                   <button type="submit" class="btn btn-default" ng-click="cancelEditingGroup(group)">Cancel</button>

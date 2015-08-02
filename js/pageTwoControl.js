@@ -97,7 +97,8 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
         HYgroups.measures.forEach(function(item){
           DVgroups.push({
             name: item.name.toString(),
-            type: "DVgroup"
+            type: "DVgroup",
+            description: ""
           });
         });
       }
@@ -159,7 +160,8 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
       }
       group.levels.push({
         name: group.newCategoryName,
-        type: "category"
+        type: "category",
+        description: ""
       });
       group.newCategoryName = '';
     };
@@ -188,7 +190,8 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
       if (groupName.length > 0) {
         DVgroups.push({
           name: groupName,
-          type: "DVgroup"
+          type: "DVgroup",
+          description: ""
         });
         document.getElementById("DVgroupName").value = '';
       }      
