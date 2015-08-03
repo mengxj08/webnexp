@@ -75,7 +75,34 @@ $pdf->MultiCell(0,10,(string)$data['design_guide']['research_question']['experim
 $pdf->SetFont('Times','B',15);
 $pdf->MultiCell(0,10,'Hypothesis:',0,1);
 $pdf->SetFont('Times','',12);
-$pdf->MultiCell(0,10,'To be done',0,1);
+$tmpString = "( ";
+foreach($data['design_guide']['research_question']['hypothesis']['main_solutions'] as $group)
+    $tmpString.= $group['name']." ";
+
+$tmpString.=") is better than ( ";
+
+foreach($data['design_guide']['research_question']['hypothesis']['compare_solutions'] as $group)
+    $tmpString.= $group['name']." ";
+
+$tmpString.=") in ( ";
+
+foreach($data['design_guide']['research_question']['hypothesis']['tasks'] as $group)
+    $tmpString.= $group['name']." ";
+
+$tmpString.=") under ( ";
+
+foreach($data['design_guide']['research_question']['hypothesis']['contexts'] as $group)
+    $tmpString.= $group['name']." ";
+
+$tmpString.=") based on ( ";
+
+foreach($data['design_guide']['research_question']['hypothesis']['measures'] as $group)
+    $tmpString.= $group['name']." ";
+
+$tmpString.=").";
+
+$pdf->MultiCell(0,10,$tmpString,0,1);
+$pdf->Ln();
 
 $pdf->SetFont('Times','B',15);
 $pdf->MultiCell(0,10,'Indepdent variables:',0,1);
@@ -143,8 +170,69 @@ $pdf->MultiCell(0,10,"The time cost of per trial is ".$data['design_guide']['arr
 $pdf->MultiCell(0,10,"The time cost of per participant is ".$data['design_guide']['arrangement']['totalTimeCost']." minutes.",0,1);
 $pdf->MultiCell(0,10,"The fee of per participant is ".$data['design_guide']['arrangement']['fee_per_participant']." bucks.",0,1);
 $pdf->MultiCell(0,10,"The fee of per participant is ".$data['design_guide']['arrangement']['totalPayment']." bucks.",0,1);
-$pdf->MultiCell(0,10,"In total, the experiement consisted of:",0,1);
+$pdf->Ln();
 
+$IVarray = array();
+$IVLatinSquare = array();
+$IV_i = 0;
+$IV_LatinSquare = 0;
+$flagWithin = FALSE;
+$flagBetween = FALSE;
+foreach ($data['design_guide']['variables']['independent_variable'] as $group) {
+    $IVarray[$IV_i] = sizeof($group['levels']);
+    if($group['subject_design'] == 'Within'){
+        $flagWithin = TRUE;
+    }
+    else{
+        $flagBetween = TRUE;
+    }
+    if($group['counter_balance'] == 'LatinSquare'){
+        $IVLatinSquare[$IV_LatinSquare] = $group['name'];
+        $IV_LatinSquare++;
+    }
+
+    $IV_i++;
+}
+$design = "";
+if($flagWithin && $flagBetween){
+    $design = 'mixed-subject';
+}
+else if($flagWithin){
+    $design = 'within-subject';
+
+}
+else if($flagBetween){
+    $design = 'between-subject';
+}
+else{}
+$para = "The experiment was a ";
+if(sizeof($IVarray) != 1){
+    $para = "The experiment was a ".implode("*",$IVarray)." "; 
+}
+$para .= $design." design with ".sizeof($IVarray)." independent variables: ";
+foreach($data['design_guide']['variables']['independent_variable'] as $group){
+    $tmp = "";
+    $i;
+    for($i = 0; $i < sizeof($group["levels"]) - 1; $i++){
+        $tmp .= $group["levels"][$i]['name'];
+        $tmp .= ", ";
+    }
+    $tmp .= $group["levels"][$i]['name'];
+    $para .= $group['name'].' ('.$tmp.'); ';
+}
+$para = chop($para, '; ').".";
+
+if(sizeof($IVLatinSquare) > 0){
+    $para .= " The orders of ".implode(",",$IVLatinSquare)." were counter-balanced with Latin Square.";
+}
+
+
+$para .= " In summary, the experiement consisted of:";
+$pdf->SetFont('Times','',12);
+$pdf->MultiCell(0,10,$para,0,1);
+
+
+$pdf->SetFont('Times','',12);
 $pdf->SetX(20);
 $pdf->MultiCell(0,10,$data['design_guide']['arrangement']['actual_number'].' Participants *',0,1);
 foreach($data['design_guide']['variables']['independent_variable'] as $group){
@@ -162,17 +250,34 @@ $pdf->SetX(20);
 $pdf->MultiCell(0,10,$data['design_guide']['arrangement']['block'].' repetitions of blocks *',0,1);
 $pdf->SetX(20);
 $pdf->MultiCell(0,10,$data['design_guide']['arrangement']['trial'].' repetitions of trials',0,1);
+$pdf->Ln();
 
 $pdf->SetFont('Times','B',15);
 $pdf->MultiCell(0,10,'Arrangment of the experiment:',0,1);
 $pdf->SetFont('Times','',12);
 
-// if(!isset($_SESSION[$session_arrangement])) {
-//     $pdf->MultiCell(0,10,'The arrangement is not set successfully!',0,1);
-// } else {
-    $pdf->MultiCell(0,10,'To be done',0,1);
-   //$pdf->MultiCell(0,10,(string)$_SESSION[$session_arrangement],0,1);
-//}
+if(!isset($_SESSION[$session_arrangement])) {
+     $pdf->MultiCell(0,10,'The arrangement is not set successfully!',0,1);
+ } else {
+    $arrangment = (array) json_decode($_SESSION[$session_arrangement],true);
+    foreach($arrangment['children'] as $participant){
+        $pdf->SetFont('Times','B',12);
+        $pdf->MultiCell(0,10,$participant['name'],0,1);
+        foreach($participant['children'] as $block){
+            $pdf->SetFont('Times','',12);
+            $pdf->SetX(20);
+            $pdf->MultiCell(0,10,$block['name'],0,1);
+            foreach($block['children'] as $condition){
+                $pdf->SetX(30);
+                $tmpCondition = "";
+                foreach($condition['children'] as $trial){
+                    $tmpCondition.= $trial['name']." "; 
+                }
+                $pdf->MultiCell(0,10,$condition['name']." : ".$tmpCondition,0,1);
+            }
+        }
+    }
+}
 
 $pdf->Output();
 ?>

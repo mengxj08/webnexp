@@ -33,6 +33,8 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
       $scope.GenerateSimulation();
       //jsonString = $scope.writeToJson;
       draw($scope.writeToJson);
+
+      $scope.PostDataToPhP();
     };
 
     $scope.GenerateSimulation = function(){
@@ -421,6 +423,22 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
         success(function(response) {
             $scope.codeStatus = response.data;
             $window.location.href = 'download.php';
+        }).
+        error(function(response) {
+            $scope.codeStatus = response || "Request failed";
+        });
+    };
+
+    $scope.PostDataToPhP = function(){
+      $http({
+          method: 'post',
+          url: 'SaveDataToCookies.php',
+          data: $.param({'name':'ResultOfArrangement','data':$scope.writeToJson}),
+          headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8;'},
+        }).
+        success(function(response) {
+            $scope.codeStatus = response.data;
+            //$window.location.href = 'download.php';
         }).
         error(function(response) {
             $scope.codeStatus = response || "Request failed";
