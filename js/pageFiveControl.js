@@ -36,6 +36,9 @@ app.controller('pageFiveControl',function($scope,$http,$window,localStorageServi
             $scope.codeStatus = response || "Request failed";
         });
     };
+    $scope.redesign = function(){
+      $window.location.href = 'index.html';
+    };
 
     $scope.saveToPDF = function(){
       $http({

@@ -74,6 +74,7 @@
       </div>
       <div class="jumbotron">
           <p>3. To test your statement, you have to define a reasonable hypothesis based on your research question. The process of refining the hypothesis helps you specify representative independent/dependent variables and test conditions.</p>
+          <p><a role="button" class="btn btn-success" data-toggle="modal" data-target="#showExample">Show example</a><a role="button" class="btn btn-success" data-toggle="modal" data-target="#reset">Reset</a></p>
           <a href="contents/helpPage2.html#3" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
       </div>
 <!--       The first question starts: main_solutions -->
@@ -397,85 +398,35 @@
     <!-- /container --> 
 
 <!-- Model template for add into the select options -->
-   <!--  <div class="modal fade bs-example-modal-sm" id="firstModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-body">
-              <div class="input-group input-group-lg">
-                <input id="inputOne" type="text" class="form-control" placeholder="Your solution" ng-model="addOption">
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveChanges('selectOne')">Save changes</button>
-          </div>
-        </div>
+<div id="showExample" class="modal fade bs-example-modal-sm" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>The example will replace your current setup. Do you really want to show the example?</p>
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="showExample()">Yes</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="modal fade bs-example-modal-sm" id="secondModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-body">
-              <div class="input-group input-group-lg">
-                <input id="inputTwo" type="text" class="form-control" placeholder="Other solution" ng-model="addOption">
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveChanges('selectTwo')">Save changes</button>
-          </div>
-        </div>
+<div id="reset" class="modal fade bs-example-modal-sm" role="dialog" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Reset will erase your current setup. Do you really want to reset?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="reset()">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
       </div>
     </div>
-
-    <div class="modal fade bs-example-modal-sm" id="thirdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-body">
-              <div class="input-group input-group-lg">
-                <input id="inputThree" type="text" class="form-control" placeholder="certain tasks" ng-model="addOption">
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveChanges('selectThree')">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade bs-example-modal-sm" id="forthModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-body">
-              <div class="input-group input-group-lg">
-                <input id="inputFour" type="text" class="form-control" placeholder="certain context" ng-model="addOption">
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveChanges('selectFour')">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade bs-example-modal-sm" id="fifthModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-body">
-              <div class="input-group input-group-lg">
-                <input id="inputFive" type="text" class="form-control" placeholder="centain terms" ng-model="addOption">
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveChanges('selectFive')">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
+  </div>
+</div>
 <!-- ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/pageOneControl.js"></script>

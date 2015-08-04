@@ -147,8 +147,48 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
 		}
     };
 
+    $scope.showExample = function(){
+    	hypothesis.main_solutions = [];
+    	hypothesis.main_solutions.push({
+    		name: 'optimal keyboard layout'
+    	});
+    	hypothesis.compare_solutions = [];
+    	hypothesis.compare_solutions.push({
+    		name: 'qwerty keyboard layout'
+    	});
+    	hypothesis.tasks = [];
+    	hypothesis.tasks.push({
+    		name: 'Type \'the quick brown fox jumps over the lazy dog\''
+    	});
+    	hypothesis.contexts = [];
+    	hypothesis.contexts.push({
+    		name: 'Different devices'
+    	},{
+    		name: 'Different screen size'
+    	});
+    	hypothesis.measures = [];
+    	hypothesis.measures.push({
+    		name: 'Speed'
+    	},{
+    		name: 'Accuracy'
+    	},{
+    		name: 'Learning cost'
+    	});
+    	hypothesis.target_population = [];
+    	hypothesis.target_population.push({
+    		name: 'Computer users'
+    	});
+    };
 
+    $scope.reset = function(){
+    	hypothesis.main_solutions = [];
+    	hypothesis.compare_solutions = [];
+    	hypothesis.tasks = [];
+    	hypothesis.contexts = [];
+    	hypothesis.measures = [];
+    	hypothesis.target_population = [];
 
+    };
  //    $scope.clickMinusFunction = function(selectID) {
  //    	console.log(selectID);
 	// 	var hypothesis = $scope.jsonData.design_guide.research_question.hypothesis;

@@ -64,8 +64,12 @@
       </div>
 
       <div class="jumbotron">
-          <p><a role="button" class="btn btn-success btn-lg" ng-click="DownloadFile()">Download</a> the design file of the whole experiment.</p>
-          <p><a role="button" class="btn btn-success btn-lg" ng-click="saveToPDF()">Download</a></p>
+          <p><a role="button" class="btn btn-success btn-lg" ng-click="DownloadFile()">Save</a> the design file of the whole experiment.</p>
+          <p><a role="button" class="btn btn-success btn-lg" ng-click="saveToPDF()">Download</a> the summarized report of the designed controlled experiment.</p>
+      </div>
+
+      <div class="jumbotron">
+          <p><a role="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#reDesign">Re-design</a> another controlled experiment. Remember to save your design to the local file.</p>
       </div>
     <nav>
       <ul class="pager">
@@ -77,6 +81,21 @@
       <p>&copy; XXX-HCI Lab</p>
     </footer>
     </div> 
+
+<div id="reDesign" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Re-design will erase the current design. Remember to save your design to the local file, otherwise you may lost the data. Do you really want to redesign?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="redesign()">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
     <!-- /container --> 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
