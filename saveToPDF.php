@@ -77,28 +77,35 @@ $pdf->MultiCell(0,10,'Hypothesis:',0,1);
 $pdf->SetFont('Times','',12);
 $tmpString = "( ";
 foreach($data['design_guide']['research_question']['hypothesis']['main_solutions'] as $group)
-    $tmpString.= $group['name']." ";
+    $tmpString.= $group['name'].", ";
+
+$tmpString = chop($tmpString, ', ')." ";
 
 $tmpString.=") is better than ( ";
 
 foreach($data['design_guide']['research_question']['hypothesis']['compare_solutions'] as $group)
-    $tmpString.= $group['name']." ";
+    $tmpString.= $group['name'].", ";
+
+$tmpString = chop($tmpString, ', ')." ";
 
 $tmpString.=") in ( ";
 
 foreach($data['design_guide']['research_question']['hypothesis']['tasks'] as $group)
-    $tmpString.= $group['name']." ";
+    $tmpString.= $group['name'].", ";
 
+$tmpString = chop($tmpString, ', ')." ";
 $tmpString.=") under ( ";
 
 foreach($data['design_guide']['research_question']['hypothesis']['contexts'] as $group)
-    $tmpString.= $group['name']." ";
+    $tmpString.= $group['name'].", ";
 
+$tmpString = chop($tmpString, ', ')." ";
 $tmpString.=") based on ( ";
 
 foreach($data['design_guide']['research_question']['hypothesis']['measures'] as $group)
-    $tmpString.= $group['name']." ";
+    $tmpString.= $group['name'].", ";
 
+$tmpString = chop($tmpString, ', ')." ";
 $tmpString.=").";
 
 $pdf->MultiCell(0,10,$tmpString,0,1);
@@ -118,13 +125,13 @@ foreach($data['design_guide']['variables']['independent_variable'] as $group){
     $pdf->MultiCell(0,10,(string)$group["name"],0,1);
 
     $pdf->SetFont('Times','I',12);
-    $pdf->Cell(50,10,$header[0],1);
+    $pdf->Cell(60,10,$header[0],1);
     $pdf->Cell(0,10,$header[1],1);
     $pdf->Ln();
 
     $pdf->SetFont('Times','',12);
     foreach($group["levels"] as $category){
-        $pdf->Cell(50,10,(string)$category["name"],1);
+        $pdf->Cell(60,10,(string)$category["name"],1);
         $pdf->Cell(0,10,(string)$category["description"],1);
         $pdf->Ln();
     }
@@ -149,12 +156,12 @@ $pdf->MultiCell(0,10,'Dependent variables:',0,1);
 
 $header = array('Variable Name', 'Description');
 $pdf->SetFont('Times','I',12);
-$pdf->Cell(50,10,$header[0],1);
+$pdf->Cell(60,10,$header[0],1);
 $pdf->Cell(0,10,$header[1],1);
 $pdf->Ln();
 $pdf->SetFont('Times','',12);
 foreach ($data['design_guide']['variables']['dependent_variable'] as $group) {
-        $pdf->Cell(50,10,(string)$group["name"],1);
+        $pdf->Cell(60,10,(string)$group["name"],1);
         $pdf->Cell(0,10,(string)$group["description"],1);
         $pdf->Ln();
 }
@@ -223,11 +230,23 @@ foreach($data['design_guide']['variables']['independent_variable'] as $group){
 $para = chop($para, '; ').".";
 
 if(sizeof($IVLatinSquare) > 0){
-    $para .= " The orders of ".implode(",",$IVLatinSquare)." were counter-balanced with Latin Square.";
+    $para .= " The orders of ".implode(",",$IVLatinSquare)." were counter-balanced with Latin Square. ";
 }
 
+if(sizeof($data['design_guide']['variables']['dependent_variable'])!=0){
+    $para .= "We considered two dependent variables: ";
+    foreach($data['design_guide']['variables']['dependent_variable'] as $group){
+        $para .= $group['name'];
+        if($group['description'] != "")
+            $para .= ' ('.$group['description'].')';
 
-$para .= " In summary, the experiement consisted of:";
+        $para .= ', ';
+    }
+
+    $para = chop($para, ', ').". ";
+}
+
+$para .= "In summary, the experiement consisted of:";
 $pdf->SetFont('Times','',12);
 $pdf->MultiCell(0,10,$para,0,1);
 
