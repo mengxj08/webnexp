@@ -42,17 +42,23 @@ textarea {
   margin-bottom: 30px;
 }
 
-.col-md-6{
-  padding-right: 0px;
+.col-md-2{
+  padding-left: 0px;
+  font-size: 18px;
+  margin-top: 6px;
 }
-.row{
-  margin-bottom: 20px;
-}
+/*ol{
+  list-style-type:none;
+}*/
 
-select[multiple]{
+/*.row{
+  margin-bottom: 20px;
+}*/
+
+/*select[multiple]{
   height: 78px;
 }
-
+*/
 span.glyphicon {
   font-size:12px;
 }
@@ -132,4 +138,8 @@ span.glyphicon {
 
 div{
   word-wrap:break-word;
+}
+
+h4{
+  line-height: 150%;
 }

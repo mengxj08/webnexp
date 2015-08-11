@@ -109,12 +109,12 @@ span.glyphicon {
   display: none;
   }
   .largeLabels{
-  width: 300px;
+  width: 400px;
 /*  display: inline;*/
   }
 
   .small{
-  width: 100px;
+  width: 105px;
   }
 }
 /* D3 */

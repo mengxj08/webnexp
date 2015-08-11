@@ -40,21 +40,27 @@
         <h3 class="text-muted">NEXP</h3>
       </div>
       <ul class="nav nav-tabs">
-        <li role="presentation"><a href="guidedesignOne.html">1-Research question & hypothesis</a></li>
-        <li role="presentation"><a href="guidedesignTwo.html">2-Variables</a></li>
-        <li role="presentation"><a href="guidedesignThree.html">3-Arrangement</a></li>
-        <li role="presentation" class="active"><a href="">4-Block & Trial & Timing</a></li>
-        <li role="presentation"><a href="guidedesignFive.html">5-Procedures</a></li>
+        <li role="presentation"><a href="guidedesignOne.html">I-Research question & hypothesis</a></li>
+        <li role="presentation"><a href="guidedesignTwo.html">II-Variables</a></li>
+        <li role="presentation"><a href="guidedesignThree.html">III-Arrangement</a></li>
+        <li role="presentation" class="active"><a href="">IV-Block & Trial & Timing</a></li>
+        <li role="presentation"><a href="guidedesignFive.html">V-Procedures</a></li>
       </ul>
       <div class="page-header">
-          <h1>Step 4: Decide blocks and trails</h1>
+          <h1><b>STAGE 4 :</b> Adjust duration of task blocks</h1>
+          <p>The purpose of this stage is to adjust the amount of time your entire experiment takes. This may require you to adjust the number of factors you test, or the arrangement of the task blocks or you may even have to reconsider how to test your solution. Experimental design incorporates many elements and it is normal to try different formats before you find the design that is effective and can be conducted in a reasonable amount of time. </p>
       </div>
 
       <div class="jumbotron">
-          <p>Step 1: Estimate the time for each trial (typically at least 3 trials per condition);</p>
-          <p>Step 2: Estimate the time for each block;</p>
-          <p>Step 3: Balance the trials and blocks so that the main part of the experiment is within 45 minutes;</p>
-          <p>Step 4: Combine with the condition arrangement and check the simulation of the whole experiment.</p>
+          <p><b>Terms used in this section:</b></p>
+          <p>Trial: each performance of the task that will be measured.  A minimum of three trials per condition is recommended.</p>
+          <p>Block: a group of trials. </p>
+          <p>Condition: the unique set of independent variables that will be used in each block of trials. Changing the number of conditions will change the number of blocks required to test all the possible conditions.</p>
+          <p><b>Instructions:</b></p>
+          <p>Step 1: Estimate the time for each trial</p>
+          <p>Step 2: Review the resulting time for each block</p>
+          <p>Step 3: Review the trials and blocks so that the main part of the experiment is within the recommended 45 minutes.</p>
+          <p>Step 4: If the experiment is too long, you may have to return to Stage 2 and Stage 3 to adjust the number of independent variables, test conditions and the order of tasks. Feel free to adjust the various elements of the experiment until the experiment falls within a reasonable time span.</p>
           <a href="contents/helpPage5.html#1" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
       </div>
       <div class="InputGroup">
@@ -63,67 +69,68 @@
           <span class="input-group-addon largeLabels" id="sizing-addon4">Minimum number of participants:</span>
           <input type="number" class="form-control" placeholder="0" aria-describedby="sizing-addon4" ng-model="jsonData.design_guide.arrangement.min_number" disabled>
         </div>
-        <h4 class="smallLabels">Actual number of participants:</h4>
+        <p>State the number of participants you want to have. This must be multiples of <span ng-bind="jsonData.design_guide.arrangement.min_number"></span> based on your current study design.</p>
+        <h4 class="smallLabels">State the actual number of participants:</h4>
         <Form class="input-group input-group-lg" name="groupOne">
-          <span class="input-group-addon largeLabels" id="sizing-addon5">Actual number of participants:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon5">State the actual number of participants:</span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon5" ng-model="jsonData.design_guide.arrangement.actual_number" min="0" max="99" required>
           <span class="input-group-addon small" ng-show="groupOne.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupOne.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
           <span class="input-group-addon small" ng-show="groupOne.input.$error.min || groupOne.input.$error.max">The value must be in range 0 to 99!</span>
         </Form>
-        <h4 class="smallLabels">Number of trials per condition:</h4>
+        <h4 class="smallLabels">State the number of trials per condition: </h4>
         <Form class="input-group input-group-lg" name="groupTwo">
-          <span class="input-group-addon largeLabels" id="sizing-addon1">Number of trials per condition:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon1">State the number of trials per condition: </span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon1" ng-model="jsonData.design_guide.arrangement.trial" min="0" max="99" required>
           <span class="input-group-addon small" ng-show="groupTwo.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupTwo.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
           <span class="input-group-addon small" ng-show="groupTwo.input.$error.min || groupTwo.input.$error.max">The value must be in range 0 to 99!</span>
         </Form>
-        <h4 class="smallLabels">Number of blocks per participant:</h4>
+        <h4 class="smallLabels">State the number of blocks per participant:</h4>
         <Form class="input-group input-group-lg" name="groupThree">
-          <span class="input-group-addon largeLabels" id="sizing-addon2">Number of blocks per participant:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon2">State the number of blocks per participant:</span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon2" ng-model="jsonData.design_guide.arrangement.block" min="0" max="99" required>
           <span class="input-group-addon small" ng-show="groupThree.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupThree.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
           <span class="input-group-addon small" ng-show="groupThree.input.$error.min || groupThree.input.$error.max">The value must be in range 0 to 99!</span>
         </Form>
-        <h4 class="smallLabels">Time cost per trial:</h4>
+        <h4 class="smallLabels">Estimate the duration of each trial:</h4>
         <Form class="input-group input-group-lg" name="groupFour">
-          <span class="input-group-addon largeLabels" id="sizing-addon3">Time cost per trial:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon3">Estimate the duration of each trial:</span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon3" ng-model="jsonData.design_guide.arrangement.time_per_trial" min="0" max="3600" required> 
           <span class="input-group-addon small">Seconds</span> 
           <span class="input-group-addon small" ng-show="groupFour.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupFour.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
           <span class="input-group-addon small" ng-show="groupFour.input.$error.min || groupFour.input.$error.max">The value must be in range 0 to 3600!</span>
         </Form>
-        <h4 class="smallLabels">Fee per participant:</h4>
+        <h4 class="smallLabels">The resulting time for the entire experiment is: </h4>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon largeLabels" id="sizing-addon7">The resulting time for the entire experiment is:</span>
+          <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon7" ng-model="jsonData.design_guide.arrangement.totalTimeCost" disabled>
+          <span class="input-group-addon small">Minutes</span> 
+        </div>
+
+        <h4 class="smallLabels">Cost per participant:</h4>
         <Form class="input-group input-group-lg" name="groupFive">
-          <span class="input-group-addon largeLabels" id="sizing-addon6">Fee per participant:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon6">Cost per participant:</span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon6" ng-model="jsonData.design_guide.arrangement.fee_per_participant" min="0" max="999" required>
           <span class="input-group-addon small" ng-show="groupFive.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupFive.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
           <span class="input-group-addon small" ng-show="groupFive.input.$error.min || groupFive.input.$error.max">The value must be in range 0 to 999!</span>
         </Form>
-        <h4 class="smallLabels">Total time cost per participant:</h4>
+        <h4 class="smallLabels">Total cost of participants:</h4>
         <div class="input-group input-group-lg">
-          <span class="input-group-addon largeLabels" id="sizing-addon7">Total time cost per participant:</span>
-          <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon7" ng-model="jsonData.design_guide.arrangement.totalTimeCost" disabled>
-          <span class="input-group-addon small">Minutes</span> 
-        </div>
-        <h4 class="smallLabels">Total payment:</h4>
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon largeLabels" id="sizing-addon8">Total payment:</span>
+          <span class="input-group-addon largeLabels" id="sizing-addon8">Total cost of participants:</span>
           <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon8" ng-model="jsonData.design_guide.arrangement.totalPayment" disabled>
           <span class="input-group-addon small">Bucks</span>
         </div>        
       </div>
       <div class="jumbotron">
           <p><a role="button" class="btn btn-success btn-lg" ng-click="showDraw()">Generate</a> the simulation of the whole arrangement of the experiment:</p>
-          <p>Only after generating the simulation, you are able to download the arrangement file,<a ng-show="generate" ng-click="DownloadFile()">(Click here to download)</a> which is used as input for running platform.</p>
-
+          <p>Only after generating the simulation, you will be able to download the arrangement file,<a ng-show="generate" ng-click="DownloadFile()">(Click here to download)</a> that will be used as input for the experiment running platform.</p>
       </div>
       <div id="draw" ng-show="generate"></div>
-
+      <p>Once you’re satisfied with the main experiment, you can complete the final stage of setting up the experimental procedures. </p>
     <nav>
       <ul class="pager">
           <li class="previous"><a href="guidedesignThree.html"><span aria-hidden="true">&larr;</span> Previous</a></li>

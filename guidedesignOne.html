@@ -39,29 +39,30 @@
         <h3 class="text-muted">NEXP</h3>
       </div>
       <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="">1-Research question & hypothesis</a></li>
-        <li role="presentation"><a href="guidedesignTwo.html">2-Variables</a></li>
-        <li role="presentation"><a href="guidedesignThree.html">3-Arrangement</a></li>
-        <li role="presentation"><a href="guidedesignFour.html">4-Block & Trial & Timing</a></li>
-        <li role="presentation"><a href="guidedesignFive.html">5-Procedures</a></li>
+        <li role="presentation" class="active"><a href="">I-Research question & hypothesis</a></li>
+        <li role="presentation"><a href="guidedesignTwo.html">II-Variables</a></li>
+        <li role="presentation"><a href="guidedesignThree.html">III-Arrangement</a></li>
+        <li role="presentation"><a href="guidedesignFour.html">IV-Block & Trial & Timing</a></li>
+        <li role="presentation"><a href="guidedesignFive.html">V-Procedures</a></li>
       </ul>
       <div class="page-header">
-          <h1>Step 1: Define the research question</h1>
+          <h1><b>STAGE 1 :</b> Think through your claim</h1>
       </div>
+<!-- The first question starts: setup the experiment   -->
       <div class="jumbotron">
-          <p>1. Before designing the experiment, you should be clear that what question you are going to focus on. Start with a general Question:</p>
+          <p>1. Let’s set up the experiment:</p>
           <a href="contents/helpPage2.html#1" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
       </div>
-      <textarea class="form-control" rows="3" placeholder="Research Question" ng-model="jsonData.design_guide.research_question.general_question"></textarea>
+    <!--   <textarea class="form-control" rows="3" placeholder="Research Question" ng-model="jsonData.design_guide.research_question.general_question"></textarea> -->
 
-      <div class="jumbotron">
+<!--       <div class="jumbotron">
           <p>2. After figuring out the general question, please type the necessary information below:</p>
           <a href="contents/helpPage2.html#2" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
-      </div>
+      </div> -->
       <div class="InputGroup">
         <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="sizing-addon1">Experiment Name:</span>
-          <input type="text" class="form-control" placeholder="name" aria-describedby="sizing-addon1" ng-model="jsonData.design_guide.research_question.experiment_title">
+          <span class="input-group-addon" id="sizing-addon1">Experiment Title:</span>
+          <input type="text" class="form-control" placeholder="title" aria-describedby="sizing-addon1" ng-model="jsonData.design_guide.research_question.experiment_title">
         </div>
         <div class="input-group input-group-lg">
           <span class="input-group-addon" id="sizing-addon2">Author:</span>
@@ -73,29 +74,30 @@
         </div>
       </div>
       <div class="jumbotron">
-          <p>3. To test your statement, you have to define a reasonable hypothesis based on your research question. The process of refining the hypothesis helps you specify representative independent/dependent variables and test conditions.</p>
+          <p>To test your statement, you have to define a reasonable hypothesis based on your research question. The process of refining the hypothesis helps you specify representative independent/dependent variables and test conditions.</p>
           <p><a role="button" class="btn btn-success" data-toggle="modal" data-target="#showExample">Show example</a><a role="button" class="btn btn-success" data-toggle="modal" data-target="#reset">Reset</a></p>
           <a href="contents/helpPage2.html#3" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
       </div>
-<!--       The first question starts: main_solutions -->
+
+<!-- The second question starts: target_population   -->
       <div ui-tree="options" class="treeClass">
         <ol class="angular-ui-tree-nodes">
           <li class="angular-ui-tree-node">
             <div class="group-title angular-ui-tree-handle">
-              <label><h4>3.1 What are your solutions?</h4></label>
-              <form class="form-inline" role="form">       
+              <label><h4>2. Who is your solution for? Describe your target user. Consider age, ability and motivation of the user. A general population answer is also acceptable. </h4></label>
+              <form class="form-inline" role="form">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="MainSolutions" placeholder="Click to edit...">
+                  <input type="text" class="form-control" id="targetPopulation" placeholder="Click to edit...">
                 </div>
-                <button type="submit" class="btn btn-default" ng-click="addItems('MainSolutions')">Add</button>
+                <button type="submit" class="btn btn-default" ng-click="addItems('targetPopulation')">Add</button>
               </form>
             </div>
           </li>
         </ol>
-        <ol ui-tree-nodes ng-model="jsonData.design_guide.research_question.hypothesis.main_solutions">
-            <li ng-repeat="group in jsonData.design_guide.research_question.hypothesis.main_solutions" ui-tree-node>
+        <ol ui-tree-nodes ng-model="jsonData.design_guide.research_question.hypothesis.target_population">
+            <li ng-repeat="group in jsonData.design_guide.research_question.hypothesis.target_population" ui-tree-node>
               <div class="category-title angular-ui-tree-handle" ng-show="!group.editing">
-                <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeItem('MainSolutions',group)"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeItem('targetPopulation',group)"><i class="glyphicon glyphicon-remove"></i></a>
                 <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editItem(group)"><i class="glyphicon glyphicon-pencil"></i></a>
                 <div>&nbsp;{{group.name}}</div>
               </div>
@@ -110,9 +112,83 @@
               </div>
             </li>
           </ol>
+        </div>  
+
+<!--  The third question starts: main_solutions -->
+      <div ui-tree="options" class="treeClass">
+        <ol class="angular-ui-tree-nodes">
+          <li class="angular-ui-tree-node">
+            <div class="group-title angular-ui-tree-handle">
+              <label><h4>3. What are you claiming? Experiments are designed to prove a claim that your solution(s) is better than other solution(s). State the solutions you wish to compare.</h4></label>
+              <div class="row">
+                <div class="col-md-5">
+                  <form class="form-inline" role="form">       
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="MainSolutions" placeholder="Click to edit...">
+                  </div>
+                  <button type="submit" class="btn btn-default" ng-click="addItems('MainSolutions')">Add</button>
+                  </form>
+                </div>
+                <div class="col-md-2">is better than</div>
+                <div class="col-md-5">
+                  <form class="form-inline" role="form">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="ComSolutions" placeholder="Click to edit...">
+                    </div>
+                    <button type="submit" class="btn btn-default" ng-click="addItems('ComSolutions')">Add</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ol>
+        <div class="row">
+          <div class="col-md-5">
+            <ol ui-tree-nodes ng-model="jsonData.design_guide.research_question.hypothesis.main_solutions">
+              <li ng-repeat="group in jsonData.design_guide.research_question.hypothesis.main_solutions" ui-tree-node>
+                <div class="category-title angular-ui-tree-handle" ng-show="!group.editing">
+                  <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeItem('MainSolutions',group)"><i class="glyphicon glyphicon-remove"></i></a>
+                  <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editItem(group)"><i class="glyphicon glyphicon-pencil"></i></a>
+                  <div>&nbsp;{{group.name}}</div>
+                </div>
+                <div class="category-title angular-ui-tree-handle" data-nodrag ng-show="group.editing">
+                  <form class="form-inline" role="form">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Group name" ng-model="group.name">
+                    </div>
+                    <button type="submit" class="btn btn-default" ng-click="saveItem(group)">Save</button>
+                    <button type="submit" class="btn btn-default" ng-click="cancelEditingItem(group)">Cancel</button>
+                  </form>
+                </div>
+              </li>
+            </ol>            
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-5">
+            <ol ui-tree-nodes ng-model="jsonData.design_guide.research_question.hypothesis.compare_solutions">
+              <li ng-repeat="group in jsonData.design_guide.research_question.hypothesis.compare_solutions" ui-tree-node>
+                <div class="category-title angular-ui-tree-handle" ng-show="!group.editing">
+                  <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeItem('ComSolutions',group)"><i class="glyphicon glyphicon-remove"></i></a>
+                  <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editItem(group)"><i class="glyphicon glyphicon-pencil"></i></a>
+                  <div>&nbsp;{{group.name}}</div>
+                </div>
+                <div class="category-title angular-ui-tree-handle" data-nodrag ng-show="group.editing">
+                  <form class="form-inline" role="form">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Group name" ng-model="group.name">
+                    </div>
+                    <button type="submit" class="btn btn-default" ng-click="saveItem(group)">Save</button>
+                    <button type="submit" class="btn btn-default" ng-click="cancelEditingItem(group)">Cancel</button>
+                  </form>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+
         </div>
 <!-- The second question starts: compare_solutions -->
-      <div ui-tree="options" class="treeClass">
+<!--       <div ui-tree="options" class="treeClass">
         <ol class="angular-ui-tree-nodes">
           <li class="angular-ui-tree-node">
             <div class="group-title angular-ui-tree-handle">
@@ -144,49 +220,16 @@
               </div>
             </li>
           </ol>
-        </div>
+        </div> -->
 
-<!-- The third question starts: target_population   -->
-      <div ui-tree="options" class="treeClass">
-        <ol class="angular-ui-tree-nodes">
-          <li class="angular-ui-tree-node">
-            <div class="group-title angular-ui-tree-handle">
-              <label><h4>3.3 Who are your solutions designed for (target population)?</h4></label>
-              <form class="form-inline" role="form">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="targetPopulation" placeholder="Click to edit...">
-                </div>
-                <button type="submit" class="btn btn-default" ng-click="addItems('targetPopulation')">Add</button>
-              </form>
-            </div>
-          </li>
-        </ol>
-        <ol ui-tree-nodes ng-model="jsonData.design_guide.research_question.hypothesis.target_population">
-            <li ng-repeat="group in jsonData.design_guide.research_question.hypothesis.target_population" ui-tree-node>
-              <div class="category-title angular-ui-tree-handle" ng-show="!group.editing">
-                <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeItem('targetPopulation',group)"><i class="glyphicon glyphicon-remove"></i></a>
-                <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editItem(group)"><i class="glyphicon glyphicon-pencil"></i></a>
-                <div>&nbsp;{{group.name}}</div>
-              </div>
-              <div class="category-title angular-ui-tree-handle" data-nodrag ng-show="group.editing">
-                <form class="form-inline" role="form">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Group name" ng-model="group.name">
-                  </div>
-                  <button type="submit" class="btn btn-default" ng-click="saveItem(group)">Save</button>
-                  <button type="submit" class="btn btn-default" ng-click="cancelEditingItem(group)">Cancel</button>
-                </form>
-              </div>
-            </li>
-          </ol>
-        </div>  
+
 
 <!-- The forth question starts: tasks   -->
       <div ui-tree="options" class="treeClass">
         <ol class="angular-ui-tree-nodes">
           <li class="angular-ui-tree-node">
             <div class="group-title angular-ui-tree-handle">
-              <label><h4>3.4 What subset of tasks are appropriate to test (Define your tasks)?</h4></label>
+              <label><h4>4. Using your solution, what tasks will your users be able to perform better? Common tasks are target clicking or text selecting.</h4></label>
               <form class="form-inline" role="form">
                 <div class="form-group">
                   <input type="text" class="form-control" id="Tasks" placeholder="Click to edit...">
@@ -221,7 +264,7 @@
         <ol class="angular-ui-tree-nodes">
           <li class="angular-ui-tree-node">
             <div class="group-title angular-ui-tree-handle">
-              <label><h4>3.5 What measures are you going to use to quantify the performance?</h4></label>
+              <label><h4>5. To show that the tasks have been performed better, what will you measure? State the measurement(s) you wish to make to demonstrate the users’ ability to perform these tasks.  Common measurements are speed of task completion or accuracy of task completion.</h4></label>
               <form class="form-inline" role="form">
                 <div class="form-group">
                   <input type="text" class="form-control" id="Measures" placeholder="Click to edit...">
@@ -257,7 +300,7 @@
           <li class="angular-ui-tree-node">
             <div class="group-title angular-ui-tree-handle">
               <form class="form-inline" role="form">
-                <label><h4>3.6 Other than the different type of tasks, what other factors can influence the measures (Define other conditions/factors to test)?</h4></label>
+                <label><h4>6. Other than the tasks, what other experimental conditions<sup>1</sup> might influence the performance of these tasks? Common examples are size of cursor or users’ dominant hand.</h4></label>
                 <div class="form-group">
                   <input type="text" class="form-control" id="Contexts" placeholder="Click to edit...">
                 </div>
@@ -375,16 +418,23 @@
       </div> -->
 <!-- ———————————————————————————————————————————————————————————————————————————————————————————————————The hypothesis is generated: -->
       <div class="jumbotron">
-          <p>According to your answers, NexP generates your <strong>hypothesis</strong>:</p>
+          <p>7. Based on the information you have given above, this is what your research claim looks like at the moment. Feel free to adjust the information above until you feel that the research claim explains what you want to test, and appears to be a claim that can be tested. </p>
           <p>
-            <span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.main_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.main_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>is better than
-            <span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.compare_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.compare_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>in
-            <span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.tasks"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.tasks.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>under
-            <span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.contexts"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.contexts.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>based on
-            <span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.measures"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.measures.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>.
+            Experiment Title: <u><span ng-bind="jsonData.design_guide.research_question.experiment_title"></span></u>
+          </p>
+          <p>
+            Author: <u><span ng-bind="jsonData.design_guide.research_question.experiment_conductor"></span></u>
+          </p>
+          <p>
+            In my experiment, I want to claim that for to do
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.tasks"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.tasks.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>",
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.main_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.main_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" is better than
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.compare_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.compare_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>". To test this claim, I will vary the
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.contexts"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.contexts.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" and measure
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.measures"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.measures.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>".
           </p>
       </div>
-
+        <p><sup>1</sup>These set of factors are usually the conditions under which the tasks are performed or the features of the users that might change their performance.</p>
     <nav>
       <ul class="pager">
         <li class="previous"><a href="guidedesign.html"><span aria-hidden="true">&larr;</span> Previous</a></li>

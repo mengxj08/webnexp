@@ -73,3 +73,8 @@ body {
     border-bottom: 0;
   }
 }
+
+#process{
+  text-align: left;
+  line-height: 80%;
+}
