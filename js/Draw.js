@@ -1,5 +1,5 @@
 function draw(jsonString){
-	var margin = {top: 20, right: 120, bottom: 20, left: 120},
+	var margin = {top: 20, right: 20, bottom: 20, left: 65},
 	    width = 960 - margin.right - margin.left,
 	    height = 800 - margin.top - margin.bottom;
 	    
@@ -34,20 +34,54 @@ function draw(jsonString){
 	    }
 	  }
 
+	  function Firstcollapse(d){
+	  	if(d._children){
+	  		d.children = d._children;
+	  		d._children = null;
+	  		Firstcollapse(d.children[0]);
+	  	}
+	  	else
+	  		return;
+	  }
+
 	  root.children.forEach(collapse);
+
+	  if(root.children)
+	  	Firstcollapse(root.children[0]);
+
 	  update(root);
+
 	// });
 
-	d3.select(self.frameElement).style("height", "800px");
+	//d3.select(self.frameElement).style("height", "800px");
+
+	var levelWidth = [1];
+	function childCount(level, n) {
+
+	  if(n.children && n.children.length > 0) {
+	    if(levelWidth.length <= level + 1) levelWidth.push(0);
+
+	    levelWidth[level+1] += n.children.length;
+	    n.children.forEach(function(d) {
+	      childCount(level + 1, d);
+	    });
+	  }
+	};
 
 	function update(source) {
+	  levelWidth = [1];
+	  childCount(0, root); 
+	  var newHeight = d3.max(levelWidth) * 20; // 20 pixels per line  
+	  tree = tree.size([newHeight + height, width]);
+	  d3.select("svg").attr("height", newHeight+height + margin.top + margin.bottom)
+
 
 	  // Compute the new tree layout.
 	  var nodes = tree.nodes(root).reverse(),
 	      links = tree.links(nodes);
 
 	  // Normalize for fixed-depth.
-	  nodes.forEach(function(d) { d.y = d.depth * 180; });
+	  nodes.forEach(function(d) { d.y = d.depth * 170; });
 
 	  // Update the nodes…
 	  var node = svg.selectAll("g.node")
@@ -70,6 +104,13 @@ function draw(jsonString){
 	      .text(function(d) { return d.name; })
 	      .style("fill-opacity", 1e-6);
 
+	  nodeEnter.append("text")
+	  	  .attr("class","plus")
+	      .attr("dx", function(d) { return -3; })
+	      .attr("dy", ".35em")
+	      .text("+")
+	      .style("fill-opacity", 1e-6);
+
 	  // Transition nodes to their new position.
 	  var nodeUpdate = node.transition()
 	      .duration(duration)
@@ -80,7 +121,10 @@ function draw(jsonString){
 	      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
 	  nodeUpdate.select("text")
-	      .style("fill-opacity", 1);
+	      .style("fill-opacity", 5);
+
+	  nodeUpdate.select("text.plus")
+	  	  .style("fill-opacity", function(d) { return d._children ? "5" : "1e-6";});
 
 	  // Transition exiting nodes to the parent's new position.
 	  var nodeExit = node.exit().transition()
@@ -91,7 +135,7 @@ function draw(jsonString){
 	  nodeExit.select("circle")
 	      .attr("r", 1e-6);
 
-	  nodeExit.select("text")
+	  nodeExit.selectAll("text")
 	      .style("fill-opacity", 1e-6);
 
 	  // Update the links…
