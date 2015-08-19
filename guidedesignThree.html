@@ -61,14 +61,14 @@
         <table class="table" ng-model="jsonData.design_guide.variables.independent_variable">
           <thead>
           <tr>
-              <th id="FactorName">Factor</th>
+              <th id="FactorName">Independent Variable</th>
               <th id="designType">Between- or Within-</th>
               <th id="Type">Strategy</th>
-              <th id="level">Level</th>
+              <th id="level">Test Condition</th>
           </tr>
           </thead>
           <tr ng-repeat="item in jsonData.design_guide.variables.independent_variable">
-            <td><input type="text" class="form-control" placeholder="Name" ng-model="item.name"></td>
+            <td><input type="text" class="form-control" placeholder="Name" ng-model="item.name" disabled></td>
             <td>
                 <select class="form-control" size="1" ng-model="item.subject_design">
                     <option value="Between">Between</option>
@@ -88,21 +88,22 @@
                     <option>2</option>
                     <option>3</option>
                 </select> -->
-                <div class="row">
-                  <div class="col-xs-4 col-md-9">
-                    <select multiple class="form-control" ng-model="item.selectedlevel">
-                    <option ng-repeat="subitem in item.levels">{{subitem.name}}</option>
+<!--                 <div class="row">
+                  <div class="col-xs-4 col-md-9"> -->
+                    <select class="form-control" ng-model="item.selectedlevel">
+                      <option value="" disabled selected>Click to see test conditions</option>
+                      <option ng-repeat="subitem in item.levels">{{subitem.name}}</option>
                     </select>
-                  </div>
-                  <div class="col-xs-1 col-md-1">
+<!--                   </div> -->
+<!--                   <div class="col-xs-1 col-md-1">
                     <div class="btn-group-vertical btn-group-xs" role="group" aria-label="...">
                       <button type="button" class="btn btn-default btn-table" data-toggle="modal" data-target="#myModal" ng-click="passValuetoModel(item)">
                         <span class="glyphicon glyphicon-plus" aria-hidden="false"></span></button>
                       <button type="button" class="btn btn-default btn-table" ng-click="clickMinusFunction(item, item.selectedlevel)">
                         <span class="glyphicon glyphicon-minus" aria-hidden="false"></span></button>
                     </div>
-                  </div>
-                </div>                
+                  </div> -->
+<!--                 </div>   -->              
             </td>
           </tr>
         </table>

@@ -32,37 +32,37 @@ app.controller('pageThreeControl',function($scope, $http, localStorageService){
     };
     $scope.removeNoLevels();
 
-    $scope.clickMinusFunction = function(IDV, selectedlevel){
-    	if(IDV && selectedlevel){
-    		var index = IVgroups.indexOf(IDV);
-    		if(index > -1)
-    		{
-    			//console.log("index:"+index);
-    			IVgroups[index].levels.forEach(function(element,indexElement){
-    				if(element.name == selectedlevel.toString()){
-    					IVgroups[index].levels.splice(indexElement,1);
-    				}
-    			});
-    			//var indexLevel = IVgroups[index].levels.indexOf(selectedlevel.toString());
-    			//console.log(selectedlevel);
-    			//console.log(IVgroups[index].levels);
-    		}
+    // $scope.clickMinusFunction = function(IDV, selectedlevel){
+    // 	if(IDV && selectedlevel){
+    // 		var index = IVgroups.indexOf(IDV);
+    // 		if(index > -1)
+    // 		{
+    // 			//console.log("index:"+index);
+    // 			IVgroups[index].levels.forEach(function(element,indexElement){
+    // 				if(element.name == selectedlevel.toString()){
+    // 					IVgroups[index].levels.splice(indexElement,1);
+    // 				}
+    // 			});
+    // 			//var indexLevel = IVgroups[index].levels.indexOf(selectedlevel.toString());
+    // 			//console.log(selectedlevel);
+    // 			//console.log(IVgroups[index].levels);
+    // 		}
     		
-    	}
-    };
-    $scope.passValuetoModel = function(IDV){
-    	$scope.clickedItem = IDV;
-    	console.log("123");
-    };
-    $scope.saveChanges = function(IDV){
-    	var groupName = document.getElementById("inputOne").value;
-    	if($scope.clickedItem && groupName.length > 0){
-	    	var index = IVgroups.indexOf($scope.clickedItem);
-	    	IVgroups[index].levels.push({
-	          name: groupName,
-	          type: "category",
-	        });
-	        document.getElementById("inputOne").value = '';
-    	}
-    };
+    // 	}
+    // };
+    // $scope.passValuetoModel = function(IDV){
+    // 	$scope.clickedItem = IDV;
+    // 	console.log("123");
+    // };
+    // $scope.saveChanges = function(IDV){
+    // 	var groupName = document.getElementById("inputOne").value;
+    // 	if($scope.clickedItem && groupName.length > 0){
+	   //  	var index = IVgroups.indexOf($scope.clickedItem);
+	   //  	IVgroups[index].levels.push({
+	   //        name: groupName,
+	   //        type: "category",
+	   //      });
+	   //      document.getElementById("inputOne").value = '';
+    // 	}
+    // };
 });
