@@ -21,13 +21,31 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
     }
 
     localStorageService.bind($scope, 'jsonData');
-    //$scope.jsonData = localStorageService.get('jsonData');
-    //console.log($scope.jsonData);
-    //console.log($scope.jsonData.design_guide.research_question.general_question);
 
-    //$scope.selectedItemTwo = $scope.jsonData.design_guide.research_question.hypothesis.compare_solutions[0];
-    //$scope.addOption = "test";
+    var IVgroups = $scope.jsonData.design_guide.variables.independent_variable;
+    var DVgroups = $scope.jsonData.design_guide.variables.dependent_variable;
 	var hypothesis = $scope.jsonData.design_guide.research_question.hypothesis;
+	//var pid = $scope.jsonData.parameter.pid;
+
+	var flag = true;
+    IVgroups.forEach(function(item,index){
+      if(item.pid == 0)
+        flag = false;
+    });
+
+    if(flag){
+        var tmp = {
+          name: "Techniques",
+          subject_design: "Within",
+          levels: [
+            ],
+          counter_balance: "FullyCounterBalancing",
+          type: "group",
+          pid: 0
+        };
+        IVgroups.push(tmp);
+    }
+
     $scope.addItems = function(tmp) {
       // if ($scope.groups.length > 10) {
       //   window.alert('You can\'t add more than 10 groups!');
@@ -37,11 +55,25 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
 		case 'MainSolutions':
 		  var groupName = document.getElementById("MainSolutions").value;
 		  if (groupName.length > 0) {
+
 		    hypothesis.main_solutions.push({
 		      name: groupName,
+		      pid: $scope.jsonData.parameter.pid
 		    });
+
+		    IVgroups.forEach(function(item,index){
+      			if(item.pid == 0){
+		          item.levels.push({
+		              name: groupName,
+		              type: "category",
+		              pid: $scope.jsonData.parameter.pid
+		          });      				
+      			}
+    		});
+    		$scope.jsonData.parameter.pid++;
 		    document.getElementById("MainSolutions").value = '';
 		  }
+
 		  break;
 
 		case 'ComSolutions':
@@ -49,7 +81,19 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
 		  if (groupName.length > 0) {
 		    hypothesis.compare_solutions.push({
 		      name: groupName,
+		      pid: $scope.jsonData.parameter.pid
 		    });
+
+		   	IVgroups.forEach(function(item,index){
+      			if(item.pid == 0){
+		          item.levels.push({
+		              name: groupName,
+		              type: "category",
+		              pid: $scope.jsonData.parameter.pid
+		          });      				
+      			}
+    		});
+    		$scope.jsonData.parameter.pid++;
 		    document.getElementById("ComSolutions").value = '';
 		  }
 		  break;
@@ -59,8 +103,21 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
 		  if (groupName.length > 0) {
 		    hypothesis.tasks.push({
 		      name: groupName,
+		      pid: $scope.jsonData.parameter.pid
 		    });
-		    document.getElementById("Tasks").value = '';
+          var tmp = {
+            name: groupName,
+            subject_design: "Within",
+            levels: [
+              ],
+            counter_balance: "FullyCounterBalancing",
+            type: "group",
+            pid: $scope.jsonData.parameter.pid
+          };
+
+          IVgroups.push(tmp);
+          $scope.jsonData.parameter.pid++;	    
+		  document.getElementById("Tasks").value = '';
 		  }
 		  break;	
 
@@ -69,8 +126,22 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
 		  if (groupName.length > 0) {
 		    hypothesis.contexts.push({
 		      name: groupName,
+		      pid: $scope.jsonData.parameter.pid
 		    });
-		    document.getElementById("Contexts").value = '';
+
+          var tmp = {
+            name: groupName,
+            subject_design: "Within",
+            levels: [
+              ],
+            counter_balance: "FullyCounterBalancing",
+            type: "group",
+            pid: $scope.jsonData.parameter.pid
+          };
+
+          IVgroups.push(tmp);
+          $scope.jsonData.parameter.pid++;		    
+		  document.getElementById("Contexts").value = '';
 		  }
 		  break;
 
@@ -79,8 +150,22 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
 		  if (groupName.length > 0) {
 		    hypothesis.measures.push({
 		      name: groupName,
+		      pid:$scope.jsonData.parameter.pid
 		    });
-		    document.getElementById("Measures").value = '';
+
+          var tmp = {
+            name: groupName,
+            subject_design: "Within",
+            levels: [
+              ],
+            counter_balance: "FullyCounterBalancing",
+            type: "group",
+            pid: $scope.jsonData.parameter.pid
+          };
+
+          DVgroups.push(tmp);
+          $scope.jsonData.parameter.pid++;		    
+		  document.getElementById("Measures").value = '';
 		  }
 		  break;
 
@@ -92,8 +177,7 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
 		    });
 		    document.getElementById("targetPopulation").value = '';
 		  }
-		  break;
-		  		  		  	  		
+		  break;	  		  	  		
 		default:
 	}
     };
@@ -106,6 +190,24 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
     };
 
     $scope.saveItem = function(group) {
+      IVgroups.forEach(function(item,index){
+      	if(item.pid == 0){
+      		item.levels.forEach(function(subItem,subIndex){
+      			if(subItem.pid == group.pid)
+      				subItem.name = group.name;
+      		});
+      	}
+      	else if(item.pid == group.pid){
+      		item.name = group.name;
+      	}
+      	else{}
+      });
+
+      DVgroups.forEach(function(item,index){
+      	if(item.pid == group.pid){
+      		item.name = group.name;
+      	}
+      });
       group.editing = false;
     };
 
@@ -117,26 +219,64 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
 			case 'MainSolutions':
 			    var removedIndex = hypothesis.main_solutions.indexOf(group);
       			hypothesis.main_solutions.splice(removedIndex,1);
+
+      			IVgroups.forEach(function(item,index){
+	      			if(item.pid == 0){
+			          item.levels.forEach(function(subItem,subIndex){
+			          	if(subItem.pid == group.pid){
+			          		item.levels.splice(subIndex,1);
+			          	}
+			          });     				
+	      			}
+    			});
 				break;
 
 			case 'ComSolutions':
 			    var removedIndex = hypothesis.compare_solutions.indexOf(group);
       			hypothesis.compare_solutions.splice(removedIndex,1);
+
+      			IVgroups.forEach(function(item,index){
+	      			if(item.pid == 0){
+			          item.levels.forEach(function(subItem,subIndex){
+			          	if(subItem.pid == group.pid){
+			          		item.levels.splice(subIndex,1);
+			          	}
+			          });     				
+	      			}
+    			});
 				break;
 
 			case 'Tasks':
 			    var removedIndex = hypothesis.tasks.indexOf(group);
       			hypothesis.tasks.splice(removedIndex,1);
+
+      			IVgroups.forEach(function(item,index){
+		          	if(item.pid == group.pid){
+		          		IVgroups.splice(index,1);
+		          	}	
+    			});
 				break;
 
 			case 'Contexts':
 			    var removedIndex = hypothesis.contexts.indexOf(group);
       			hypothesis.contexts.splice(removedIndex,1);
+
+      			IVgroups.forEach(function(item,index){
+		          	if(item.pid == group.pid){
+		          		IVgroups.splice(index,1);
+		          	}	
+    			});
 				break;
 
 			case 'Measures':
 			    var removedIndex = hypothesis.measures.indexOf(group);
       			hypothesis.measures.splice(removedIndex,1);
+
+      			DVgroups.forEach(function(item,index){
+		          	if(item.pid == group.pid){
+		          		DVgroups.splice(index,1);
+		          	}	
+    			});
 				break;
 
 			case 'targetPopulation':
@@ -148,6 +288,7 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
     };
 
     $scope.showExample = function(){
+    	// need to add to IV&DV as well
     	hypothesis.main_solutions = [];
     	hypothesis.main_solutions.push({
     		name: 'optimal keyboard layout'

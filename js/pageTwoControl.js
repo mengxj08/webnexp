@@ -19,95 +19,96 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
     }
 
     localStorageService.bind($scope, 'jsonData');
-    localStorageService.bind($scope, 'flagOne');
+    //localStorageService.bind($scope, 'flagOne');
 
     var IVgroups = $scope.jsonData.design_guide.variables.independent_variable;
     var DVgroups = $scope.jsonData.design_guide.variables.dependent_variable;
+    var HYgroups = $scope.jsonData.design_guide.research_question.hypothesis;
 
-    $scope.Automation = function(){
-      $scope.flagOne = false;
+    // $scope.Automation = function(){
+    //   $scope.flagOne = false;
 
-      var HYgroups = $scope.jsonData.design_guide.research_question.hypothesis;
-      if(HYgroups.main_solutions.length != 0 || HYgroups.compare_solutions.length != 0){
-        var tmp = {
-          name: "Techniques",
-          subject_design: "Within",
-          levels: [
-            ],
-          counter_balance: "FullyCounterBalancing",
-          type: "group"
-        };
+    //   var HYgroups = $scope.jsonData.design_guide.research_question.hypothesis;
+    //   if(HYgroups.main_solutions.length != 0 || HYgroups.compare_solutions.length != 0){
+    //     var tmp = {
+    //       name: "Techniques",
+    //       subject_design: "Within",
+    //       levels: [
+    //         ],
+    //       counter_balance: "FullyCounterBalancing",
+    //       type: "group"
+    //     };
 
-        HYgroups.main_solutions.forEach(function(item){
-          tmp.levels.push({
-              name: item.name.toString(),
-              type: "category"
-          });
-        });
+    //     HYgroups.main_solutions.forEach(function(item){
+    //       tmp.levels.push({
+    //           name: item.name.toString(),
+    //           type: "category"
+    //       });
+    //     });
 
-        HYgroups.compare_solutions.forEach(function(item){
-          tmp.levels.push({
-              name: item.name.toString(),
-              type: "category"
-          });
-        });
+    //     HYgroups.compare_solutions.forEach(function(item){
+    //       tmp.levels.push({
+    //           name: item.name.toString(),
+    //           type: "category"
+    //       });
+    //     });
 
-        IVgroups.push(tmp);
-      }
+    //     IVgroups.push(tmp);
+    //   }
 
-      if(HYgroups.tasks.length != 0){
+    //   if(HYgroups.tasks.length != 0){
 
-        HYgroups.tasks.forEach(function(item){
-          // tmp.levels.push({
-          //     name: item.toString(),
-          //     type: "category"
-          // });
-          var tmp = {
-            name: item.name.toString(),
-            subject_design: "Within",
-            levels: [
-              ],
-            counter_balance: "FullyCounterBalancing",
-            type: "group"
-          };
+    //     HYgroups.tasks.forEach(function(item){
+    //       // tmp.levels.push({
+    //       //     name: item.toString(),
+    //       //     type: "category"
+    //       // });
+    //       var tmp = {
+    //         name: item.name.toString(),
+    //         subject_design: "Within",
+    //         levels: [
+    //           ],
+    //         counter_balance: "FullyCounterBalancing",
+    //         type: "group"
+    //       };
 
-          IVgroups.push(tmp);
-        });
-      }
-      if(HYgroups.contexts.length != 0){
+    //       IVgroups.push(tmp);
+    //     });
+    //   }
+    //   if(HYgroups.contexts.length != 0){
 
-        HYgroups.contexts.forEach(function(item){
-          var tmp = {
-            name: item.name.toString(),
-            subject_design: "Within",
-            levels: [
-              ],
-            counter_balance: "FullyCounterBalancing",
-            type: "group"
-          };
+    //     HYgroups.contexts.forEach(function(item){
+    //       var tmp = {
+    //         name: item.name.toString(),
+    //         subject_design: "Within",
+    //         levels: [
+    //           ],
+    //         counter_balance: "FullyCounterBalancing",
+    //         type: "group"
+    //       };
 
-          IVgroups.push(tmp);
-          // tmp.levels.push({
-          //     name: item.toString(),
-          //     type: "category"
-          // });
-        });
-      }
-      if(HYgroups.measures.length != 0){
-        HYgroups.measures.forEach(function(item){
-          DVgroups.push({
-            name: item.name.toString(),
-            type: "DVgroup",
-            description: ""
-          });
-        });
-      }
-    };
+    //       IVgroups.push(tmp);
+    //       // tmp.levels.push({
+    //       //     name: item.toString(),
+    //       //     type: "category"
+    //       // });
+    //     });
+    //   }
+    //   if(HYgroups.measures.length != 0){
+    //     HYgroups.measures.forEach(function(item){
+    //       DVgroups.push({
+    //         name: item.name.toString(),
+    //         type: "DVgroup",
+    //         description: ""
+    //       });
+    //     });
+    //   }
+    // };
 
-    if($scope.flagOne === 'true'){
-      $scope.Automation();
-      console.log("First enter the Automation");
-    }
+    // if($scope.flagOne === 'true'){
+    //   $scope.Automation();
+    //   console.log("First enter the Automation");
+    // }
 
     $scope.addGroup = function() {
       // if ($scope.groups.length > 10) {
@@ -121,7 +122,7 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
           subject_design: "Within",
           counter_balance: "FullyCounterBalancing",
           levels: [],
-          type: "group"
+          type: "group",
         });
         document.getElementById("groupName").value = '';
       }
