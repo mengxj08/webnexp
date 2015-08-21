@@ -46,11 +46,12 @@
       </ul>
       <div class="page-header">
           <h1><b>STAGE 2 :</b> Define the statistical variables </h1>
-          <p>In this stage, you will use statistical language to define the elements of your experiment into independent variables and dependent variables. Independent variables are all the factors that may influence task performance.  Dependent variables are the measurements that change, based on the manipulation of the independent variables.</p>
+          <p>In this stage, you will use statistical language to define the elements of your experiment into independent variables and dependent variables. Independent variables are factors you manipulate that may influence task performance.  Dependent variables are the measurements that change, based on the manipulation of the independent variables.</p>
       </div>
       <div class="jumbotron">
-          <h3>1. Define the independent variables:</h3>
-          These are the different solutions (variables) that can be manipulated by you. The changing of these variables will change the results of the experiment.
+          <h3>1. Define the independent variables (factors).</h3>
+          The first independent variable is mostly likely the solutions/interface/interaction technique you want to compare with. The different solutions/interfaces/interaction techniques you want to compare with are the test conditions (or levels) for this independent variable. 
+          Note that an independent variable is also called a factor, a test condition is also called a level. These terms are synonyms and can be used interchangeably. 
           <br />
           <a href="contents/helpPage3.html#1" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
       </div>
@@ -82,12 +83,11 @@
 -->
 
       <div ui-tree="options">
-<!--         <h3>Independent Variables:</h3> -->
-        <h3>1.1 - Solutions:</h3>
-        <ol ui-tree-nodes ng-model="jsonData.design_guide.variables.independent_variable" data-type="group">
-          <li ng-repeat="group in jsonData.design_guide.variables.independent_variable" ui-tree-node>
-            <div class="group-title angular-ui-tree-handle" ng-show="!group.editing">
-              <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeGroup(group)"><i class="glyphicon glyphicon-remove"></i></a>
+        <h3>Independent variables: Solutions</h3>
+        <ol ui-tree-nodes ng-model="jsonData.design_guide.variables.independent_variable">
+          <li ng-repeat="group in jsonData.design_guide.variables.independent_variable | filter: filterSolution" ui-tree-node>
+            <div class="group-title angular-ui-tree-handle" ng-show="!group.editing" data-nodrag>
+              <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag data-toggle="modal" data-target="#showExample"><i class="glyphicon glyphicon-remove"></i></a>
               <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editGroup(group)"><i class="glyphicon glyphicon-pencil"></i></a>
               <div>&nbsp;Independent variable:&nbsp;{{group.name}}</div>
             </div>
@@ -117,7 +117,7 @@
                       <label>Description</label>
                       <input type="text" class="form-control" placeholder="Description" ng-model="category.description">
                     </div>
-                    <button type="submit" class="btn btn-default" ng-click="saveCategory(category)">Save</button>
+                    <button type="submit" class="btn btn-default" ng-click="saveCategory(group,category)">Save</button>
                     <button type="submit" class="btn btn-default" ng-click="cancelEditingCategory(category)">Cancel</button>
                   </form>
                </div>
@@ -138,24 +138,82 @@
             </ol>
           </li>
         </ol>
-        <ol class="angular-ui-tree-nodes">
-          <li class="angular-ui-tree-node">
-            <div class="group-title angular-ui-tree-handle">
-              <form class="form-inline" role="form">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="groupName" placeholder="Variable name">
-                </div>
-                <button type="submit" class="btn btn-default" ng-click="addGroup()">Add Independent Variables</button>
-              </form>
-            </div>
-          </li>
-        </ol>
-
       </div>
       <hr />
-
+      <div ui-tree="options">
+      <h3>Other factors that may influence the comparison of the different solutions</h3>
+      <p>These are the many other factors that can potentially influence the result of your comparison. These factors can include task types, different contextual and environmental factors, user groups, etc. You can also include some of these factors as the independent variables you want to test in your experiment</p>
+      <p>For each independent variable, you choose a few representative test conditions. For example, the independent variable size of cursor may have the test conditions small and large. The task target clicking may have the test conditions square target and round target.</p>
+      <ol ui-tree-nodes ng-model="jsonData.design_guide.variables.independent_variable" data-type="group">
+        <li ng-repeat="group in jsonData.design_guide.variables.independent_variable" ng-hide="filterSolution(group)" ui-tree-node>
+          <div class="group-title angular-ui-tree-handle" ng-show="!group.editing">
+            <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeGroup(group)"><i class="glyphicon glyphicon-remove"></i></a>
+            <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editGroup(group)"><i class="glyphicon glyphicon-pencil"></i></a>
+            <div>&nbsp;Independent variable:&nbsp;{{group.name}}</div>
+          </div>
+          <div class="group-title angular-ui-tree-handle" data-nodrag ng-show="group.editing">
+            <form class="form-inline" role="form">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Variable name" ng-model="group.name">
+              </div>
+              <button type="submit" class="btn btn-default" ng-click="saveGroup(group)">Save</button>
+              <button type="submit" class="btn btn-default" ng-click="cancelEditingGroup(group)">Cancel</button>
+            </form>
+          </div>
+          <ol ui-tree-nodes ng-model="group.levels" data-type="category">
+            <li ng-repeat="category in group.levels" ui-tree-node>
+              <div class="category-title angular-ui-tree-handle" ng-show="!category.editing">
+                <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeCategory(group, category)"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="" class="btn btn-primary btn-xs pull-right" data-nodrag ng-click="editCategory(category)"><i class="glyphicon glyphicon-pencil"></i></a>
+                <div>
+                  &nbsp;Test condition: &nbsp;{{category.name}}&nbsp;&nbsp;&nbsp;&nbsp;Description:{{category.description}}
+                </div>
+              </div>
+              <div class="category-title angular-ui-tree-handle" data-nodrag ng-show="category.editing">
+                <form class="form-inline" role="form">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" placeholder="Test condition name" ng-model="category.name">
+                    <label>Description</label>
+                    <input type="text" class="form-control" placeholder="Description" ng-model="category.description">
+                  </div>
+                  <button type="submit" class="btn btn-default" ng-click="saveCategory(group, category)">Save</button>
+                  <button type="submit" class="btn btn-default" ng-click="cancelEditingCategory(category)">Cancel</button>
+                </form>
+             </div>
+            </li>
+          </ol>
+          <ol class="angular-ui-tree-nodes" data-nodrag>
+            <li class="angular-ui-tree-node">
+              <div class="category-title angular-ui-tree-handle">
+                <form class="form-inline" role="form">
+                  <div class="form-group">
+                    <label class="sr-only" for="categoryName">Test condition</label>
+                    <input type="text" class="form-control" ng-model="group.newCategoryName" placeholder="Test condition name">
+                  </div>
+                  <button type="submit" class="btn btn-default" ng-click="addCategory(group)">Add Test condtions</button>
+                </form>
+              </div>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <ol class="angular-ui-tree-nodes">
+        <li class="angular-ui-tree-node">
+          <div class="group-title angular-ui-tree-handle">
+            <form class="form-inline" role="form">
+              <div class="form-group">
+                <input type="text" class="form-control" id="groupName" placeholder="Variable name">
+              </div>
+              <button type="submit" class="btn btn-default" ng-click="addGroup()">Add Independent Variables</button>
+            </form>
+          </div>
+        </li>
+      </ol>
+      </div>
+      <hr />
       <div class="jumbotron">
-          <h3>2. Define your dependent variables:</h3>
+          <h3>2. Define the Dependent Variables:</h3>
           These are the measurable results that depend on the variables that you manipulate.  Ensure that these measurements can be reliably obtained, and that they reflect the true nature of the task you are asking your users to undertake. 
           <br/>
           <a href="contents/helpPage3.html#1" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
@@ -232,6 +290,20 @@
     </div> 
     <!-- /container --> 
 
+<!-- Model template for add into the select options -->    
+    <div id="showExample" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>The primary independent variable (solution) is the most imporant one that you want to investigate. We strongly recommend you not to delete it. You can modify it by clicking the blue "EDIT" buttion.</p>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
 <!-- ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="js/pageTwoControl.js"></script>

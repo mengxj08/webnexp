@@ -135,16 +135,20 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
     });
 
     $scope.$watch('jsonData.design_guide.arrangement.trial', function(){
-      $scope.jsonData.design_guide.arrangement.totalTimeCost = parseInt($scope.getConditionsNum()*$scope.jsonData.design_guide.arrangement.trial * $scope.jsonData.design_guide.arrangement.block * $scope.jsonData.design_guide.arrangement.time_per_trial / 60);
+      $scope.jsonData.design_guide.arrangement.totalTimeCost = parseInt(($scope.getConditionsNum()*$scope.jsonData.design_guide.arrangement.trial * $scope.jsonData.design_guide.arrangement.block * $scope.jsonData.design_guide.arrangement.time_per_trial + ($scope.jsonData.design_guide.arrangement.block - 1)*$scope.jsonData.design_guide.arrangement.time_break_block )/ 60);
     });
 
     $scope.$watch('jsonData.design_guide.arrangement.block', function(){
-      $scope.jsonData.design_guide.arrangement.totalTimeCost = parseInt($scope.getConditionsNum()*$scope.jsonData.design_guide.arrangement.trial * $scope.jsonData.design_guide.arrangement.block * $scope.jsonData.design_guide.arrangement.time_per_trial / 60);
+      $scope.jsonData.design_guide.arrangement.totalTimeCost = parseInt(($scope.getConditionsNum()*$scope.jsonData.design_guide.arrangement.trial * $scope.jsonData.design_guide.arrangement.block * $scope.jsonData.design_guide.arrangement.time_per_trial + ($scope.jsonData.design_guide.arrangement.block - 1)*$scope.jsonData.design_guide.arrangement.time_break_block )/ 60);
     });
 
     $scope.$watch('jsonData.design_guide.arrangement.time_per_trial', function(){
-      $scope.jsonData.design_guide.arrangement.totalTimeCost = parseInt($scope.getConditionsNum()*$scope.jsonData.design_guide.arrangement.trial * $scope.jsonData.design_guide.arrangement.block * $scope.jsonData.design_guide.arrangement.time_per_trial / 60);
+      $scope.jsonData.design_guide.arrangement.totalTimeCost = parseInt(($scope.getConditionsNum()*$scope.jsonData.design_guide.arrangement.trial * $scope.jsonData.design_guide.arrangement.block * $scope.jsonData.design_guide.arrangement.time_per_trial + ($scope.jsonData.design_guide.arrangement.block - 1)*$scope.jsonData.design_guide.arrangement.time_break_block )/ 60);
     });
+
+    $scope.$watch('jsonData.design_guide.arrangement.time_break_block', function(){
+      $scope.jsonData.design_guide.arrangement.totalTimeCost = parseInt(($scope.getConditionsNum()*$scope.jsonData.design_guide.arrangement.trial * $scope.jsonData.design_guide.arrangement.block * $scope.jsonData.design_guide.arrangement.time_per_trial + ($scope.jsonData.design_guide.arrangement.block - 1)*$scope.jsonData.design_guide.arrangement.time_break_block )/ 60);
+    });    
 
     $scope.GenerateOverallArrangment = function(){
       $scope.idvWithin.forEach(function(idv){

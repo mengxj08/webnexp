@@ -10,7 +10,6 @@ app.config(function(localStorageServiceProvider){
 });
 
 app.controller('pageOneControl', function($scope, $http, localStorageService){
-	//console.log(localStorageService.get('localStorageDemo'));
 
 	if (localStorageService.getStorageType().indexOf('session') >= 0) {
       console.log('StorageType: Session storage');
@@ -27,30 +26,7 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
 	var hypothesis = $scope.jsonData.design_guide.research_question.hypothesis;
 	//var pid = $scope.jsonData.parameter.pid;
 
-	var flag = true;
-    IVgroups.forEach(function(item,index){
-      if(item.pid == 0)
-        flag = false;
-    });
-
-    if(flag){
-        var tmp = {
-          name: "Techniques",
-          subject_design: "Within",
-          levels: [
-            ],
-          counter_balance: "FullyCounterBalancing",
-          type: "group",
-          pid: 0
-        };
-        IVgroups.push(tmp);
-    }
-
     $scope.addItems = function(tmp) {
-      // if ($scope.groups.length > 10) {
-      //   window.alert('You can\'t add more than 10 groups!');
-      //   return;
-      // }
 	switch(tmp){
 		case 'MainSolutions':
 		  var groupName = document.getElementById("MainSolutions").value;
@@ -160,6 +136,7 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
               ],
             counter_balance: "FullyCounterBalancing",
             type: "group",
+            description: "",
             pid: $scope.jsonData.parameter.pid
           };
 
@@ -183,10 +160,12 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
     };
     $scope.editItem = function(group) {
       group.editing = true;
+      group.preName = group.name;
     };
 
     $scope.cancelEditingItem = function(group) {
       group.editing = false;
+      group.name = group.preName;
     };
 
     $scope.saveItem = function(group) {
@@ -209,6 +188,7 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
       	}
       });
       group.editing = false;
+      group.preName = group.name;
     };
 
     $scope.removeItem = function(tmp, group) {

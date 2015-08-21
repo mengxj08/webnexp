@@ -27,9 +27,32 @@ app.controller('initData', function($scope, $http, $window, localStorageService,
         $http.get($scope.data).success(function (data){
         localStorageService.set('jsonData', data);
         localStorageService.bind($scope, 'jsonData');
-        console.log($scope.jsonData.design_guide.variables.dependent_variable.length);
+        $scope.setPrimaryFactor();
+        console.log($scope.jsonData.design_guide.variables.independent_variable.length);
       });     
     }
+
+    $scope.setPrimaryFactor = function(){
+        var IVgroups = $scope.jsonData.design_guide.variables.independent_variable;
+        var flag = true;
+        IVgroups.forEach(function(item,index){
+          if(item.pid == 0)
+            flag = false;
+        });
+
+        if(flag){
+            var tmp = {
+              name: "Techniques",
+              subject_design: "Within",
+              levels: [
+                ],
+              counter_balance: "FullyCounterBalancing",
+              type: "group",
+              pid: 0
+            };
+            IVgroups.push(tmp);
+        }
+    };
 
     $scope.ReadLocalJsonFile();
 

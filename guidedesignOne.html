@@ -27,7 +27,6 @@
   </head>
 
   <body ng-controller="pageOneControl">
-
     <div class="container">
       <div class="header">
         <nav>
@@ -119,7 +118,7 @@
         <ol class="angular-ui-tree-nodes">
           <li class="angular-ui-tree-node">
             <div class="group-title angular-ui-tree-handle">
-              <label><h4>3. What are you claiming? Experiments are designed to prove a claim that your solution(s) is better than other solution(s). State the solutions you wish to compare.</h4></label>
+              <label><h4>3. What are you hypothesizing? Experiments are designed to prove a hypothesis that your solution(s) is better than other solution(s) in certain ways. State the solutions you wish to compare.</h4></label>
               <div class="row">
                 <div class="col-md-5">
                   <form class="form-inline" role="form">       
@@ -229,7 +228,7 @@
         <ol class="angular-ui-tree-nodes">
           <li class="angular-ui-tree-node">
             <div class="group-title angular-ui-tree-handle">
-              <label><h4>4. Using your solution, what tasks will your users be able to perform better? Common tasks are target clicking or text selecting.</h4></label>
+              <label><h4>4. Using your solution, what tasks will your users be able to perform better? Example tasks including target clicking or text selecting.</h4></label>
               <form class="form-inline" role="form">
                 <div class="form-group">
                   <input type="text" class="form-control" id="Tasks" placeholder="Click to edit...">
@@ -264,7 +263,7 @@
         <ol class="angular-ui-tree-nodes">
           <li class="angular-ui-tree-node">
             <div class="group-title angular-ui-tree-handle">
-              <label><h4>5. To show that the tasks have been performed better, what will you measure? State the measurement(s) you wish to make to demonstrate the users’ ability to perform these tasks.  Common measurements are speed of task completion or accuracy of task completion.</h4></label>
+              <label><h4>5. To show that the tasks have been performed better, what will you measure? State the measurement(s) you wish to make to demonstrate the users’ ability to perform these tasks.  Common measurements are speed of task completion, accuracy of task completion, and learnability of the solutions.</h4></label>
               <form class="form-inline" role="form">
                 <div class="form-group">
                   <input type="text" class="form-control" id="Measures" placeholder="Click to edit...">
@@ -300,7 +299,7 @@
           <li class="angular-ui-tree-node">
             <div class="group-title angular-ui-tree-handle">
               <form class="form-inline" role="form">
-                <label><h4>6. Other than the tasks, what other experimental conditions<sup>1</sup> might influence the performance of these tasks? Common examples are size of cursor or users’ dominant hand.</h4></label>
+                <label><h4>6. Other than the tasks, what other factors might influence the performance of these tasks? Examples can include usage of scenario, size of cursor or users’ dominant hand.</h4></label>
                 <div class="form-group">
                   <input type="text" class="form-control" id="Contexts" placeholder="Click to edit...">
                 </div>
@@ -418,7 +417,7 @@
       </div> -->
 <!-- ———————————————————————————————————————————————————————————————————————————————————————————————————The hypothesis is generated: -->
       <div class="jumbotron">
-          <p>7. Based on the information you have given above, this is what your research claim looks like at the moment. Feel free to adjust the information above until you feel that the research claim explains what you want to test, and appears to be a claim that can be tested. </p>
+          <p>7. Based on the information you have given above, this is what your hypothesis looks like at the moment. Feel free to adjust the information above until you feel that the hypothesis explains what you want to test, and appears to be a hypothesis that can be tested. </p>
           <p>
             Experiment Title: <u><span ng-bind="jsonData.design_guide.research_question.experiment_title"></span></u>
           </p>
@@ -426,15 +425,14 @@
             Author: <u><span ng-bind="jsonData.design_guide.research_question.experiment_conductor"></span></u>
           </p>
           <p>
-            In my experiment, I want to claim that for to do
+            In my experiment, I want to hypothesize that for to do
             "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.tasks"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.tasks.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>",
             "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.main_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.main_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" is better than
-            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.compare_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.compare_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>". To test this claim, I will vary the
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.compare_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.compare_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>". To test this hypothesis, I will vary the
             "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.contexts"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.contexts.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" and measure
             "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.measures"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.measures.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>".
           </p>
       </div>
-        <p><sup>1</sup>These set of factors are usually the conditions under which the tasks are performed or the features of the users that might change their performance.</p>
     <nav>
       <ul class="pager">
         <li class="previous"><a href="guidedesign.html"><span aria-hidden="true">&larr;</span> Previous</a></li>

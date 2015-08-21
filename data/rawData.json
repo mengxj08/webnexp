@@ -32,7 +32,8 @@
       "fee_per_participant": 10,
       "trial": 3,
       "time_per_trial": 0,
-      "block": 2,
+      "time_break_block": 0,
+      "block": 1,
       "totalPayment":0,
       "totalTimeCost":0,
       "participants": ""

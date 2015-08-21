@@ -48,7 +48,7 @@
       </ul>
       <div class="page-header">
           <h1><b>STAGE 4 :</b> Adjust duration of task blocks</h1>
-          <p>The purpose of this stage is to adjust the amount of time your entire experiment takes. This may require you to adjust the number of factors you test, or the arrangement of the task blocks or you may even have to reconsider how to test your solution. Experimental design incorporates many elements and it is normal to try different formats before you find the design that is effective and can be conducted in a reasonable amount of time. </p>
+          <p>The purpose of this stage is to adjust the amount of time your entire experiment takes. This may require you to adjust the number of independent variables you test, or the arrangement of the task blocks or you may even have to reconsider how to test your solution. Experimental design incorporates many elements and it is normal to try different formats before you find the design that is effective and can be conducted in a reasonable amount of time. </p>
       </div>
 
       <div class="jumbotron">
@@ -103,6 +103,16 @@
           <span class="input-group-addon small" ng-show="groupFour.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
           <span class="input-group-addon small" ng-show="groupFour.input.$error.min || groupFour.input.$error.max">The value must be in range 0 to 3600!</span>
         </Form>
+        <h4 class="smallLabels">Estimate the break duration after each block:</h4>
+        <Form class="input-group input-group-lg" name="groupSix">
+          <span class="input-group-addon largeLabels" id="sizing-addon3">Estimate the break duration after each block:</span>
+          <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon3" ng-model="jsonData.design_guide.arrangement.time_break_block" min="0" max="3600" required> 
+          <span class="input-group-addon small">Seconds</span> 
+          <span class="input-group-addon small" ng-show="groupSix.input.$error.required"><span class="label label-danger">Required!</span></span>
+          <span class="input-group-addon small" ng-show="groupSix.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
+          <span class="input-group-addon small" ng-show="groupSix.input.$error.min || groupSix.input.$error.max">The value must be in range 0 to 3600!</span>
+        </Form>
+
         <h4 class="smallLabels">The resulting time for the entire experiment is: </h4>
         <div class="input-group input-group-lg">
           <span class="input-group-addon largeLabels" id="sizing-addon7">The resulting time for the entire experiment is:</span>

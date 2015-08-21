@@ -8,7 +8,14 @@ app.config(function(localStorageServiceProvider){
     .setStorageCookieDomain('example.com')
     .setNotify(true, true);
 });
-
+// app.filter('filterSolution',function(){
+//   return function(group){
+//     return (group.pid == 0);
+//   };
+// });
+// app.filter('filterNonSolution',function(group){
+//   return (group.pid != 0);
+// });
 app.controller('pageTwoControl',function($scope, $http, localStorageService){
 	  if (localStorageService.getStorageType().indexOf('session') >= 0) {
       console.log('StorageType: Session storage');
@@ -23,7 +30,11 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
 
     var IVgroups = $scope.jsonData.design_guide.variables.independent_variable;
     var DVgroups = $scope.jsonData.design_guide.variables.dependent_variable;
-    var HYgroups = $scope.jsonData.design_guide.research_question.hypothesis;
+    var hypothesis = $scope.jsonData.design_guide.research_question.hypothesis;
+
+    $scope.filterSolution = function(group){
+      return (group.pid == 0);
+    };
 
     // $scope.Automation = function(){
     //   $scope.flagOne = false;
@@ -109,6 +120,15 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
     //   $scope.Automation();
     //   console.log("First enter the Automation");
     // }
+    // $scope.filterSolution = function(group){
+    //   if(group.pid == 0) return true;
+    //   else return false;
+    // }
+
+    // $scope.filterNonSolution = function(group){
+    //   if(group.pid != 0) return true;
+    //   else return false;
+    // }
 
     $scope.addGroup = function() {
       // if ($scope.groups.length > 10) {
@@ -123,36 +143,78 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
           counter_balance: "FullyCounterBalancing",
           levels: [],
           type: "group",
+          pid: $scope.jsonData.parameter.pid
         });
+
+        hypothesis.contexts.push({
+          name: groupName,
+          pid: $scope.jsonData.parameter.pid
+        });
+
+        $scope.jsonData.parameter.pid++;
         document.getElementById("groupName").value = '';
       }
     };
 
     $scope.editGroup = function(group) {
       group.editing = true;
+      group.preName = group.name;
     };
 
     $scope.cancelEditingGroup = function(group) {
       group.editing = false;
+      group.name = group.preName;
     };
 
     $scope.saveGroup = function(group) {
       group.editing = false;
+      group.preName = group.name;
+      if(group.pid != 0){
+        hypothesis.tasks.forEach(function(item, index){
+          if(item.pid == group.pid){
+            item.name = group.name;
+          }
+        });
+        hypothesis.contexts.forEach(function(item, index){
+          if(item.pid == group.pid){
+            item.name = group.name;
+          }
+        });
+        hypothesis.measures.forEach(function(item, index){
+          if(item.pid == group.pid){
+            item.name = group.name;
+          }
+        });                
+      }
     };
 
     $scope.removeGroup = function(group) {
-      // if (window.confirm('Are you sure to remove this group?')) {
-      //   group.destroy();
-      // }
       var removedIndex = IVgroups.indexOf(group);
       console.log(removedIndex);
       IVgroups.splice(removedIndex,1);
+
+      hypothesis.tasks.forEach(function(item,index){
+        if(item.pid == group.pid){
+          hypothesis.tasks.splice(index,1);
+        }
+      });
+      hypothesis.contexts.forEach(function(item,index){
+        if(item.pid == group.pid){
+          hypothesis.contexts.splice(index,1);
+        }
+      });
     };
 
     $scope.removeDVGroup = function(group){
       var removedIndex = DVgroups.indexOf(group);
       console.log(removedIndex);
       DVgroups.splice(removedIndex,1);
+
+      hypothesis.measures.forEach(function(item,index){
+        if(item.pid == group.pid){
+          hypothesis.measures.splice(index,1);
+        }
+      });
     };
 
     $scope.addCategory = function(group) {
@@ -162,8 +224,17 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
       group.levels.push({
         name: group.newCategoryName,
         type: "category",
-        description: ""
+        description: "",
+        pid: $scope.jsonData.parameter.pid
       });
+
+      if(group.pid == 0){
+        hypothesis.compare_solutions.push({
+          name: group.newCategoryName,
+          pid: $scope.jsonData.parameter.pid
+        });        
+      }
+      $scope.jsonData.parameter.pid++;
       group.newCategoryName = '';
     };
 
@@ -171,19 +242,49 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
       var removedIndex = group.levels.indexOf(category);
       if (removedIndex > -1) {
         group.levels.splice(removedIndex, 1);
+        if(group.pid == 0){
+          hypothesis.main_solutions.forEach(function(item,index){
+            if(item.pid == category.pid){
+              hypothesis.main_solutions.splice(index,1);
+            }
+          });
+
+          hypothesis.ComSolutions.forEach(function(item,index){
+            if(item.pid == category.pid){
+              hypothesis.ComSolutions.splice(index,1);
+            }
+          });
+        }        
       }
     };
 
     $scope.editCategory = function(category){
       category.editing = true;
+      category.preName = category.name;
     };
 
-    $scope.saveCategory = function(category){
+    $scope.saveCategory = function(group, category){
       category.editing = false;
+      category.preName = category.name;
+
+      if(group.pid == 0){
+        hypothesis.main_solutions.forEach(function(item,index){
+          if(item.pid == category.pid){
+            item.name = category.name;
+          }
+        });
+
+        hypothesis.compare_solutions.forEach(function(item,index){
+          if(item.pid == category.pid){
+            item.name = category.name;
+          }
+        });
+      }
     };
 
     $scope.cancelEditingCategory = function(category){
       category.editing = false;
+      category.name = category.preName;
     };
 
     $scope.addGrouptoDV = function(){
@@ -192,34 +293,28 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
         DVgroups.push({
           name: groupName,
           type: "DVgroup",
-          description: ""
+          description: "",
+          pid: $scope.jsonData.parameter.pid
         });
+
+        hypothesis.measures.push({
+          name: groupName,
+          pid:$scope.jsonData.parameter.pid
+        });
+
+        $scope.jsonData.parameter.pid++;  
         document.getElementById("DVgroupName").value = '';
       }      
     };
 
     $scope.options = {
       accept: function(sourceNode, destNodes, destIndex) {
-        // console.log("accept");
         var data = sourceNode.$modelValue.type;
         var destType = destNodes.$element.attr('data-type');
-        //console.log(sourceNode.$modelValue.type == destType);
+        console.log(sourceNode.$modelValue.type);
+        console.log('destType:'+destType);
         return (data == destType); // only accept the same type
-        //return true;
       },
-      // dropped: function(event) {
-      //   console.log(event);
-      //   // var sourceNode = event.source.nodeScope;
-      //   // var destNodes = event.dest.nodesScope;
-      //   // // update changes to server
-      //   // if (destNodes.isParent(sourceNode)
-      //   //   && destNodes.$element.attr('data-type') == 'category') { // If it moves in the same group, then only update group
-      //   //   var group = destNodes.$nodeScope.$modelValue;
-      //   //   //group.save();
-      //   // } else { // save all
-      //   //   //$scope.saveGroups();
-      //   // }
-      // },
       beforeDrop: function(event) {
         //if (!window.confirm('Are you sure you want to drop it here?')) {
         //event.source.nodeScope.$$apply = true;
