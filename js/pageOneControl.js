@@ -130,14 +130,10 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
 		    });
 
           var tmp = {
-            name: groupName,
-            subject_design: "Within",
-            levels: [
-              ],
-            counter_balance: "FullyCounterBalancing",
-            type: "group",
-            description: "",
-            pid: $scope.jsonData.parameter.pid
+	          name: groupName,
+	          type: "DVgroup",
+	          description: "",
+	          pid: $scope.jsonData.parameter.pid
           };
 
           DVgroups.push(tmp);
@@ -268,40 +264,128 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
     };
 
     $scope.showExample = function(){
-    	// need to add to IV&DV as well
-    	hypothesis.main_solutions = [];
-    	hypothesis.main_solutions.push({
-    		name: 'optimal keyboard layout'
-    	});
-    	hypothesis.compare_solutions = [];
+		$scope.reset();
+
+	    hypothesis.main_solutions.push({
+	      name: 'optimal keyboard layout',
+	      pid: $scope.jsonData.parameter.pid
+	    });
+	    IVgroups.forEach(function(item,index){
+  			if(item.pid == 0){
+	          item.levels.push({
+	              name: 'optimal keyboard layout',
+	              type: "category",
+	              pid: $scope.jsonData.parameter.pid
+	          });      				
+  			}
+		});
+		$scope.jsonData.parameter.pid++;
+
+    	
     	hypothesis.compare_solutions.push({
-    		name: 'qwerty keyboard layout'
+    		name: 'qwerty keyboard layout',
+    		pid: $scope.jsonData.parameter.pid
     	});
-    	hypothesis.tasks = [];
+	    IVgroups.forEach(function(item,index){
+  			if(item.pid == 0){
+	          item.levels.push({
+	              name: 'qwerty keyboard layout',
+	              type: "category",
+	              pid: $scope.jsonData.parameter.pid
+	          });      				
+  			}
+		});
+		$scope.jsonData.parameter.pid++;
+
     	hypothesis.tasks.push({
-    		name: 'Type \'the quick brown fox jumps over the lazy dog\''
+    		name: 'Type \'the quick brown fox jumps over the lazy dog\'',
+    		pid: $scope.jsonData.parameter.pid
     	});
-    	hypothesis.contexts = [];
+        IVgroups.push({
+            name: 'Type \'the quick brown fox jumps over the lazy dog\'',
+            subject_design: "Within",
+            levels: [
+              ],
+            counter_balance: "FullyCounterBalancing",
+            type: "group",
+            pid: $scope.jsonData.parameter.pid
+        });
+        $scope.jsonData.parameter.pid++;
+
     	hypothesis.contexts.push({
-    		name: 'Different devices'
-    	},{
-    		name: 'Different screen size'
+    		name: 'Different devices',
+    		pid: $scope.jsonData.parameter.pid
     	});
-    	hypothesis.measures = [];
+        IVgroups.push({
+            name: 'Different devices',
+            subject_design: "Within",
+            levels: [
+              ],
+            counter_balance: "FullyCounterBalancing",
+            type: "group",
+            pid: $scope.jsonData.parameter.pid
+        });    	
+		$scope.jsonData.parameter.pid++;
+
+    	hypothesis.contexts.push({
+    		name: 'Different screen size',
+    		pid: $scope.jsonData.parameter.pid
+    	});
+        IVgroups.push({
+            name: 'Different screen size',
+            subject_design: "Within",
+            levels: [
+              ],
+            counter_balance: "FullyCounterBalancing",
+            type: "group",
+            pid: $scope.jsonData.parameter.pid
+        });    	
+		$scope.jsonData.parameter.pid++;
+
     	hypothesis.measures.push({
-    		name: 'Speed'
-    	},{
-    		name: 'Accuracy'
-    	},{
-    		name: 'Learning cost'
+    		name: 'Speed',
+    		pid: $scope.jsonData.parameter.pid
     	});
-    	hypothesis.target_population = [];
+    	DVgroups.push({
+          name: 'Speed',
+          type: "DVgroup",
+          description: "",
+          pid: $scope.jsonData.parameter.pid    		
+    	});
+		$scope.jsonData.parameter.pid++;
+
+    	hypothesis.measures.push({
+    		name: 'Accuracy',
+    		pid: $scope.jsonData.parameter.pid
+    	});
+    	DVgroups.push({
+          name: 'Accuracy',
+          type: "DVgroup",
+          description: "",
+          pid: $scope.jsonData.parameter.pid    		
+    	});
+		$scope.jsonData.parameter.pid++;
+
+    	hypothesis.measures.push({
+    		name: 'Learning cost',
+    		pid: $scope.jsonData.parameter.pid
+    	});
+    	DVgroups.push({
+          name: 'Learning cost',
+          type: "DVgroup",
+          description: "",
+          pid: $scope.jsonData.parameter.pid    		
+    	});
+		$scope.jsonData.parameter.pid++;		
+
     	hypothesis.target_population.push({
     		name: 'Computer users'
     	});
     };
 
     $scope.reset = function(){
+    	$scope.jsonData.parameter.pid = 1;
+
     	hypothesis.main_solutions = [];
     	hypothesis.compare_solutions = [];
     	hypothesis.tasks = [];
@@ -309,6 +393,20 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
     	hypothesis.measures = [];
     	hypothesis.target_population = [];
 
+	    $scope.jsonData.design_guide.variables.independent_variable = [];
+	    $scope.jsonData.design_guide.variables.dependent_variable = [];   	
+        var tmp = {
+          name: "Techniques",
+          subject_design: "Within",
+          levels: [
+            ],
+          counter_balance: "FullyCounterBalancing",
+          type: "group",
+          pid: 0
+        };
+        $scope.jsonData.design_guide.variables.independent_variable.push(tmp);
+        IVgroups = $scope.jsonData.design_guide.variables.independent_variable;
+    	DVgroups = $scope.jsonData.design_guide.variables.dependent_variable;
     };
  //    $scope.clickMinusFunction = function(selectID) {
  //    	console.log(selectID);
