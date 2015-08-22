@@ -49,7 +49,39 @@
           <p>This stage helps you to organize the order that your participant will perform the tasks, ie. You will design task blocks. Some tasks require more than just a simple order of events. Use this stage to design how you want the tasks to be presented, so that potentially confounding issues such as order (learning) effects, and performance fatigue can be reduced. 
           </p>
       </div>
-
+      <div class="jumbotron">
+          <h3>Your experiment so far :) </h3>
+          <div id='hypothesis'>
+          <p>
+            Experiment Title: <u><span ng-bind="jsonData.design_guide.research_question.experiment_title"></span></u>
+          </p>
+          <p>
+            Author: <u><span ng-bind="jsonData.design_guide.research_question.experiment_conductor"></span></u>
+          </p>
+          <p>
+            In my experiment, I want to hypothesize that for to do
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.tasks"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.tasks.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>",
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.main_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.main_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" is better than
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.compare_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.compare_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>". To test this hypothesis, I will vary the
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.contexts"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.contexts.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" and measure
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.measures"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.measures.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>".
+          </p>
+          <p><b>_Independent variables_</b></p>
+          <div ng-repeat="group in jsonData.design_guide.variables.independent_variable">
+            <span><b>IV</b>:&nbsp;{{group.name;}}</span>
+            <ul ng-repeat="level in group.levels">
+              <li><b>Test condition</b>:&nbsp;{{level.name;}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Description</b>:&nbsp;{{level.description;}}</li>
+            </ul>
+          </div>
+          <br/>
+          <p><b>_Dependent variables_</b></p>
+          <span ng-repeat="group in jsonData.design_guide.variables.dependent_variable">
+            <b>DV</b>:&nbsp;{{group.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Description</b>:&nbsp;{{group.description;}}
+            <br />
+          </span>
+          </div>
+      </div>
+      <hr />
       <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading"><h4>Set the arrangement of your independent variables and dependent variables in the below table.</h4>

@@ -48,6 +48,30 @@
           <h1><b>STAGE 2 :</b> Define the statistical variables </h1>
           <p>In this stage, you will use statistical language to define the elements of your experiment into independent variables and dependent variables. Independent variables are factors you manipulate that may influence task performance.  Dependent variables are the measurements that change, based on the manipulation of the independent variables.</p>
       </div>
+
+      <div class="jumbotron">
+          <h3>For easy reference, the claim statement you made in Stage 1 is reproduced here:</h3>
+          <div id='hypothesis'>
+          <p>
+            Experiment Title: <u><span ng-bind="jsonData.design_guide.research_question.experiment_title"></span></u>
+          </p>
+          <p>
+            Author: <u><span ng-bind="jsonData.design_guide.research_question.experiment_conductor"></span></u>
+          </p>
+          <p>
+            In my experiment, I want to hypothesize that for to do
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.tasks"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.tasks.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>",
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.main_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.main_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" is better than
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.compare_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.compare_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>". To test this hypothesis, I will vary the
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.contexts"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.contexts.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" and measure
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.measures"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.measures.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>".
+          </p>
+          </div>
+          <p>
+          The information from Stage 1 is also pre-filled in this Stage, but you may wish to add more information. 
+          </p>
+      </div>
+      <hr />
       <div class="jumbotron">
           <h3>1. Define the independent variables (factors).</h3>
           The first independent variable is mostly likely the solutions/interface/interaction technique you want to compare with. The different solutions/interfaces/interaction techniques you want to compare with are the test conditions (or levels) for this independent variable. 
@@ -55,7 +79,6 @@
           <br />
           <a href="contents/helpPage3.html#1" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
       </div>
-
 <!-- AnjularJS Tree -->  
 <!--
         <script type="text/ng-template" id="nodes_renderer.html">

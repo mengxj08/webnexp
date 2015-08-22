@@ -276,7 +276,7 @@ $pdf->MultiCell(0,10,'Arrangment of the experiment:',0,1);
 $pdf->SetFont('Times','',12);
 
 if(!isset($_SESSION[$session_arrangement])) {
-     $pdf->MultiCell(0,10,'The arrangement is not set successfully!',0,1);
+     $pdf->MultiCell(0,10,'You have not generated the whole arrangment of the experiment. Please click the "Generate" button in stage 4.',0,1);
  } else {
     $arrangment = (array) json_decode($_SESSION[$session_arrangement],true);
     foreach($arrangment['children'] as $participant){

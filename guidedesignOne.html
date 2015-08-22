@@ -418,6 +418,7 @@
 <!-- ———————————————————————————————————————————————————————————————————————————————————————————————————The hypothesis is generated: -->
       <div class="jumbotron">
           <p>7. Based on the information you have given above, this is what your hypothesis looks like at the moment. Feel free to adjust the information above until you feel that the hypothesis explains what you want to test, and appears to be a hypothesis that can be tested. </p>
+          <div id='hypothesis'>
           <p>
             Experiment Title: <u><span ng-bind="jsonData.design_guide.research_question.experiment_title"></span></u>
           </p>
@@ -432,6 +433,7 @@
             "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.contexts"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.contexts.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" and measure
             "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.measures"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.measures.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>".
           </p>
+          </div>
       </div>
     <nav>
       <ul class="pager">

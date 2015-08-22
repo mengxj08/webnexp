@@ -67,6 +67,11 @@ span.glyphicon {
   font-size:24px;
 }
 
+#hypothesis{
+  border: 1px dashed #000000;
+  padding: 10px;
+}
+
 .btn{
   margin-right: 8px;
 }

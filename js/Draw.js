@@ -182,4 +182,34 @@ function draw(jsonString){
 	  }
 	  update(d);
 	}
+
+	function expand(d){   
+	    var children = (d.children)?d.children:d._children;
+	    if (d._children) {        
+	        d.children = d._children;
+	        d._children = null;       
+	    }
+	    if(children)
+	      children.forEach(expand);
+	}
+
+	function collapse(d) {
+	  if (d.children) {
+	    d._children = d.children;
+	    d._children.forEach(collapse);
+	    d.children = null;
+	  }
+	}
+
+	var expandAllObj = d3.select("#expandAllObj")
+	.on('click',function(){
+		expand(root); 
+    	update(root);
+	});
+
+	var collapseAllObj = d3.select("#collapseAllObj")
+	.on('click',function(){
+    	root.children.forEach(collapse);
+    	update(root);
+	});
 }

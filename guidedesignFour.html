@@ -139,7 +139,10 @@
           <p><a role="button" class="btn btn-success btn-lg" ng-click="showDraw()">Generate</a> the simulation of the whole arrangement of the experiment:</p>
           <p>Only after generating the simulation, you will be able to download the arrangement file,<a ng-show="generate" ng-click="DownloadFile()">(Click here to download)</a> that will be used as input for the experiment running platform.</p>
       </div>
-      <div id="draw" ng-show="generate"></div>
+      <div id="simulation" ng-show="generate">
+        <p><a id="expandAllObj" role="button" class="btn btn-success btn-sm">Expand all</a>  <a id="collapseAllObj" role="button" class="btn btn-success btn-sm" onclick="">Collapse all</a></p>
+        <div id="draw"></div>
+      </div>
       <p>Once you’re satisfied with the main experiment, you can complete the final stage of setting up the experimental procedures. </p>
     <nav>
       <ul class="pager">

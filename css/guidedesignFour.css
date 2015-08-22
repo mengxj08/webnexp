@@ -138,6 +138,8 @@ span.glyphicon {
   stroke-width: 1.5px;
 }
 
-#draw{
+#simulation{
   border:2px solid grey;
+  padding-top: 2px;
+  padding-left: 2px;
 }
