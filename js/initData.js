@@ -20,6 +20,24 @@ app.controller('initData', function($scope, $http, $window, localStorageService,
       console.log('StorageType: Cookie');
     }
 
+    $scope.clearSession = function(){
+      $http({
+          method: 'post',
+          url: 'SaveDataToCookies.php',
+          data: $.param({'name':'clear','data':'ResultOfArrangement'}),
+          headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8;'},
+        }).
+        success(function(response) {
+            $scope.codeStatus = response.data;
+            console.log("Unset successfully");
+        }).
+        error(function(response) {
+            $scope.codeStatus = response || "Request failed";
+        });
+    };        
+
+    $scope.clearSession();
+
     $scope.ReadLocalJsonFile = function(){
         //$scope.data = "data/data.json";
         localStorageService.set('flagOne', true);
@@ -30,7 +48,7 @@ app.controller('initData', function($scope, $http, $window, localStorageService,
         $scope.setPrimaryFactor();
         console.log($scope.jsonData.design_guide.variables.independent_variable.length);
       });     
-    }
+    };
 
     $scope.setPrimaryFactor = function(){
         var IVgroups = $scope.jsonData.design_guide.variables.independent_variable;

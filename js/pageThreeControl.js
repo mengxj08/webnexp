@@ -21,16 +21,28 @@ app.controller('pageThreeControl',function($scope, $http, localStorageService){
     localStorageService.bind($scope, 'jsonData');	
     console.log($scope.jsonData.design_guide.variables.independent_variable.length);
     var IVgroups = $scope.jsonData.design_guide.variables.independent_variable;
+    var hypothesis = $scope.jsonData.design_guide.research_question.hypothesis;
 
-    // $scope.removeNoLevels = function(){
-    //     for(var i = 0; i < IVgroups.length; i++){
-    //         if(IVgroups[i].levels.length == 0){
-    //             IVgroups.splice(i,1);
-    //             i--;
-    //         }
-    //     }
-    // };
-    // $scope.removeNoLevels();
+    $scope.removeNoLevels = function(){
+        for(var i = 0; i < IVgroups.length; i++){
+            if(IVgroups[i].levels.length == 0 && IVgroups[i].pid != 0){
+                var group = IVgroups[i];
+                IVgroups.splice(i,1);
+                i--;
+            hypothesis.tasks.forEach(function(item,index){
+                if(item.pid == group.pid){
+                  hypothesis.tasks.splice(index,1);
+                }
+              });
+            hypothesis.contexts.forEach(function(item,index){
+                if(item.pid == group.pid){
+                  hypothesis.contexts.splice(index,1);
+                }
+              });                
+            }
+        }
+    };
+    $scope.removeNoLevels();
 
     // $scope.clickMinusFunction = function(IDV, selectedlevel){
     // 	if(IDV && selectedlevel){

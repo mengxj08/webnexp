@@ -8,6 +8,12 @@ session_start();
 $session_name = $_POST['name'];
 $session_value = $_POST['data'];
 
-$_SESSION[$session_name] = $session_value;
+if($session_name == 'clear'){
+	session_unset();
+}
+else{
+	$_SESSION[$session_name] = $session_value;
+}
+
 
 ?>

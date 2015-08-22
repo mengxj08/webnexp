@@ -21,6 +21,7 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
     localStorageService.bind($scope, 'jsonData');	
     //console.log($scope.jsonData.design_guide.variables.independent_variable.length);
     var arrangement = $scope.jsonData.design_guide.arrangement;
+    var IVgroups = $scope.jsonData.design_guide.variables.independent_variable;
 
     $scope.between = "Between";
     $scope.within = "Within";
@@ -29,12 +30,20 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
     $scope.noCounterBalancing = "NoCounterBalancing";
 
     $scope.showDraw = function(){
-      $scope.generate = true;
-      $scope.GenerateSimulation();
-      //jsonString = $scope.writeToJson;
-      draw($scope.writeToJson);
-
-      $scope.PostDataToPhP();
+      var flag = true;
+      IVgroups.forEach(function(item,index){
+        if(item.levels.length == 0)
+            flag = false;
+      });
+      if(flag){
+        $scope.generate = true;
+        $scope.GenerateSimulation();
+        draw($scope.writeToJson);
+        $scope.PostDataToPhP();       
+      }
+      else{
+        alert("Please assign test conditions to independent variables.");
+      }
     };
 
     $scope.GenerateSimulation = function(){

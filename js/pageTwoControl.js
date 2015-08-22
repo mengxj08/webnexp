@@ -36,105 +36,7 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
       return (group.pid == 0);
     };
 
-    // $scope.Automation = function(){
-    //   $scope.flagOne = false;
-
-    //   var HYgroups = $scope.jsonData.design_guide.research_question.hypothesis;
-    //   if(HYgroups.main_solutions.length != 0 || HYgroups.compare_solutions.length != 0){
-    //     var tmp = {
-    //       name: "Techniques",
-    //       subject_design: "Within",
-    //       levels: [
-    //         ],
-    //       counter_balance: "FullyCounterBalancing",
-    //       type: "group"
-    //     };
-
-    //     HYgroups.main_solutions.forEach(function(item){
-    //       tmp.levels.push({
-    //           name: item.name.toString(),
-    //           type: "category"
-    //       });
-    //     });
-
-    //     HYgroups.compare_solutions.forEach(function(item){
-    //       tmp.levels.push({
-    //           name: item.name.toString(),
-    //           type: "category"
-    //       });
-    //     });
-
-    //     IVgroups.push(tmp);
-    //   }
-
-    //   if(HYgroups.tasks.length != 0){
-
-    //     HYgroups.tasks.forEach(function(item){
-    //       // tmp.levels.push({
-    //       //     name: item.toString(),
-    //       //     type: "category"
-    //       // });
-    //       var tmp = {
-    //         name: item.name.toString(),
-    //         subject_design: "Within",
-    //         levels: [
-    //           ],
-    //         counter_balance: "FullyCounterBalancing",
-    //         type: "group"
-    //       };
-
-    //       IVgroups.push(tmp);
-    //     });
-    //   }
-    //   if(HYgroups.contexts.length != 0){
-
-    //     HYgroups.contexts.forEach(function(item){
-    //       var tmp = {
-    //         name: item.name.toString(),
-    //         subject_design: "Within",
-    //         levels: [
-    //           ],
-    //         counter_balance: "FullyCounterBalancing",
-    //         type: "group"
-    //       };
-
-    //       IVgroups.push(tmp);
-    //       // tmp.levels.push({
-    //       //     name: item.toString(),
-    //       //     type: "category"
-    //       // });
-    //     });
-    //   }
-    //   if(HYgroups.measures.length != 0){
-    //     HYgroups.measures.forEach(function(item){
-    //       DVgroups.push({
-    //         name: item.name.toString(),
-    //         type: "DVgroup",
-    //         description: ""
-    //       });
-    //     });
-    //   }
-    // };
-
-    // if($scope.flagOne === 'true'){
-    //   $scope.Automation();
-    //   console.log("First enter the Automation");
-    // }
-    // $scope.filterSolution = function(group){
-    //   if(group.pid == 0) return true;
-    //   else return false;
-    // }
-
-    // $scope.filterNonSolution = function(group){
-    //   if(group.pid != 0) return true;
-    //   else return false;
-    // }
-
     $scope.addGroup = function() {
-      // if ($scope.groups.length > 10) {
-      //   window.alert('You can\'t add more than 10 groups!');
-      //   return;
-      // }
       var groupName = document.getElementById("groupName").value;
       if (groupName.length > 0) {
         IVgroups.push({
@@ -311,8 +213,8 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
       accept: function(sourceNode, destNodes, destIndex) {
         var data = sourceNode.$modelValue.type;
         var destType = destNodes.$element.attr('data-type');
-        console.log(sourceNode.$modelValue.type);
-        console.log('destType:'+destType);
+        // console.log(sourceNode.$modelValue.type);
+        // console.log('destType:'+destType);
         return (data == destType); // only accept the same type
       },
       beforeDrop: function(event) {
