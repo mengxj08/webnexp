@@ -75,44 +75,39 @@ $pdf->MultiCell(0,10,(string)$data['design_guide']['research_question']['experim
 $pdf->SetFont('Times','B',15);
 $pdf->MultiCell(0,10,'Hypothesis:',0,1);
 $pdf->SetFont('Times','',12);
-$tmpString = "( ";
+
+$tmpString = "In my experiment, I want to hypothesize that for to do \"";
+foreach($data['design_guide']['research_question']['hypothesis']['tasks'] as $group)
+    $tmpString.= $group['name'].", ";
+
+$tmpString = chop($tmpString, ', ')."\", the solution(s) \"";
+
 foreach($data['design_guide']['research_question']['hypothesis']['main_solutions'] as $group)
     $tmpString.= $group['name'].", ";
 
-$tmpString = chop($tmpString, ', ')." ";
-
-$tmpString.=") is better than ( ";
+$tmpString = chop($tmpString, ', ')."\" is better than \"";
 
 foreach($data['design_guide']['research_question']['hypothesis']['compare_solutions'] as $group)
     $tmpString.= $group['name'].", ";
 
-$tmpString = chop($tmpString, ', ')." ";
-
-$tmpString.=") in ( ";
-
-foreach($data['design_guide']['research_question']['hypothesis']['tasks'] as $group)
-    $tmpString.= $group['name'].", ";
-
-$tmpString = chop($tmpString, ', ')." ";
-$tmpString.=") under ( ";
+$tmpString = chop($tmpString, ', ')."\". To test this hypothesis, I will vary the \"";
 
 foreach($data['design_guide']['research_question']['hypothesis']['contexts'] as $group)
     $tmpString.= $group['name'].", ";
 
 $tmpString = chop($tmpString, ', ')." ";
-$tmpString.=") based on ( ";
+$tmpString.="\" and measure \"";
 
 foreach($data['design_guide']['research_question']['hypothesis']['measures'] as $group)
     $tmpString.= $group['name'].", ";
 
-$tmpString = chop($tmpString, ', ')." ";
-$tmpString.=").";
+$tmpString = chop($tmpString, ', ')."\".";
 
 $pdf->MultiCell(0,10,$tmpString,0,1);
 $pdf->Ln();
 
 $pdf->SetFont('Times','B',15);
-$pdf->MultiCell(0,10,'Indepdent variables:',0,1);
+$pdf->MultiCell(0,10,'Independent variables:',0,1);
 
 $header = array('Test condition', 'Description');
 
@@ -175,8 +170,8 @@ $pdf->MultiCell(0,10,"The number of blocks per participant is ".$data['design_gu
 $pdf->MultiCell(0,10,"The number of trials per condition is ".$data['design_guide']['arrangement']['trial'].".",0,1);
 $pdf->MultiCell(0,10,"The time cost of per trial is ".$data['design_guide']['arrangement']['time_per_trial']." seconds.",0,1);
 $pdf->MultiCell(0,10,"The time cost of per participant is ".$data['design_guide']['arrangement']['totalTimeCost']." minutes.",0,1);
-$pdf->MultiCell(0,10,"The fee of per participant is ".$data['design_guide']['arrangement']['fee_per_participant']." bucks.",0,1);
-$pdf->MultiCell(0,10,"The fee of per participant is ".$data['design_guide']['arrangement']['totalPayment']." bucks.",0,1);
+$pdf->MultiCell(0,10,"The fee of per participant is ".$data['design_guide']['arrangement']['fee_per_participant']." dollars.",0,1);
+$pdf->MultiCell(0,10,"The fee of per participant is ".$data['design_guide']['arrangement']['totalPayment']." dollars.",0,1);
 $pdf->Ln();
 
 $IVarray = array();
@@ -234,7 +229,9 @@ if(sizeof($IVLatinSquare) > 0){
 }
 
 if(sizeof($data['design_guide']['variables']['dependent_variable'])!=0){
-    $para .= "We considered two dependent variables: ";
+    $para .= "We considered ";
+    $para .= sizeof($data['design_guide']['variables']['dependent_variable']);
+    $para .= " dependent variables: ";
     foreach($data['design_guide']['variables']['dependent_variable'] as $group){
         $para .= $group['name'];
         if($group['description'] != "")

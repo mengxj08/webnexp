@@ -123,19 +123,22 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
       if (!group.newCategoryName || group.newCategoryName.length === 0) {
         return;
       }
-      group.levels.push({
-        name: group.newCategoryName,
-        type: "category",
-        description: "",
-        pid: $scope.jsonData.parameter.pid
-      });
-
+      var dataType = "category";
       if(group.pid == 0){
+        dataType = "solution";
         hypothesis.compare_solutions.push({
           name: group.newCategoryName,
           pid: $scope.jsonData.parameter.pid
         });        
       }
+
+      group.levels.push({
+        name: group.newCategoryName,
+        type: dataType,
+        description: "",
+        pid: $scope.jsonData.parameter.pid
+      });
+
       $scope.jsonData.parameter.pid++;
       group.newCategoryName = '';
     };
@@ -151,9 +154,9 @@ app.controller('pageTwoControl',function($scope, $http, localStorageService){
             }
           });
 
-          hypothesis.ComSolutions.forEach(function(item,index){
+          hypothesis.compare_solutions.forEach(function(item,index){
             if(item.pid == category.pid){
-              hypothesis.ComSolutions.splice(index,1);
+              hypothesis.compare_solutions.splice(index,1);
             }
           });
         }        

@@ -41,7 +41,7 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
       			if(item.pid == 0){
 		          item.levels.push({
 		              name: groupName,
-		              type: "category",
+		              type: "solution",
 		              pid: $scope.jsonData.parameter.pid
 		          });      				
       			}
@@ -64,7 +64,7 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
       			if(item.pid == 0){
 		          item.levels.push({
 		              name: groupName,
-		              type: "category",
+		              type: "solution",
 		              pid: $scope.jsonData.parameter.pid
 		          });      				
       			}
@@ -274,7 +274,7 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
   			if(item.pid == 0){
 	          item.levels.push({
 	              name: 'optimal keyboard layout',
-	              type: "category",
+	              type: "solution",
 	              pid: $scope.jsonData.parameter.pid
 	          });      				
   			}
@@ -290,7 +290,7 @@ app.controller('pageOneControl', function($scope, $http, localStorageService){
   			if(item.pid == 0){
 	          item.levels.push({
 	              name: 'qwerty keyboard layout',
-	              type: "category",
+	              type: "solution",
 	              pid: $scope.jsonData.parameter.pid
 	          });      				
   			}

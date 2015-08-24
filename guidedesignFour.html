@@ -55,7 +55,7 @@
           <p><b>Terms used in this section:</b></p>
           <p>Trial: each performance of the task that will be measured.  A minimum of three trials per condition is recommended.</p>
           <p>Block: a group of trials. </p>
-          <p>Condition: the unique set of independent variables that will be used in each block of trials. Changing the number of conditions will change the number of blocks required to test all the possible conditions.</p>
+          <p>Condition: the unique set of independent variables that will be used in each block of trials. Changing the number of independent variables will change the number of participants required to test all the possible combinations.</p>
           <p><b>Instructions:</b></p>
           <p>Step 1: Estimate the time for each trial</p>
           <p>Step 2: Review the resulting time for each block</p>
@@ -124,6 +124,7 @@
         <Form class="input-group input-group-lg" name="groupFive">
           <span class="input-group-addon largeLabels" id="sizing-addon6">Cost per participant:</span>
           <input type="number" class="form-control" name="input" placeholder="" aria-describedby="sizing-addon6" ng-model="jsonData.design_guide.arrangement.fee_per_participant" min="0" max="999" required>
+          <span class="input-group-addon small">Dollars</span>
           <span class="input-group-addon small" ng-show="groupFive.input.$error.required"><span class="label label-danger">Required!</span></span>
           <span class="input-group-addon small" ng-show="groupFive.input.$error.number"><span class="label label-danger">Not valid number!</span></span>
           <span class="input-group-addon small" ng-show="groupFive.input.$error.min || groupFive.input.$error.max">The value must be in range 0 to 999!</span>
@@ -132,12 +133,12 @@
         <div class="input-group input-group-lg">
           <span class="input-group-addon largeLabels" id="sizing-addon8">Total cost of participants:</span>
           <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon8" ng-model="jsonData.design_guide.arrangement.totalPayment" disabled>
-          <span class="input-group-addon small">Bucks</span>
+          <span class="input-group-addon small">Dollars</span>
         </div>        
       </div>
       <div class="jumbotron">
           <p><a role="button" class="btn btn-success btn-lg" ng-click="showDraw()">Generate</a> the simulation of the whole arrangement of the experiment:</p>
-          <p>Only after generating the simulation, you will be able to download the arrangement file,<a ng-show="generate" ng-click="DownloadFile()">(Click here to download)</a> that will be used as input for the experiment running platform.</p>
+          <p>Only after generating the simulation, you will be able to download the arrangement file (*.json format), <a ng-show="generate" ng-click="DownloadFile()">(Click here to download)</a> that will be used as input for the experiment running platform.</p>
       </div>
       <div id="simulation" ng-show="generate">
         <p><a id="expandAllObj" role="button" class="btn btn-success btn-sm">Expand all</a>  <a id="collapseAllObj" role="button" class="btn btn-success btn-sm" onclick="">Collapse all</a></p>

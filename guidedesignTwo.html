@@ -46,7 +46,7 @@
       </ul>
       <div class="page-header">
           <h1><b>STAGE 2 :</b> Define the statistical variables </h1>
-          <p>In this stage, you will use statistical language to define the elements of your experiment into independent variables and dependent variables. Independent variables are factors you manipulate that may influence task performance.  Dependent variables are the measurements that change, based on the manipulation of the independent variables.</p>
+          <p>In this stage, you will use statistical language to define the elements of your experiment into independent variables and dependent variables. Independent variables are factors you manipulate that may influence task performance. Dependent variables are the measurements that change, based on the manipulation of the independent variables.</p>
       </div>
 
       <div class="jumbotron">
@@ -60,7 +60,7 @@
           </p>
           <p>
             In my experiment, I want to hypothesize that for to do
-            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.tasks"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.tasks.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>",
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.tasks"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.tasks.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>", the solution(s)
             "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.main_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.main_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" is better than
             "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.compare_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.compare_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>". To test this hypothesis, I will vary the
             "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.contexts"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.contexts.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" and measure
@@ -73,8 +73,8 @@
       </div>
       <hr />
       <div class="jumbotron">
-          <h3>1. Define the independent variables (factors).</h3>
-          The first independent variable is mostly likely the solutions/interface/interaction technique you want to compare with. The different solutions/interfaces/interaction techniques you want to compare with are the test conditions (or levels) for this independent variable. 
+          <h2>1. Define the independent variables (factors).</h2>
+          The first independent variable is mostly likely the solutions/interface/interaction technique you want to compare. The different solutions/interfaces/interaction techniques you want to compare are the test conditions (or levels) for this independent variable. 
           Note that an independent variable is also called a factor, a test condition is also called a level. These terms are synonyms and can be used interchangeably. 
           <br />
           <a href="contents/helpPage3.html#1" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
@@ -106,7 +106,7 @@
 -->
 
       <div ui-tree="options">
-        <h3>Independent variables: Solutions</h3>
+        <h3>Independent variables: (Your) Solutions</h3>
         <ol ui-tree-nodes ng-model="jsonData.design_guide.variables.independent_variable">
           <li ng-repeat="group in jsonData.design_guide.variables.independent_variable | filter: filterSolution" ui-tree-node>
             <div class="group-title angular-ui-tree-handle" ng-show="!group.editing" data-nodrag>
@@ -123,7 +123,7 @@
                 <button type="submit" class="btn btn-default" ng-click="cancelEditingGroup(group)">Cancel</button>
               </form>
             </div>
-            <ol ui-tree-nodes ng-model="group.levels" data-type="category">
+            <ol ui-tree-nodes ng-model="group.levels" data-type="solution">
               <li ng-repeat="category in group.levels" ui-tree-node>
                 <div class="category-title angular-ui-tree-handle" ng-show="!category.editing">
                   <a href="" class="btn btn-danger btn-xs pull-right" data-nodrag ng-click="removeCategory(group, category)"><i class="glyphicon glyphicon-remove"></i></a>
@@ -236,7 +236,7 @@
       </div>
       <hr />
       <div class="jumbotron">
-          <h3>2. Define the Dependent Variables:</h3>
+          <h2>2. Define the Dependent Variables:</h2>
           These are the measurable results that depend on the variables that you manipulate.  Ensure that these measurements can be reliably obtained, and that they reflect the true nature of the task you are asking your users to undertake. 
           <br/>
           <a href="contents/helpPage3.html#1" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
@@ -278,7 +278,7 @@
           </ol>
         </div>
         <br/>
-        <p>You have completed deciding what you are going to test. Now it is time to decide on the order of the test blocks. </p>
+        <p>You have completed deciding what you are going to test. You can return to edit these at any time during the remaining stages. Now it is time to decide on the order of the test blocks. </p>
 <!--       <div class="row">
       <div class="col-md-5"><h2>Dependent variables</h2></div>
         <div class="col-md-6">

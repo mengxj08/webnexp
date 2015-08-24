@@ -45,7 +45,7 @@
         <li role="presentation"><a href="guidedesignFive.html">V-Procedures</a></li>
       </ul>
       <div class="page-header">
-          <h1><b>STAGE 1 :</b> Think through your claim</h1>
+          <h1><b>STAGE 1 :</b> Think through your hypothesis</h1>
       </div>
 <!-- The first question starts: setup the experiment   -->
       <div class="jumbotron">
@@ -73,7 +73,7 @@
         </div>
       </div>
       <div class="jumbotron">
-          <p>To test your statement, you have to define a reasonable hypothesis based on your research question. The process of refining the hypothesis helps you specify representative independent/dependent variables and test conditions.</p>
+          <p>To test your statement, you have to define a reasonable hypothesis based on your research question. The following set of questions are intended to help you to formulate your hypothesis as well as defining the independent/dependent variables of the experiment.</p>
           <p><a role="button" class="btn btn-success" data-toggle="modal" data-target="#showExample">Show example</a><a role="button" class="btn btn-success" data-toggle="modal" data-target="#reset">Reset</a></p>
           <a href="contents/helpPage2.html#3" role="button" class="close" aria-label="Close"><span id="helpIcon" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
       </div>
@@ -299,7 +299,7 @@
           <li class="angular-ui-tree-node">
             <div class="group-title angular-ui-tree-handle">
               <form class="form-inline" role="form">
-                <label><h4>6. Other than the tasks, what other factors might influence the performance of these tasks? Examples can include usage of scenario, size of cursor or users’ dominant hand.</h4></label>
+                <label><h4>6. Other than the tasks themselves, what other factors might influence the performance of these tasks? Examples can include usage scenario, size of cursor or users’ dominant hand.</h4></label>
                 <div class="form-group">
                   <input type="text" class="form-control" id="Contexts" placeholder="Click to edit...">
                 </div>
@@ -427,7 +427,7 @@
           </p>
           <p>
             In my experiment, I want to hypothesize that for to do
-            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.tasks"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.tasks.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>",
+            "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.tasks"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.tasks.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>", the solution(s)
             "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.main_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.main_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" is better than
             "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.compare_solutions"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.compare_solutions.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>". To test this hypothesis, I will vary the
             "<span ng-repeat="group in jsonData.design_guide.research_question.hypothesis.contexts"><u>{{group.name;}}</u>&nbsp;</span><span ng-show="!jsonData.design_guide.research_question.hypothesis.contexts.length"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;</span>" and measure
