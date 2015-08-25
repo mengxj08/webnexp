@@ -94,7 +94,7 @@
           <thead>
           <tr>
               <th id="FactorName">Independent Variable</th>
-              <th id="designType">Between- or Within-</th>
+              <th id="designType">Between- or Within- subject</th>
               <th id="Type">Strategy</th>
               <th id="level">Test Condition</th>
           </tr>
@@ -109,9 +109,10 @@
             </td>
             <td>
                 <select class="form-control" size="1" ng-model="item.counter_balance">
-                    <option value="NoCounterBalancing">No CounterBalancing</option>
+                    <option value="Sequential">Sequential</option>
                     <option value="LatinSquare">Latin Square</option>
                     <option value="FullyCounterBalancing">Fully CounterBalancing</option>
+                    <option value="Random">Random</option>
                 </select>
             </td> 
             <td>

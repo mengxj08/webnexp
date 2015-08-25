@@ -27,7 +27,8 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
     $scope.within = "Within";
     $scope.fullyCounterBalancing = "FullyCounterBalancing";
     $scope.latinSquare = "LatinSquare";
-    $scope.noCounterBalancing = "NoCounterBalancing";
+    $scope.sequential = "Sequential";
+    $scope.random = "Random";
 
     $scope.showDraw = function(){
       var flag = true;
@@ -50,6 +51,7 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
       $scope.idvBetween = new Array();
       $scope.idvWithin = new Array();
       $scope.arrangement = new Array();
+      $scope.arrangementStrategy = new Array();
       $scope.individual = new Array();
       $scope.betweenArrangement = new Array();
       $scope.numberOfParticipants = 1;
@@ -68,9 +70,9 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
       });
 
       $scope.GenerateOverallArrangment();
-      //console.log($scope.arrangement);
+      console.log($scope.arrangement);
       $scope.GenerateIndividualArrangment();
-      //console.log($scope.individual);
+      console.log($scope.individual);
       $scope.GenerateBetweenArrangment();
       $scope.WriteToJson();
       //console.log($scope.writeToJson);
@@ -93,7 +95,9 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
             case $scope.latinSquare:
               Withintmp *= length;
               break;
-            case $scope.noCounterBalancing:
+            case $scope.sequential:
+              break;
+            case $scope.random:
               break;
           }
         }
@@ -171,6 +175,7 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
             var result = levelsName.reduce(function permute(res, item, key, arr) {
                          return res.concat(arr.length > 1 && arr.slice(0, key).concat(arr.slice(key + 1)).reduce(permute, []).map(function(perm) { return [item].concat(perm); }) || item);}, []);
             $scope.arrangement.push(result);
+            $scope.arrangementStrategy.push($scope.fullyCounterBalancing);
             break;
           case $scope.latinSquare:
             var result = new Array();
@@ -184,16 +189,42 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
               result.push(tmp);
             }
             $scope.arrangement.push(result);
+            $scope.arrangementStrategy.push($scope.latinSquare);
             break;
-          case $scope.noCounterBalancing:
+          case $scope.sequential:
             var result = new Array();
             result.push(levelsName);
             $scope.arrangement.push(result);
+            $scope.arrangementStrategy.push($scope.sequential);
+            break;
+          case $scope.random:
+            var result = new Array();
+            result.push(levelsName);
+            $scope.arrangement.push(result);
+            $scope.arrangementStrategy.push($scope.random);
             break;
         }
       });
     };
+    $scope.shuffle = function(array) {
+        var counter = array.length, temp, index;
 
+        // While there are elements in the array
+        while (counter > 0) {
+            // Pick a random index
+            index = Math.floor(Math.random() * counter);
+
+            // Decrease counter by 1
+            counter--;
+
+            // And swap the last element with it
+            temp = array[counter];
+            array[counter] = array[index];
+            array[index] = temp;
+        }
+
+        return array;
+    };
     $scope.GenerateIndividualArrangment = function(){
       $scope.arrangement.forEach(function(idv){
         $scope.numberOfParticipants *= idv.length;
@@ -214,6 +245,10 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
           total = parseInt(total / $scope.arrangement[j].length);
           index[j] = parseInt(tmp/total);
           tmp -= index[j]*total;
+//To enrich more possibility of the "Random" option
+          if($scope.arrangement[j].length == 1 && $scope.arrangementStrategy[j] == $scope.random){
+            $scope.arrangement[j][0] = $scope.shuffle($scope.arrangement[j][0]);
+          }
         }
         for(var k=0; k < $scope.numberOfConditions; k++){
           var condition = new Array();
@@ -224,6 +259,13 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
             var n = parseInt(tmpK / totalConditions);
             condition.push($scope.arrangement[m][index[m]][n]);
             tmpK -= n*totalConditions;
+
+//To enrich more possibility of the "Random" option
+            // if($scope.arrangement[m].length == 1 && $scope.arrangementStrategy[m] == $scope.random &&
+            //   k < $scope.numberOfConditions - 1 && (k + 1) % $scope.arrangement[m][0].length == 0){
+            //   $scope.arrangement[m][0] = $scope.shuffle($scope.arrangement[m][0]);
+            // }
+//--------------------------------------------------            
           }
           participants.push(condition);
         }
