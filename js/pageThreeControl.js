@@ -19,7 +19,6 @@ app.controller('pageThreeControl',function($scope, $http, localStorageService){
     }
 
     localStorageService.bind($scope, 'jsonData');	
-    console.log($scope.jsonData.design_guide.variables.independent_variable.length);
     var IVgroups = $scope.jsonData.design_guide.variables.independent_variable;
     var hypothesis = $scope.jsonData.design_guide.research_question.hypothesis;
 

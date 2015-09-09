@@ -70,9 +70,9 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
       });
 
       $scope.GenerateOverallArrangment();
-      console.log($scope.arrangement);
+
       $scope.GenerateIndividualArrangment();
-      console.log($scope.individual);
+
       $scope.GenerateBetweenArrangment();
       $scope.WriteToJson();
       //console.log($scope.writeToJson);
@@ -87,7 +87,7 @@ app.controller('pageFourControl',function($scope, $http, $window,localStorageSer
         //console.log(idv);
         var length = idv.levels.length;
         if(idv.subject_design == $scope.within){
-          console.log(idv.name);
+  
           switch(idv.counter_balance){
             case $scope.fullyCounterBalancing:
               for(var i = 0; i < length; i++) Withintmp *= (length - i);
