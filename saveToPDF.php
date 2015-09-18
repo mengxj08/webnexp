@@ -52,10 +52,10 @@ $pdf->AddPage();
 $pdf->SetFont('Times','',15);
 $pdf->MultiCell(0,10,'The design of the controlled experiment is as below.',0,1);
 
-// $pdf->SetFont('Times','B',15);
-// $pdf->MultiCell(0,10,'Research question:',0,1);
-// $pdf->SetFont('Times','',12);
-// $pdf->MultiCell(0,10,(string)$data['design_guide']['research_question']['general_question'],0,1);
+$pdf->SetFont('Times','B',15);
+$pdf->MultiCell(0,10,'Research question:',0,1);
+$pdf->SetFont('Times','',12);
+$pdf->MultiCell(0,10,(string)$data['design_guide']['research_question']['general_question'],0,1);
 
 $pdf->SetFont('Times','B',15);
 $pdf->MultiCell(0,10,'Experiment title:',0,1);
