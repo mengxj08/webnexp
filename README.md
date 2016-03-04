@@ -1,2 +1,2 @@
 # webnexp
-web-based NEXP toolkit
+web-based NexP toolkit
